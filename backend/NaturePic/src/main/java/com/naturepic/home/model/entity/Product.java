@@ -4,6 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 
+import java.util.List;
+
 @Entity
 public class Product {
 
@@ -17,11 +19,7 @@ public class Product {
     @ManyToOne
     private Category category;
 
-    public Product(Long id, String name, String description, Boolean status, Category category) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.status = status;
-        this.category = category;
-    }
+    private List<String> images;
+
+
 }

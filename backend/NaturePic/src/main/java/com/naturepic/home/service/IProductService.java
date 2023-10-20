@@ -10,6 +10,8 @@ public interface IProductService {
 
     ProductDto findProductById(Long id);
 
+    ProductDto findProductByName(String name);
+
     boolean deleteProduct(Long id);
 
     Set<ProductDto> listAllProducts();

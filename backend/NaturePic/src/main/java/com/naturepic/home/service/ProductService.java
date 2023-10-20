@@ -28,6 +28,11 @@ public class ProductService implements IProductService{
     }
 
     @Override
+    public ProductDto findProductByName(String name) {
+        return null;
+    }
+
+    @Override
     public boolean deleteProduct(Long id) {
         return false;
     }
