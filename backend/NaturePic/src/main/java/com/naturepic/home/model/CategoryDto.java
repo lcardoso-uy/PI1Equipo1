@@ -13,6 +13,6 @@ public class CategoryDto {
 
     private String name;
     private Boolean status;
-    private String imageurl;
 
+    private String imageurl;  /*si seteo imageUrl en camelCase, a la base va como image_url, pero luego, no funcionan bien las actualizacoines del campo*/
 }

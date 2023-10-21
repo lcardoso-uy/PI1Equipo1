@@ -1,7 +1,6 @@
 package com.naturepic.home.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.naturepic.home.model.entity.Category;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,9 +12,9 @@ import java.util.List;
 public class ProductDto {
 
     private Long id;
-    private String name, description;
+    private String name;
+    private String description;
     private Boolean status;
-    private Category category;
-    private List<String> images;
-
+    private CategoryDto category;
+    private List<ProductImageDto> images;
 }
