@@ -1,12 +1,14 @@
 package com.naturepic.home.controller;
 
 import com.naturepic.home.model.ProductDto;
+import com.naturepic.home.model.entity.Product;
 import com.naturepic.home.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Set;
 
 @CrossOrigin(origins = "*")
@@ -23,8 +25,12 @@ public class ProductController {
 
     @PostMapping
     public ResponseEntity<?> newProduct(@RequestBody ProductDto productDto){
-        productService.newProduct(productDto);
-        return ResponseEntity.status(HttpStatus.CREATED).body("Producto crado exitosamente.");
+        try {
+            productService.newProduct(productDto);
+            return ResponseEntity.status(HttpStatus.CREATED).body("Producto creado exitosamente.");
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
     }
 
     @GetMapping
@@ -42,6 +48,11 @@ public class ProductController {
         }
     }
 
+    @GetMapping("/random")
+    public ResponseEntity<List<Product>> getRandomProducts() {
+        return ResponseEntity.ok(productService.findRandomProducts());
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteProduct(@PathVariable Long id) {
         boolean deleted = productService.deleteProduct(id);
@@ -50,6 +61,11 @@ public class ProductController {
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Producto no encontrado.");
         }
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<String> handleIllegalArgumentException(IllegalArgumentException e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
     }
 
 }

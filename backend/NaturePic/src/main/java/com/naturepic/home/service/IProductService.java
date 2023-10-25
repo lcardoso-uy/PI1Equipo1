@@ -1,7 +1,9 @@
 package com.naturepic.home.service;
 
 import com.naturepic.home.model.ProductDto;
+import com.naturepic.home.model.entity.Product;
 
+import java.util.List;
 import java.util.Set;
 
 public interface IProductService {
@@ -16,4 +18,5 @@ public interface IProductService {
 
     Set<ProductDto> listAllProducts();
 
+    List<Product> findRandomProducts();
 }

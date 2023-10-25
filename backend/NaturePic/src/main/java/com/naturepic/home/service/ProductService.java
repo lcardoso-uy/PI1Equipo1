@@ -12,7 +12,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
-public class ProductService implements IProductService{
+public class ProductService implements IProductService {
 
     @Autowired
     private ProductRepository productRepository;
@@ -21,7 +21,15 @@ public class ProductService implements IProductService{
     ObjectMapper mapper;
 
     @Override
-    public void newProduct(ProductDto productDto) { saveProduct( productDto );  }
+    public void newProduct(ProductDto productDto) {
+        Product existingProduct = productRepository.findByName(productDto.getName()).orElse(null);
+
+        if (existingProduct != null) {
+            throw new IllegalArgumentException("El producto con el nombre " + productDto.getName() + " ya existe!");
+        }
+
+        saveProduct(productDto);
+    }
 
     @Override
     public ProductDto findProductById(Long id) {
@@ -39,6 +47,10 @@ public class ProductService implements IProductService{
             return mapper.convertValue(product, ProductDto.class);
         }
         return null;
+    }
+
+    public List<Product> findRandomProducts() {
+        return productRepository.findRandomProducts();
     }
 
     @Override
@@ -59,11 +71,8 @@ public class ProductService implements IProductService{
                 .collect(Collectors.toSet());
     }
 
-
-    private void saveProduct(ProductDto productDto){
+    private void saveProduct(ProductDto productDto) {
         Product newProduct = mapper.convertValue(productDto, Product.class);
         productRepository.save(newProduct);
     }
-
-
 }
