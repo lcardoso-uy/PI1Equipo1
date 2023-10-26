@@ -23,8 +23,9 @@ const Detalle = () => {
       <h1>Detalle del Producto</h1>
       <InfoProducto product={product} />
       <Link to={`/galeria/${product.id}`}>
-        <button>Ver más</button>
+      <button className="ver-mas">Ver más</button>
       </Link>
+
     </div>
     </div>
   );
