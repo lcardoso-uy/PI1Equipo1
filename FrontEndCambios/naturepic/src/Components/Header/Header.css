@@ -3,6 +3,13 @@
     margin: 0;
 }
 
+.h1-home{
+    background-color: pink;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 header {
     width: 100%;
     position: fixed;
@@ -19,7 +26,7 @@ header {
     display: flex;
     align-items: center;
     text-decoration: none;
-    color: black;
+    color: #ffffffbb;
 }
   
 .logo-container img {
@@ -32,3 +39,49 @@ header {
     padding: 5px 15px;
     cursor: pointer;
 }
+
+.crear-account{
+    margin-right: 10px;
+}
+
+
+@media (max-width: 768px) {
+    .logo-container img {
+      height: 30px;
+    }
+    
+    .Header-buttons {
+      font-size: 14px;
+    }
+    
+    .Header-buttons button {
+      padding: 5px 10px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    header {
+      flex-direction: column;
+      padding: 10px;
+    }
+    
+    .logo-container {
+      margin-bottom: 10px;
+    }
+    
+    .Header-buttons {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .Header-buttons button {
+      margin-bottom: 5px;
+    }
+  }
+  
+  @media (max-width: 768px) and (min-width: 551px) {
+    header {
+      flex-direction: column;
+    }
+  }

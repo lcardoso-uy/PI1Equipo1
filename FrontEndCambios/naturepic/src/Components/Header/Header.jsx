@@ -12,9 +12,8 @@ const Header = () => {
           <span>Lema de la Empresa</span>
         </Link>
       </div>
-{/* RESPONSIVE PENDING */}
       <div className="Header-buttons">
-        <button>Crear cuenta</button>
+        <button className='crear-account'>Crear cuenta</button>
         <button>Iniciar sesión</button>
       </div>
     </header>

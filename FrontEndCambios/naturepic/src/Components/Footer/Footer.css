@@ -1,28 +1,54 @@
 .footer {
-  width: 100%;
-  height: 100px;
-  padding: 10px 20px;
-  box-sizing: border-box;
-  background-color: #D3D04F;
-  color: #fff;
-  position: fixed;
-  bottom: 0;
+  background-color: #213363;
+  color: white;
+  text-align: center;
+  padding: 10px 0;
 }
 
 .footer-content {
   max-width: 1200px;
   margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
+  padding: 0 20px;
 }
 
 .footer-block {
   display: flex;
+  justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap; /* Permite que los elementos se ajusten en líneas separadas si no hay suficiente espacio */
 }
 
-.footer-block img {
-  max-height: 50px;
-  margin-right: 10px;
+.footer img {
+  height: 50px;
+  margin-bottom: 10px; /* Espaciado inferior para cuando el texto se mueva debajo del logo en pantallas pequeñas */
 }
 
+.footer span {
+  font-size: 1rem;
+}
+
+/* Estilos para tablets */
+@media screen and (max-width: 768px) {
+  .footer img {
+    height: 40px; /* Reducir el tamaño del logo */
+  }
+
+  .footer span {
+    font-size: 0.9rem; /* Reducir el tamaño del texto */
+  }
+}
+
+/* Estilos para móviles */
+@media screen and (max-width: 480px) {
+  .footer img {
+    height: 30px; /* Reducir aún más el tamaño del logo */
+  }
+
+  .footer span {
+    font-size: 0.8rem; /* Reducir aún más el tamaño del texto */
+  }
+
+  .footer-content {
+    padding: 0 10px; /* Reducir el espaciado interno */
+  }
+}

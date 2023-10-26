@@ -1,8 +1,9 @@
 import React from 'react';
+import './Detalle.css';
 
 const InfoProducto = ({ product }) => {
   return (
-    <div>
+    <div className="info-producto-container">
       <h2>{product.name}</h2>
       <p>{product.description}</p>
     </div>
@@ -10,3 +11,5 @@ const InfoProducto = ({ product }) => {
 };
 
 export default InfoProducto;
+
+

@@ -1,9 +1,23 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { DataContext } from '../Context/DataContext';
+import './Detalle.css';
 
-const Galeria = ({ images }) => {
+const Galeria = () => {
+  const { productId } = useParams();
+  const { products } = useContext(DataContext);
+  const [images, setImages] = useState([]);
+
+  useEffect(() => {
+    const product = products.find(p => p.id === parseInt(productId));
+    if (product && product.images) {
+      setImages(product.images.slice(0, 5));
+    }
+  }, [productId, products]);
+
   return (
     <div>
-      <h3>Galería de Imágenes</h3>
+      <h1>Galería de Imágenes</h1>
       <div style={{ display: 'flex', flexWrap: 'wrap' }}>
         {images.map((image, index) => (
           <div key={index} style={{ margin: '10px' }}>

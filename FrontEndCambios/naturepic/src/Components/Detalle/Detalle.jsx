@@ -1,31 +1,31 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { DataContext } from '../Context/DataContext';
 import InfoProducto from './InfoProducto';
-import Galeria from './Galeria';
+import './Detalle.css';
 
 const Detalle = () => {
   const { productId } = useParams();
-  const products = useContext(DataContext);
+  const { products } = useContext(DataContext);
   const [product, setProduct] = useState(null);
 
   useEffect(() => {
-
-    const selectedProduct = products.find(p => p.id === productId);
-
-    if (selectedProduct) {
-      setProduct(selectedProduct);
-    }
-    
+    const selectedProduct = products.find(p => p.id === parseInt(productId));
+    setProduct(selectedProduct || null);
   }, [productId, products]);
 
   if (!product) return <p>Cargando...</p>;
 
   return (
-    <div>
+  <div>
+    <br /><br />
+    <div className="detalle-container">
       <h1>Detalle del Producto</h1>
       <InfoProducto product={product} />
-      <Galeria images={product.images} />
+      <Link to={`/galeria/${product.id}`}>
+        <button>Ver más</button>
+      </Link>
+    </div>
     </div>
   );
 };

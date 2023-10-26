@@ -2,3 +2,203 @@
 /* .admin {
     height: 100%;
 } */
+
+/* Panel de Administración */
+.admin-panel {
+    background: #f9f9f9;
+    border: 1px solid #e1e1e1;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 20px;
+  }
+  
+  .admin-panel h1 {
+    font-size: 24px;
+    color: #333;
+  }
+  
+  .admin-panel nav ul {
+    padding: 0;
+    list-style: none;
+  }
+  
+  .admin-panel nav li {
+    display: inline-block;
+    margin-right: 20px;
+  }
+  
+  .admin-panel nav a {
+    text-decoration: none;
+    color: #5d5d5d;
+    font-weight: bold;
+  }
+  
+  .admin-panel nav a:hover {
+    text-decoration: underline;
+  }
+  
+  .delete-button {
+    background-color: #ff4d4d;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  .delete-button:hover {
+    background-color: #ff1a1a;
+  }
+  
+  /* Formulario para Agregar Producto */
+  .agregar-producto-form {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .agregar-producto-form label {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  .agregar-producto-form input,
+  .agregar-producto-form textarea {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-top: 5px;
+  }
+  
+  .agregar-producto-form button {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  .agregar-producto-form button:hover {
+    background-color: #218838;
+  }
+  
+  /* Lista de Productos */
+  .lista-productos {
+    margin-top: 20px;
+  }
+  
+  .lista-productos ul {
+    padding: 0;
+    list-style: none;
+  }
+  
+  .lista-productos li {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .lista-productos li:hover {
+    background-color: #f9f9f9;
+  }
+
+  /* Estilos generales para el panel de administración */
+.admin-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  /* Estilo para el título principal */
+  .admin-panel h1 {
+    font-size: 2em;
+    margin-bottom: 20px;
+  }
+  
+  /* Estilos para la navegación */
+  .admin-nav {
+    margin-bottom: 20px;
+  }
+  
+  .admin-nav ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    gap: 20px;
+  }
+  
+  .admin-nav a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+  }
+  
+  .admin-nav a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Estilos para los formularios */
+  .admin-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 600px;
+  }
+  
+  .admin-form label {
+    margin-bottom: 10px;
+  }
+  
+  .admin-form input,
+  .admin-form textarea,
+  .admin-form button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+  }
+  
+  .admin-form button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 1em;
+  }
+  
+  .admin-form button:hover {
+    background-color: #45a049;
+  }
+  
+  /* Estilos para la lista de productos */
+  .product-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .product-list li {
+    margin-bottom: 10px;
+  }
+  
+  /* Estilos para mensajes de error en dispositivos móviles */
+  .mobile-error {
+    display: none;
+    color: red;
+    font-weight: bold;
+  }
+  
+  @media (max-width: 768px) {
+    .admin-panel {
+      display: none;
+    }
+  
+    .mobile-error {
+      display: block;
+    }
+  }
