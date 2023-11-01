@@ -44,8 +44,8 @@ public class ProductImageService implements IProductImageService{
     public void addProductImage(ProductImageDto productImageDto) {
 
         // Fetch the product by ID
-        Product product = productRepository.findById(productImageDto.getProductid())
-                .orElseThrow(() -> new RuntimeException("Producto no encontrado con ID: " + productImageDto.getProductid()));
+        Product product = productRepository.findById(productImageDto.getProductId())
+                .orElseThrow(() -> new RuntimeException("Producto no encontrado con ID: " + productImageDto.getProductId()));
 
         // Convert the DTO to an entity
         ProductImage productImage = mapper.convertValue(productImageDto, ProductImage.class);
