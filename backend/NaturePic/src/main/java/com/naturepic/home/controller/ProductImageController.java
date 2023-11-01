@@ -29,6 +29,7 @@ public class ProductImageController {
     @GetMapping("/{imageId}")
     public ResponseEntity<ProductImageDto> getProductImageById(@PathVariable Long imageId){
         ProductImageDto productImageDto = productImageService.findProductImageById(imageId);
+
         if(productImageDto != null) {
             return ResponseEntity.ok(productImageDto);
         } else {

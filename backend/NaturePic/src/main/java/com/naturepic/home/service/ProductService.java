@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.naturepic.home.model.ProductDto;
 import com.naturepic.home.model.entity.Product;
 import com.naturepic.home.model.repository.ProductRepository;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,8 @@ import java.util.stream.Collectors;
 @Service
 public class ProductService implements IProductService {
 
+    private Logger logger = Logger.getLogger(ProductService.class);
+
     @Autowired
     private ProductRepository productRepository;
 
@@ -22,12 +25,19 @@ public class ProductService implements IProductService {
 
     @Override
     public void newProduct(ProductDto productDto) {
+
+        logger.debug("newProduct :: Inicio");
+        logger.debug("product.Dto:" + productDto.getId() + "-" + productDto.getName() + "-" + productDto.getImageUrl());
+
         Product existingProduct = productRepository.findByName(productDto.getName()).orElse(null);
+
+        //logger.debug("existingProduct:" + existingProduct.getId() + "-" + existingProduct.getName() + "-" + existingProduct.getImageUrl());
 
         if (existingProduct != null) {
             throw new IllegalArgumentException("El producto con el nombre " + productDto.getName() + " ya existe!");
         }
 
+        logger.debug("save product.Dto:" + productDto.getId() + "-" + productDto.getName() + "-" + productDto.getImageUrl());
         saveProduct(productDto);
     }
 
@@ -72,6 +82,8 @@ public class ProductService implements IProductService {
     }
 
     private void saveProduct(ProductDto productDto) {
+
+
         Product newProduct = mapper.convertValue(productDto, Product.class);
         productRepository.save(newProduct);
     }

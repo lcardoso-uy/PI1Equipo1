@@ -3,6 +3,7 @@ package com.naturepic.home.controller;
 import com.naturepic.home.model.ProductDto;
 import com.naturepic.home.model.entity.Product;
 import com.naturepic.home.service.IProductService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,7 @@ import java.util.Set;
 @RequestMapping("/products")
 public class ProductController {
 
+    private Logger logger = Logger.getLogger(ProductController.class);
     private final IProductService productService;
 
     @Autowired
@@ -26,6 +28,7 @@ public class ProductController {
     @PostMapping
     public ResponseEntity<?> newProduct(@RequestBody ProductDto productDto){
         try {
+            logger.debug("new product.Dto:" + productDto.getId() + "-" + productDto.getName() + "-" + productDto.getImageUrl());
             productService.newProduct(productDto);
             return ResponseEntity.status(HttpStatus.CREATED).body("Producto creado exitosamente.");
         } catch (IllegalArgumentException e) {
