@@ -1,6 +1,9 @@
 package com.naturepic.home.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.Column;
+import jakarta.persistence.JoinColumn;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,9 +13,17 @@ import lombok.Setter;
 
 public class ProductImageDto {
 
-    private Long imageid;
-    private String imageurl;
+    @JsonProperty("image_id")
+    @Column(name = "image_id")
+    private Long imageId;
+
+    @JsonProperty("image_url")
+    @Column(name = "image_url")
+    private String imageUrl;
     // If you need a reference back to the product, just use the product ID
-    private Long productid;
+
+    @JsonProperty("product_id")
+    @JoinColumn(name = "product_id")
+    private Long productId;
 
 }

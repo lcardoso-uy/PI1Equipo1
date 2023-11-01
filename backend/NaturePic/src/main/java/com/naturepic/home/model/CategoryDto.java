@@ -1,6 +1,8 @@
 package com.naturepic.home.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.Column;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,5 +16,7 @@ public class CategoryDto {
     private String name;
     private Boolean status;
 
-    private String imageurl;  /*si seteo imageUrl en camelCase, a la base va como image_url, pero luego, no funcionan bien las actualizacoines del campo*/
+    @JsonProperty("image_url")
+    @Column(name = "image_url")
+    private String imageUrl;  /*si seteo imageUrl en camelCase, a la base va como image_url, pero luego, no funcionan bien las actualizacoines del campo*/
 }

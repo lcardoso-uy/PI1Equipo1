@@ -19,4 +19,7 @@ public interface IProductService {
     Set<ProductDto> listAllProducts();
 
     List<Product> findRandomProducts();
+
+    void associateCategoryToProduct(Long productId, Long categoryId);
+    void updateProduct(Long productId, ProductDto productDto);
 }

@@ -21,6 +21,27 @@ const ProductList = () => {
             ) : (
                 <button onClick={handleAddProduct}>Add Product</button>
             )}
+
+            {products.map(product => (
+                <div key={product.id} className="product">
+                    <h2>{product.name}</h2>
+                    <img src={product.image_url} alt="imagen de ejemplo" />
+                    <p>ejemplo</p>
+                    {/* {product.images.map((img, index) => (
+                        <img key={index} src={img} alt={product.name} />                 
+                    ))}*/}
+                </div>
+            ))}
+            
+            {/* 
+            
+            private Long id;
+
+private String name;
+private Boolean status;
+
+@JsonProperty("image_url")
+@Column(name = "image_url")
             
             {products.map(product => (
                 <div key={product.id} className="product">
@@ -31,6 +52,9 @@ const ProductList = () => {
                     ))}
                 </div>
             ))}
+
+ */}
+
         </div>
     );
 };
