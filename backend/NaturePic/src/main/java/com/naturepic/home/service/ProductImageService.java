@@ -37,7 +37,11 @@ public class ProductImageService implements IProductImageService{
     @Override
     public Set<ProductImageDto> findProductImagesByProductId(Long productId) {
         List<ProductImage> productImages = productImageRepository.findAllByProductId(productId);
-        return productImages.stream().map(img -> mapper.convertValue(img, ProductImageDto.class)).collect(Collectors.toSet());
+        return productImages.stream().map(img -> {
+            ProductImageDto dto = mapper.convertValue(img, ProductImageDto.class);
+            dto.setProductId(img.getProduct().getId());
+            return dto;
+        }).collect(Collectors.toSet());
     }
 
     @Override

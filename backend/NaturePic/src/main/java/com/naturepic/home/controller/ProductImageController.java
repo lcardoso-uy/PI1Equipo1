@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Set;
+
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -46,5 +48,17 @@ public class ProductImageController {
             return ResponseEntity.status( HttpStatus.NOT_FOUND).body("Foto no encontrada");
         }
     }
+
+    @GetMapping("/by-product/{productId}")
+    public ResponseEntity<Set<ProductImageDto>> getProductImagesByProductId(@PathVariable Long productId){
+        Set<ProductImageDto> productImageDtos = productImageService.findProductImagesByProductId(productId);
+
+        if(!productImageDtos.isEmpty()) {
+            return ResponseEntity.ok(productImageDtos);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 
 }
