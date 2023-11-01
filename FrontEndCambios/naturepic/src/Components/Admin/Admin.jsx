@@ -11,11 +11,10 @@ function Admin() {
           <ul>
             <li><Link to="agregar-producto">Agregar Producto</Link></li>
             <li><Link to="lista-de-productos">Lista de Productos</Link></li>
+            <li><Link to="agregar-categoria">Agregar Categoría</Link></li>
           </ul>
         </nav>
         <Outlet/>
-        <br />
-        <button className='delete-button'>Eliminar Producto</button>
       </div>
       <p className="mobile-error">Lo sentimos, el panel de administración no está disponible en dispositivos móviles.</p>
     </div>

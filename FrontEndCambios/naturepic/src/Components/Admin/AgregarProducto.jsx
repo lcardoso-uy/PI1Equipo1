@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { DataContext } from '../Context/DataContext';
 import './Admin.css';
+import AgregarCategoria from './AgregarCategoria';
 
 function AgregarProducto() {
   const { setProducts } = useContext(DataContext);

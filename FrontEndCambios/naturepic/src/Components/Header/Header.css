@@ -19,21 +19,22 @@ header {
     align-items: center;
     padding: 10px 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    background-color: #213363;
+    background-color: #D3D04F;
+    /* #213363 */
 }
-  
+
 .logo-container a {
     display: flex;
     align-items: center;
     text-decoration: none;
     color: #ffffffbb;
 }
-  
+
 .logo-container img {
     height: 40px;
     margin-right: 10px;
 }
-  
+
 .Header-buttons {
     margin-left: 10px;
     padding: 5px 15px;
@@ -49,37 +50,37 @@ header {
     .logo-container img {
       height: 30px;
     }
-    
+
     .Header-buttons {
       font-size: 14px;
     }
-    
+
     .Header-buttons button {
       padding: 5px 10px;
     }
   }
-  
+
   @media (max-width: 480px) {
     header {
       flex-direction: column;
       padding: 10px;
     }
-    
+
     .logo-container {
       margin-bottom: 10px;
     }
-    
+
     .Header-buttons {
       display: flex;
       flex-direction: column;
       align-items: center;
     }
-    
+
     .Header-buttons button {
       margin-bottom: 5px;
     }
   }
-  
+
   @media (max-width: 768px) and (min-width: 551px) {
     header {
       flex-direction: column;
