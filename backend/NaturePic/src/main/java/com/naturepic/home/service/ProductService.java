@@ -2,10 +2,13 @@ package com.naturepic.home.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.naturepic.home.model.ProductDto;
+import com.naturepic.home.model.entity.Category;
 import com.naturepic.home.model.entity.Product;
+import com.naturepic.home.model.repository.CategoryRepository;
 import com.naturepic.home.model.repository.ProductRepository;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,6 +25,9 @@ public class ProductService implements IProductService {
 
     @Autowired
     ObjectMapper mapper;
+
+    @Autowired
+    private CategoryRepository categoryRepository; // Inyectar CategoryRepository
 
     @Override
     public void newProduct(ProductDto productDto) {
@@ -87,4 +93,44 @@ public class ProductService implements IProductService {
         Product newProduct = mapper.convertValue(productDto, Product.class);
         productRepository.save(newProduct);
     }
+
+    public void associateCategoryToProduct(Long productId, Long categoryId) {
+        Product product = productRepository.findById(productId)
+                .orElseThrow(() -> new IllegalArgumentException("Producto no encontrado con ID: " + productId));
+        SimpleJpaRepository categoryRepository;
+        categoryRepository = null;
+        Category category = null;
+        try {
+            category = (Category) categoryRepository.findById(categoryId)
+                    .orElseThrow(() -> new IllegalArgumentException("Categoría no encontrada con ID: " + categoryId));
+        } catch (Throwable e) {
+            throw new RuntimeException( e );
+        }
+
+        product.setCategory(category);
+        productRepository.save(product);
+    }
+
+    public void updateProduct(Long productId, ProductDto productDto) {
+        Product existingProduct = productRepository.findById(productId)
+                .orElseThrow(() -> new IllegalArgumentException("Producto no encontrado con ID: " + productId));
+
+        // Actualiza los campos deseados
+        existingProduct.setName(productDto.getName());
+        existingProduct.setDescription(productDto.getDescription());
+        existingProduct.setStatus(productDto.getStatus());
+        existingProduct.setImageUrl(productDto.getImageUrl());
+
+        // Actualizar la categoría
+        if (productDto.getCategory() != null) {
+            Category category = categoryRepository.findById(productDto.getCategory().getId())
+                    .orElseThrow(() -> new IllegalArgumentException("Categoría no encontrada con ID: " + productDto.getCategory().getId()));
+            existingProduct.setCategory(category);
+        } else {
+            existingProduct.setCategory(null); // Esto permitirá establecer la categoría en null si se proporciona null
+        }
+
+        productRepository.save(existingProduct);
+    }
+
 }

@@ -53,11 +53,12 @@ public class ProductImageController {
     public ResponseEntity<Set<ProductImageDto>> getProductImagesByProductId(@PathVariable Long productId){
         Set<ProductImageDto> productImageDtos = productImageService.findProductImagesByProductId(productId);
 
-        if(!productImageDtos.isEmpty()) {
+        /*if(!productImageDtos.isEmpty()) {
             return ResponseEntity.ok(productImageDtos);
         } else {
             return ResponseEntity.notFound().build();
-        }
+        }*/
+        return ResponseEntity.ok(productImageDtos);
     }
 
 

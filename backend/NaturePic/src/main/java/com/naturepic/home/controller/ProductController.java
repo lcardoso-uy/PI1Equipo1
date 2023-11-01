@@ -66,6 +66,27 @@ public class ProductController {
         }
     }
 
+    @PostMapping("/{productId}/category/{categoryId}")
+    public ResponseEntity<?> associateCategoryToProduct(@PathVariable Long productId, @PathVariable Long categoryId){
+        try {
+
+            productService.associateCategoryToProduct(productId, categoryId);
+            return ResponseEntity.ok("Categoría asociada exitosamente al producto.");
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateProduct(@PathVariable Long id, @RequestBody ProductDto productDto){
+        try {
+            productService.updateProduct(id, productDto);
+            return ResponseEntity.ok("Producto actualizado exitosamente.");
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<String> handleIllegalArgumentException(IllegalArgumentException e) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());

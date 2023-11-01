@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Column;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Getter
 @Setter
+@NoArgsConstructor
 public class ProductDto {
 
     private Long id;
