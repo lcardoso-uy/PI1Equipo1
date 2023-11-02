@@ -5,6 +5,7 @@ import './Home.css';
 
 const Home = () => {
   const { randomProducts } = useContext(DataContext);
+  const {categorias, setCategorias} = useContext(DataContext)
 
   return (
     <div>
@@ -20,6 +21,15 @@ const Home = () => {
       <Link to="/catalogo">
         <button>Ver Productos</button>
       </Link>
+      <br />
+      <div className="categories-container">
+        {categorias.map(categoria => (
+          <div key={categoria.id}>
+          <p>{categoria.name}</p>
+            <img src={categoria.imageurl} alt={categoria.name} />
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
