@@ -23,6 +23,6 @@ jobs:
 
     - name: Run tests
       run: 
-        cd /FrontEndCambios/naturepic/package.json
+        cd C:\Users\manue\OneDrive\Escritorio\proyectofinal\PI1Equipo1\backend\NaturePic\src\main
         npm install
         npm test
