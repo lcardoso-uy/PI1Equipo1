@@ -25,3 +25,9 @@ jobs:
       run: |
         cd PI1Equipo1/integracion/naturepic
         npm test
+
+    - name: List files in directory
+      run: 
+        ls -al PI1Equipo1
+        ls -al PI1Equipo1/integracion
+        ls -al PI1Equipo1/integracion/naturepic
