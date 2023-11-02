@@ -22,4 +22,6 @@ jobs:
       run: npm install
 
     - name: Run tests
-      run: npm test
+      run: |
+          cd PI1Equipo1\integracion\naturepic\package.json
+          npm test
