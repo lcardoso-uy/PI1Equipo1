@@ -23,6 +23,5 @@ jobs:
 
     - name: List files in directory
       run: 
-        ls -al PI1Equipo1
-        ls -al PI1Equipo1/integracion
-        ls -al PI1Equipo1/integracion/naturepic
+        ls -al integracion
+        ls -al integracion/naturepic
