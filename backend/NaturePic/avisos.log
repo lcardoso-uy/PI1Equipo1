@@ -58,3 +58,11 @@
 [2023-11-0115:43:49] [ DEBUG] [ProductService:35] newProduct :: Inicio
 [2023-11-0115:43:49] [ DEBUG] [ProductService:36] product.Dto:null-producto 1-https://img.freepik.com/fotos-premium/fotografo-fotografiando-camara_191163-765.jpg?w=1380
 [2023-11-0115:43:49] [ DEBUG] [ProductService:46] save product.Dto:null-producto 1-https://img.freepik.com/fotos-premium/fotografo-fotografiando-camara_191163-765.jpg?w=1380
+[2023-11-0120:29:54] [ DEBUG] [ProductController:31] new product.Dto:null-producto 1-https://img.freepik.com/fotos-premium/fotografo-fotografiando-camara_191163-765.jpg?w=1380
+[2023-11-0120:29:54] [ DEBUG] [ProductService:35] newProduct :: Inicio
+[2023-11-0120:29:54] [ DEBUG] [ProductService:36] product.Dto:null-producto 1-https://img.freepik.com/fotos-premium/fotografo-fotografiando-camara_191163-765.jpg?w=1380
+[2023-11-0120:29:54] [ DEBUG] [ProductService:46] save product.Dto:null-producto 1-https://img.freepik.com/fotos-premium/fotografo-fotografiando-camara_191163-765.jpg?w=1380
+[2023-11-0120:30:08] [ DEBUG] [ProductController:31] new product.Dto:null-producto 1-null
+[2023-11-0120:30:08] [ DEBUG] [ProductService:35] newProduct :: Inicio
+[2023-11-0120:30:08] [ DEBUG] [ProductService:36] product.Dto:null-producto 1-null
+[2023-11-0120:30:08] [ DEBUG] [ProductService:46] save product.Dto:null-producto 1-null
