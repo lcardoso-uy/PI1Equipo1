@@ -22,4 +22,7 @@ jobs:
       run: npm install
 
     - name: Run tests
-      run: npm test
+      run: 
+        cd /FrontEndCambios/naturepic/package.json
+        npm install
+        npm test
