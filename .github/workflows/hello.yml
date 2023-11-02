@@ -23,5 +23,5 @@ jobs:
 
     - name: Run tests
       run: |
-          cd PI1Equipo1\integracion\naturepic\package.json
-          npm test
+        cd PI1Equipo1/integracion/naturepic
+        npm test
