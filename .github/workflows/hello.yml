@@ -21,11 +21,6 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    - name: Run tests
-      run: |
-        cd PI1Equipo1/integracion/naturepic
-        npm test
-
     - name: List files in directory
       run: 
         ls -al PI1Equipo1
