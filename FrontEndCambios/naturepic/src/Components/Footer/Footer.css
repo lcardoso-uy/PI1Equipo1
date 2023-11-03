@@ -1,31 +1,23 @@
 .footer {
   background-color: #A3B4E0;
-  color: white;
-  text-align: center;
-  padding: 10px 0;
+  height: 100px;
 }
 /* #213363 */
 .footer-content {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
+  font-family: Cabinet Grotesk;
+  color: #000000;
+  font-weight: bold;
+  margin-left: 20PX;
+  padding: 10px 20px;
 }
 
 .footer-block {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   flex-wrap: wrap; /* Permite que los elementos se ajusten en líneas separadas si no hay suficiente espacio */
 }
 
-.footer img {
-  height: 50px;
-  margin-bottom: 10px; /* Espaciado inferior para cuando el texto se mueva debajo del logo en pantallas pequeñas */
-}
 
-.footer span {
-  font-size: 1rem;
-}
 
 /* Estilos para tablets */
 @media screen and (max-width: 768px) {

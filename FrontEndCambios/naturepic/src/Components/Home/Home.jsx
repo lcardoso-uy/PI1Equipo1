@@ -2,19 +2,21 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { DataContext } from '../Context/DataContext';
 import './Home.css';
-
+import imgenDestacada from "../../../public/Imagen Principal 1.png";
 const Home = () => {
   const { randomProducts } = useContext(DataContext);
-  const {categorias, setCategorias} = useContext(DataContext)
-
+  const {categorias} = useContext(DataContext)
+  // const {products} = useContext(DataContext)
   return (
-    <div>
-      <h1>Tu aventura fotográfica comienza aquí</h1>
-      <div className="product-container">
+    <div className='home-container'>
+      {/* Tu aventura fotográfica comienza aquí */}
+      <h1>Explora la naturaleza en detalle</h1>
+      <img className='imagen-destacada' src={imgenDestacada} alt="imagen-destacada" />
+      <div className="Productos-random-contenedor">
         {randomProducts.map(product => (
           <div key={product.id} className="product-item">
           <p>{product.name}</p>
-            <img src={product.image} alt={product.name} />
+            <img src={product.image_url} alt={product.name} />
           </div>
         ))}
       </div>
@@ -23,10 +25,12 @@ const Home = () => {
       </Link>
       <br />
       <div className="categories-container">
+        
         {categorias.map(categoria => (
+        
           <div key={categoria.id}>
           <p>{categoria.name}</p>
-            <img src={categoria.imageurl} alt={categoria.name} />
+            <img src={categoria.image_url} alt={categoria.name} />
           </div>
         ))}
       </div>
@@ -35,7 +39,14 @@ const Home = () => {
 };
 
 export default Home;
-
+      {/* <div>
+        {products.map(product => (
+          <div key={product.id} className="product-item">
+          <p>{product.name}</p>
+            <img src={product.images} alt={product.name} />
+          </div>
+        ))}
+      </div> */}
 
 
 

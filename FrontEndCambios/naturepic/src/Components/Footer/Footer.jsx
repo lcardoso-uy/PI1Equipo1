@@ -1,14 +1,14 @@
 import React from 'react'
 import "./Footer.css"
-import logo from "../../../public/logo.png"
+import NaturePicLogo from "../../../public/NaturePic-Logo 1.png"
 
 const Footer = () => {
   return (
     <footer className="footer">
       <div className="footer-content">
         <div className="footer-block">
-          <img src={logo} alt="Isologotipo de la empresa" />
-          <span>2023</span>
+          <img src={NaturePicLogo} alt="Isologotipo de la empresa" />
+          <p>NaturePic</p>
         </div>
       </div>
     </footer>
