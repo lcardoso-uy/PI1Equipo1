@@ -25,9 +25,7 @@ const Home = () => {
       </Link>
       <br />
       <div className="categories-container">
-        
         {categorias.map(categoria => (
-        
           <div key={categoria.id}>
           <p>{categoria.name}</p>
             <img src={categoria.image_url} alt={categoria.name} />

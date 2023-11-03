@@ -31,7 +31,7 @@ export const DataProvider = ({ children }) => {
       .then(data => setRandomProducts(data))
       .catch(err => console.error("Failed to fetch random products:", err));
 
-      fetch("http://localhost:8080/categories/")
+      fetch("http://localhost:8080/categories")
       .then(res => res.json())
       .then(data => {
         setCategorias(data);
