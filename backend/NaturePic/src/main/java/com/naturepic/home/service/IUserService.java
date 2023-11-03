@@ -16,4 +16,6 @@ public interface IUserService {
     void deleteById(Long id);
 
     User update(Long id, User user);
+
+    User login(User user, String ipAddress);
 }
