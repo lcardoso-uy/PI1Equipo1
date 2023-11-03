@@ -1,17 +1,13 @@
-*{
-    box-sizing: border-box;
-    margin: 0;
-}
-
 .h1-home{
-    background-color: pink;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
+
 header {
     width: 100%;
+    height: 80px;
     position: fixed;
     top: 0;
     display: flex;
@@ -20,6 +16,7 @@ header {
     padding: 10px 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     background-color: #D3D04F;
+    z-index: 100;
     /* #213363 */
 }
 
@@ -30,10 +27,6 @@ header {
     color: #ffffffbb;
 }
 
-.logo-container img {
-    height: 40px;
-    margin-right: 10px;
-}
 
 .Header-buttons {
     margin-left: 10px;
@@ -41,9 +34,17 @@ header {
     cursor: pointer;
 }
 
-.crear-account{
-    margin-right: 10px;
+.crear-cuenta, .iniciar-sesion{
+  font-family: Satoshi;
+  font-weight: 500;
+  font-size: 20.25px;
+    margin: 0 15px;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
 }
+
 
 
 @media (max-width: 768px) {
