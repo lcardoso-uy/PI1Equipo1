@@ -1,4 +1,4 @@
-package com.naturepic.home.model.dto;  // cambio en el nombre del paquete
+package com.naturepic.home.model;  // cambio en el nombre del paquete
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;

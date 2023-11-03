@@ -1,13 +1,12 @@
 package com.naturepic.home.model.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @Entity
 @Getter
@@ -25,6 +24,7 @@ public class User {
     @Column(nullable = false)
     private String lastName;
 
+    @Email
     @Column(unique = true, nullable = false)
     private String email;
 
@@ -32,5 +32,8 @@ public class User {
     private String password;
 
     private Boolean isAdmin = false;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<LoginAttempt> loginAttempts;
 
 }
