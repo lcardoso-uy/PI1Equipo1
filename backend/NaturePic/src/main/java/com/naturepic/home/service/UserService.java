@@ -9,6 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 @Service
@@ -19,6 +20,11 @@ public class UserService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    private static final String EMAIL_PATTERN = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+
+
+    private static final Pattern pattern = Pattern.compile(EMAIL_PATTERN);
 
     // Convertir una entidad User a un UserDto
     private UserDto convertToDto(User user) {
@@ -57,6 +63,10 @@ public class UserService {
 
     public UserDto createUser(UserDto userDto) {
 
+        if (!pattern.matcher(userDto.getEmail()).matches()) {
+            throw new IllegalArgumentException("Email does not meet the required format");
+        }
+
         if (userDto.getPassword() == null) {
             throw new IllegalArgumentException("Password cannot be null");
         }
@@ -69,6 +79,11 @@ public class UserService {
     }
 
     public UserDto updateUser(Long id, UserDto userDto) {
+
+        if (!pattern.matcher(userDto.getEmail()).matches()) {
+            throw new IllegalArgumentException("Email does not meet the required format");
+        }
+
         User existingUser = userRepository.findById(id).orElseThrow(/* tu excepción aquí */);
         existingUser.setFirstName(userDto.getFirstName());
         existingUser.setLastName(userDto.getLastName());
@@ -99,7 +114,5 @@ public class UserService {
         user.setPassword(encodedPassword);
         return convertToDto(userRepository.save(user));
     }
-
-
 
 }

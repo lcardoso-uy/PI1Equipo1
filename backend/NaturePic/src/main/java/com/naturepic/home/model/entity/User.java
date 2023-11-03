@@ -1,6 +1,7 @@
 package com.naturepic.home.model.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -23,6 +24,7 @@ public class User {
     @Column(nullable = false)
     private String lastName;
 
+    @Email
     @Column(unique = true, nullable = false)
     private String email;
 

@@ -4,6 +4,7 @@ import com.naturepic.home.model.UserDto;
 import com.naturepic.home.model.entity.User;
 import com.naturepic.home.security.PasswordChangeDto;
 import com.naturepic.home.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,7 +33,7 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<UserDto> createUser(@RequestBody User user) {
+    public ResponseEntity<UserDto> createUser(@Valid @RequestBody User user) {
         // Convertir el User a UserDto antes de pasarlo al servicio
         UserDto userDto = convertToDto(user);
         UserDto createdUser = userService.createUser(userDto);
@@ -50,7 +51,7 @@ public class UserController {
         return userDto;
     }
     @PutMapping("/{id}")
-    public ResponseEntity<UserDto> updateUser(@PathVariable Long id, @RequestBody UserDto userDto) {
+    public ResponseEntity<UserDto> updateUser(@PathVariable Long id, @Valid @RequestBody UserDto userDto) {
         UserDto updatedUser = userService.updateUser(id, userDto);
         return ResponseEntity.ok(updatedUser);
     }
