@@ -11,7 +11,6 @@ function Admin() {
           <ul>
             <li><Link to="agregar-producto">Agregar Producto</Link></li>
             <li><Link to="lista-de-productos">Lista de Productos</Link></li>
-            <li><Link to="agregar-categoria">Agregar Categoría</Link></li>
           </ul>
         </nav>
         <Outlet/>

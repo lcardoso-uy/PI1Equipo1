@@ -12,6 +12,18 @@ const Home = () => {
       {/* Tu aventura fotográfica comienza aquí */}
       <h1>Explora la naturaleza en detalle</h1>
       <img className='imagen-destacada' src={imgenDestacada} alt="imagen-destacada" />
+      <br />
+      <div className="categories-container">
+        {categorias.map(categoria => (
+          <div key={categoria.id} className="categorie-item">
+          <div className='img-container-categories'>
+            <img src={categoria.image_url} alt={categoria.name} />
+            <p>{categoria.name}</p>
+          </div>
+          </div>
+        ))}
+      </div>
+      <br />
       <div className="Productos-random-contenedor">
         {randomProducts.map(product => (
           <div key={product.id} className="product-item">
@@ -23,15 +35,6 @@ const Home = () => {
       <Link to="/catalogo">
         <button>Ver Productos</button>
       </Link>
-      <br />
-      <div className="categories-container">
-        {categorias.map(categoria => (
-          <div key={categoria.id}>
-          <p>{categoria.name}</p>
-            <img src={categoria.image_url} alt={categoria.name} />
-          </div>
-        ))}
-      </div>
     </div>
   );
 };

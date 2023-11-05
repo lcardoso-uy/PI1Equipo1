@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './Admin.css';
 
 const Acciones = () => {
     const [accion, setAccion] = useState(false);
@@ -20,8 +21,8 @@ const Acciones = () => {
     }
 
     return (
-        <div className="dropdown">
-            <button className="dropbtn" onClick={toggleAccion}>Acciones</button>
+        <div className="contenedor__acciones">
+            <button className="boton__acciones" onClick={toggleAccion}>Acciones</button>
             {accion && (
             <div className="dropdown-content">
                 <button onClick={accion1} className='delete-button'>Eliminar Producto</button>

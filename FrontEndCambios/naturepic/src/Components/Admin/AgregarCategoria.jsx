@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { DataContext } from '../Context/DataContext';
-
+import './Admin.css';
 const AgregarCategoria = () => {
   const { agregarCategoria } = useContext(DataContext);
   const [nuevaCategoria, setNuevaCategoria] = useState('');

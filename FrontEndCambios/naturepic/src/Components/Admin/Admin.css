@@ -1,18 +1,60 @@
-/* bgc--> 8EAC50 */
-/* .admin {
-    height: 100%;
-} */
 
-/* Panel de Administración */
+.admin-panel {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  margin-top: 72.19px;
+  background: #f9f9f9;
+}
+
+
+.admin-panel h1 {
+  position: absolute;
+  top: 30px;
+  font-size: 24px;
+  color: #333;
+}
+
+.admin-panel nav ul {
+  padding-top: 50px;
+  list-style: none;
+}
+
+.admin-panel nav li {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+.admin-panel nav a {
+  text-decoration: none;
+  color: #5d5d5d;
+  font-weight: bold;
+}
+
+.admin-panel nav a:hover {
+  text-decoration: underline;
+}
+
 
 .id__admin-panel{
-  /* border: solid; */
   height: 2em;
   margin-right: 20px;
   color: blue;
 }
 
-.dropbtn {
+
+.contenedor__acciones {
+  position: relative;
+  display: inline-block;
+  margin-left: 20px;
+}
+
+
+.boton__acciones {
     background-color: #D3D04F;
     color: white;
     padding: 16px;
@@ -20,13 +62,7 @@
     border: none;
     cursor: pointer;
   }
-  
-  .dropdown {
-    position: relative;
-    display: inline-block;
-    margin-left: 20px;
-  }
-  
+
   .dropdown-content {
     position: absolute;
     background-color: #f9f9f9;
@@ -50,55 +86,22 @@
     background-color: #c0b632;
   }
 
-.admin-panel {
-    background: #f9f9f9;
-    border: 1px solid #e1e1e1;
-    padding: 20px;
-    border-radius: 8px;
-    margin-top: 20px;
-  }
-  
-  .admin-panel h1 {
-    font-size: 24px;
-    color: #333;
-  }
-  
-  .admin-panel nav ul {
-    padding: 0;
-    list-style: none;
-  }
-  
-  .admin-panel nav li {
-    display: inline-block;
-    margin-right: 20px;
-  }
-  
-  .admin-panel nav a {
-    text-decoration: none;
-    color: #5d5d5d;
-    font-weight: bold;
-  }
-  
-  .admin-panel nav a:hover {
-    text-decoration: underline;
-  }
+
   
   .delete-button {
-    /* background-color: #ff4d4d; */
     color: white;
     padding: 10px 20px;
-    /* border: none;
-    border-radius: 5px; */
     cursor: pointer;
     font-weight: bold;
-    /* margin-left: 1em; */
   }
   
   .delete-button:hover {
     background-color: #ff1a1a;
   }
   
-  /* Formulario para Agregar Producto */
+
+
+
   .agregar-producto-form {
     background: #fff;
     padding: 20px;
@@ -135,7 +138,9 @@
     background-color: #218838;
   }
   
-  /* Lista de Productos */
+
+
+
   .lista-productos {
     margin-top: 20px;
   }
@@ -149,31 +154,30 @@
     padding: 10px;
     border-bottom: 1px solid #eee;
     display: flex;
-    /* flex-wrap: wrap; */
+    flex-wrap: wrap;
   }
-  
-  
   
 
   .lista-productos li:hover {
     background-color: #f9f9f9;
   }
 
-  /* Estilos generales para el panel de administración */
+
 .admin-panel {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 20px;
   }
-  
-  /* Estilo para el título principal */
+
+
+
   .admin-panel h1 {
     font-size: 2em;
     margin-bottom: 20px;
   }
   
-  /* Estilos para la navegación */
+
   .admin-nav {
     margin-bottom: 20px;
   }
@@ -194,8 +198,7 @@
   .admin-nav a:hover {
     text-decoration: underline;
   }
-  
-  /* Estilos para los formularios */
+
   .admin-form {
     display: flex;
     flex-direction: column;
@@ -228,7 +231,8 @@
     background-color: #45a049;
   }
   
-  /* Estilos para la lista de productos */
+
+
   .product-list {
     list-style-type: none;
     padding: 0;
@@ -238,7 +242,7 @@
     margin-bottom: 10px;
   }
   
-  /* Estilos para mensajes de error en dispositivos móviles */
+
   .mobile-error {
     display: none;
     color: red;
@@ -253,4 +257,4 @@
     .mobile-error {
       display: block;
     }
-  }
+  } 

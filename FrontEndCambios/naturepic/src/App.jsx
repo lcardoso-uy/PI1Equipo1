@@ -13,7 +13,7 @@ import Catalogo from './Components/Home/Catalogo';
 import Galeria from './Components/Detalle/Galeria';
 import RegistroUsuario from './Components/SesionUsuario/RegistroUsuario';
 import IniciarSesion from './Components/SesionUsuario/IniciarSesion';
-import AgregarCategoria from './Components/Admin/AgregarCategoria';
+// import AgregarCategoria from './Components/Admin/AgregarCategoria';
 
 function App() {
   return (
@@ -34,7 +34,7 @@ function App() {
             <Route path='/admin' element={<Admin />}>
               <Route path='agregar-producto' element={<AgregarProducto />} />
               <Route path='lista-de-productos' element={<ListarProductos />} />
-              <Route path='agregar-categoria' element= {<AgregarCategoria/>}/>
+              {/* <Route path='agregar-categoria' element= {<AgregarCategoria/>}/> */}
             </Route>
           </Routes>
         </div>
