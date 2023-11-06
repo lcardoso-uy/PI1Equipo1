@@ -7,23 +7,14 @@ export const DataProvider = ({ children }) => {
   const [randomProducts, setRandomProducts] = useState([]);
   const [usuario, setUsuario] = useState(null);
   const [categorias, setCategorias] = useState([]);
+  const [newProduct, setNewProduct] = useState({
+    name: '',
+    description: '',
+    image_url: '',
+    category: '',
+  });
   
-  const agregarCategoria = async (nombreCategoria) => {
-    try {
-      const response = await fetch("http://localhost:8080/categories", {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ name: nombreCategoria })
-      });
-      const nuevaCategoria = await response.json();
-      setCategorias(prevCategorias => [...prevCategorias, nuevaCategoria]);
-      return nuevaCategoria; // Devuelve la nueva categoría por si necesitas el ID
-    } catch (error) {
-      console.error("Error al agregar categoría:", error);
-    }
-  };
+
 
   const agregarProducto = async (producto) => {
     try {
@@ -36,7 +27,7 @@ export const DataProvider = ({ children }) => {
       });
       const nuevoProducto = await response.json();
       setProducts(prevProducts => [...prevProducts, nuevoProducto]);
-      return nuevoProducto; // Devuelve el producto por si necesitas hacer algo más con él
+      return nuevoProducto;
     } catch (error) {
       console.error("Error al agregar producto:", error);
     }
@@ -56,10 +47,14 @@ export const DataProvider = ({ children }) => {
       .then(data => setProducts(data))
       .catch(err => console.error("Failed to fetch products:", err));
 
+
+      
     fetch("http://localhost:8080/products/random")
       .then(res => res.json())
       .then(data => setRandomProducts(data))
       .catch(err => console.error("Failed to fetch random products:", err));
+
+
 
       fetch("http://localhost:8080/categories")
       .then(res => res.json())
@@ -82,9 +77,10 @@ export const DataProvider = ({ children }) => {
   };
 
   const value = {
+    newProduct,
+    setNewProduct,
     products,
     setProducts,
-    agregarCategoria,
     agregarProducto,
     randomProducts,
     usuario,
@@ -100,6 +96,3 @@ export const DataProvider = ({ children }) => {
     </DataContext.Provider>
   );
 };
-  // const agregarCategoria = (categoria) => {
-  //   setCategorias((prevCategorias) => [...prevCategorias, categoria]);
-  // };

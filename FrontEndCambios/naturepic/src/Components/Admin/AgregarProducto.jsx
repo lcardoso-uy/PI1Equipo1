@@ -1,45 +1,28 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { DataContext } from '../Context/DataContext';
 import './Admin.css';
 
 function AgregarProducto() {
-  const { agregarProducto, agregarCategoria } = useContext(DataContext);
-  const [newProduct, setNewProduct] = useState({
-    name: '',
-    description: '',
-    image_url: '',
-  });
-  const [newCategoryName, setNewCategoryName] = useState('');
+  const { agregarProducto, setNewProduct, newProduct, products, setProducts, categorias } = useContext(DataContext);
+  const [selectedCategoryId, setSelectedCategoryId] = useState('');
 
   const handleProductChange = (e) => {
     setNewProduct({ ...newProduct, [e.target.name]: e.target.value });
   };
 
-  const handleCategoryChange = (e) => {
-    setNewCategoryName(e.target.value);
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    let categoryToUse;
-
-    if (newCategoryName.trim()) {
-      const newCategory = await agregarCategoria(newCategoryName);
-      if(newCategory) {
-        categoryToUse = newCategory.id;
-      }
-    }
-
-    if (newProduct.name.trim() && categoryToUse) {
+    if (newProduct.name.trim() && selectedCategoryId) {
       const productToSubmit = {
         ...newProduct,
-        category: { id: categoryToUse }
+        category: { id: selectedCategoryId }
       };
-      
-      await agregarProducto(productToSubmit);
-      setNewProduct({ name: '', description: '', image_url: '' });
-      setNewCategoryName('');
+
+      const addedProduct = await agregarProducto(productToSubmit);
+      if (addedProduct) {
+        setNewProduct({ name: '', description: '', image_url: '' });
+        setProducts([...products, addedProduct]);
+      }
     }
   };
 
@@ -58,8 +41,20 @@ function AgregarProducto() {
           <input type="text" name="image_url" value={newProduct.image_url} onChange={handleProductChange} required />
         </label>
         <br />
-        <label>Nueva Categoría:
-          <input type="text" value={newCategoryName} onChange={handleCategoryChange} required />
+        <label>Categoría:
+          <select
+            name="category"
+            value={selectedCategoryId}
+            onChange={(e) => setSelectedCategoryId(e.target.value)}
+            required
+          >
+            <option value="">Seleccione una categoría</option>
+            {categorias.map((categoria) => (
+              <option key={categoria.id} value={categoria.id}>
+                {categoria.name}
+              </option>
+            ))}
+          </select>
         </label>
         <br />
         <button type="submit">Agregar Producto</button>
@@ -69,6 +64,90 @@ function AgregarProducto() {
 }
 
 export default AgregarProducto;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import React, { useContext, useState } from 'react';
+// import { DataContext } from '../Context/DataContext';
+// import './Admin.css';
+
+// function AgregarProducto() {
+//   const { agregarProducto, agregarCategoria, newProduct, setNewProduct } = useContext(DataContext);
+//   const [newCategoryName, setNewCategoryName] = useState('');
+
+//   const handleProductChange = (e) => {
+//     setNewProduct({ ...newProduct, [e.target.name]: e.target.value });
+//   };
+
+//   const handleCategoryChange = (e) => {
+//     setNewCategoryName(e.target.value);
+//   };
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+
+//     let categoryToUse;
+
+//     if (newCategoryName.trim()) {
+//       const newCategory = await agregarCategoria(newCategoryName);
+//       if(newCategory) {
+//         categoryToUse = newCategory.id;
+//       }
+//     }
+
+//     if (newProduct.name.trim() && categoryToUse) {
+//       const productToSubmit = {
+//         ...newProduct,
+//         category: { id: categoryToUse }
+//       };
+      
+//       await agregarProducto(productToSubmit);
+//       setNewProduct({ name: '', description: '', image_url: '' });
+//       setNewCategoryName('');
+//     }
+//   };
+
+//   return (
+//     <div className="agregar-producto-form">
+//       <form onSubmit={handleSubmit}>
+//         <label>Nombre:
+//           <input type="text" name="name" value={newProduct.name} onChange={handleProductChange} required />
+//         </label>
+//         <br />
+//         <label>Descripción:
+//           <textarea name="description" value={newProduct.description} onChange={handleProductChange} required />
+//         </label>
+//         <br />
+//         <label>Imagen URL:
+//           <input type="text" name="image_url" value={newProduct.image_url} onChange={handleProductChange} required />
+//         </label>
+//         <br />
+//         <label>Nueva Categoría:
+//           <input type="text" value={newCategoryName} onChange={handleCategoryChange} required />
+//         </label>
+//         <br />
+//         <button type="submit">Agregar Producto</button>
+//       </form>
+//     </div>
+//   );
+// }
+
+// export default AgregarProducto;
 
 
 

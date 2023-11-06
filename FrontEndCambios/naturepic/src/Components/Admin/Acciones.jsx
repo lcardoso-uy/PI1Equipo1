@@ -24,8 +24,8 @@ const Acciones = () => {
         <div className="contenedor__acciones">
             <button className="boton__acciones" onClick={toggleAccion}>Acciones</button>
             {accion && (
-            <div className="dropdown-content">
-                <button onClick={accion1} className='delete-button'>Eliminar Producto</button>
+            <div className="contenedor__listaDeAcciones">
+                <button onClick={accion1}>Eliminar Producto</button>
                 <button onClick={accion2}>Administrar características</button>
                 <button onClick={accion3}>Agregar Categoría</button>
             </div>

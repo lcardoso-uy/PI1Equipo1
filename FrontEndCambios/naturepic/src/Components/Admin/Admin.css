@@ -1,4 +1,3 @@
-
 .admin-panel {
   display: flex;
   flex-direction: column;
@@ -17,7 +16,13 @@
   top: 30px;
   font-size: 24px;
   color: #333;
+  font-size: 2em;
+  margin-bottom: 20px;
 }
+
+
+/* Panel de admin - barra de navegación */
+
 
 .admin-panel nav ul {
   padding-top: 50px;
@@ -29,21 +34,54 @@
   margin-right: 20px;
 }
 
+
 .admin-panel nav a {
   text-decoration: none;
   color: #5d5d5d;
   font-weight: bold;
 }
 
+
 .admin-panel nav a:hover {
   text-decoration: underline;
 }
 
 
-.id__admin-panel{
-  height: 2em;
-  margin-right: 20px;
-  color: blue;
+
+
+/* Lista de productos */
+
+.lista-productos {
+  margin-top: 20px;
+}
+
+.lista-productos ul {
+  padding: 0;
+  list-style: none;
+}
+
+
+.lista-productos li {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  align-items: center;
+  gap: 50px;
+}
+
+.id__admin-panel {
+  min-width: 50px;
+  display: inline-block;
+  font-weight: bold;
+  color: #007bff;
+}
+
+
+.category {
+  background-color: #f2f2f2;
+  border-radius: 5px;
+  padding: 5px 10px;
+  font-size: 0.8em;
 }
 
 
@@ -53,17 +91,15 @@
   margin-left: 20px;
 }
 
-
 .boton__acciones {
     background-color: #D3D04F;
     color: white;
     padding: 16px;
-    font-size: 16px;
     border: none;
     cursor: pointer;
   }
-
-  .dropdown-content {
+  
+  .contenedor__listaDeAcciones {
     position: absolute;
     background-color: #f9f9f9;
     min-width: 160px;
@@ -71,49 +107,27 @@
     z-index: 1;
   }
   
-  .dropdown-content button {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-  }
-  
-  .dropdown-content button:hover {
-    background-color: #f1f1f1;
-  }
-  
-  .dropdown:hover .dropbtn {
-    background-color: #c0b632;
-  }
 
-
-  
-  .delete-button {
-    color: white;
-    padding: 10px 20px;
-    cursor: pointer;
-    font-weight: bold;
-  }
-  
-  .delete-button:hover {
-    background-color: #ff1a1a;
-  }
-  
-
-
+/* Agregar producto */
 
   .agregar-producto-form {
     background: #fff;
-    padding: 20px;
+    margin-top: 30px;
+    padding: 43.5px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }
-  
+
+
+
   .agregar-producto-form label {
     display: block;
-    margin-bottom: 10px;
+    margin-bottom: 50px;
+    padding: 0 200px;
   }
   
+
+
   .agregar-producto-form input,
   .agregar-producto-form textarea {
     width: 100%;
@@ -137,111 +151,9 @@
   .agregar-producto-form button:hover {
     background-color: #218838;
   }
-  
 
 
-
-  .lista-productos {
-    margin-top: 20px;
-  }
-  
-  .lista-productos ul {
-    padding: 0;
-    list-style: none;
-  }
-  
-  .lista-productos li {
-    padding: 10px;
-    border-bottom: 1px solid #eee;
-    display: flex;
-    flex-wrap: wrap;
-  }
-  
-
-  .lista-productos li:hover {
-    background-color: #f9f9f9;
-  }
-
-
-.admin-panel {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-  }
-
-
-
-  .admin-panel h1 {
-    font-size: 2em;
-    margin-bottom: 20px;
-  }
-  
-
-  .admin-nav {
-    margin-bottom: 20px;
-  }
-  
-  .admin-nav ul {
-    list-style-type: none;
-    padding: 0;
-    display: flex;
-    gap: 20px;
-  }
-  
-  .admin-nav a {
-    text-decoration: none;
-    color: #333;
-    font-weight: bold;
-  }
-  
-  .admin-nav a:hover {
-    text-decoration: underline;
-  }
-
-  .admin-form {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    max-width: 600px;
-  }
-  
-  .admin-form label {
-    margin-bottom: 10px;
-  }
-  
-  .admin-form input,
-  .admin-form textarea,
-  .admin-form button {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 20px;
-    box-sizing: border-box;
-  }
-  
-  .admin-form button {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    cursor: pointer;
-    font-size: 1em;
-  }
-  
-  .admin-form button:hover {
-    background-color: #45a049;
-  }
-  
-
-
-  .product-list {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .product-list li {
-    margin-bottom: 10px;
-  }
-  
+  /* Mensaje de error - panel no responsivo */
 
   .mobile-error {
     display: none;
@@ -257,4 +169,4 @@
     .mobile-error {
       display: block;
     }
-  } 
+  }

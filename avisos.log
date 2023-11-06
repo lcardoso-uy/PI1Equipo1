@@ -1,0 +1,20 @@
+[2023-11-0517:27:08] [ DEBUG] [ProductController:31] new product.Dto:null-producto 1-null
+[2023-11-0517:27:08] [ DEBUG] [ProductService:35] newProduct :: Inicio
+[2023-11-0517:27:08] [ DEBUG] [ProductService:36] product.Dto:null-producto 1-null
+[2023-11-0517:27:08] [ DEBUG] [ProductService:46] save product.Dto:null-producto 1-null
+[2023-11-0517:27:30] [ DEBUG] [ProductController:31] new product.Dto:null-producto 1-null
+[2023-11-0517:27:30] [ DEBUG] [ProductService:35] newProduct :: Inicio
+[2023-11-0517:27:30] [ DEBUG] [ProductService:36] product.Dto:null-producto 1-null
+[2023-11-0518:34:47] [ DEBUG] [ProductController:31] new product.Dto:null-producto 1-https://img.freepik.com/fotos-premium/fotografo-fotografiando-camara_191163-765.jpg?w=1380
+[2023-11-0518:34:47] [ DEBUG] [ProductService:35] newProduct :: Inicio
+[2023-11-0518:34:47] [ DEBUG] [ProductService:36] product.Dto:null-producto 1-https://img.freepik.com/fotos-premium/fotografo-fotografiando-camara_191163-765.jpg?w=1380
+[2023-11-0518:35:45] [ DEBUG] [ProductController:31] new product.Dto:null-producto 1-https://img.freepik.com/fotos-premium/fotografo-fotografiando-camara_191163-765.jpg?w=1380
+[2023-11-0518:35:45] [ DEBUG] [ProductService:35] newProduct :: Inicio
+[2023-11-0518:35:45] [ DEBUG] [ProductService:36] product.Dto:null-producto 1-https://img.freepik.com/fotos-premium/fotografo-fotografiando-camara_191163-765.jpg?w=1380
+[2023-11-0518:37:13] [ DEBUG] [ProductController:31] new product.Dto:null-producto 1-null
+[2023-11-0518:37:13] [ DEBUG] [ProductService:35] newProduct :: Inicio
+[2023-11-0518:37:13] [ DEBUG] [ProductService:36] product.Dto:null-producto 1-null
+[2023-11-0520:32:50] [ DEBUG] [ProductController:31] new product.Dto:null-producto 1-https://img.freepik.com/fotos-premium/fotografo-fotografiando-camara_191163-765.jpg?w=1380
+[2023-11-0520:32:50] [ DEBUG] [ProductService:35] newProduct :: Inicio
+[2023-11-0520:32:50] [ DEBUG] [ProductService:36] product.Dto:null-producto 1-https://img.freepik.com/fotos-premium/fotografo-fotografiando-camara_191163-765.jpg?w=1380
+[2023-11-0520:32:50] [ DEBUG] [ProductService:46] save product.Dto:null-producto 1-https://img.freepik.com/fotos-premium/fotografo-fotografiando-camara_191163-765.jpg?w=1380

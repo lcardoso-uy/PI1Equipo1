@@ -15,7 +15,7 @@ const Catalogo = () => {
           <div key={product.id} className="product-item">
             <Link to={`/detalle/${product.id}`}>
               <p>{product.name}</p>              
-              <img src={product.image} alt={product.name} />
+              <img src={product.image_url} alt={product.name} />
             </Link>
           </div>
         ))}
