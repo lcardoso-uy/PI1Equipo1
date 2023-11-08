@@ -81,70 +81,81 @@ const RegistroUsuario = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit} noValidate>
-      <label>
-        Nombre:
-        <input
-          type="text"
-          id="name"
-          name="name"
-          value={usuario.name}
-          onChange={handleChange}
-        />
-        {intentadoEnviar && errores.name && <span id="nameError" className="error">Error en el nombre</span>}
-      </label>
-      <br />
+    <form onSubmit={handleSubmit} noValidate className="form__registro">
+  <label className="form__registro-label">
+    Nombre:
+    <input
+      type="text"
+      id="name"
+      name="name"
+      value={usuario.name}
+      onChange={handleChange}
+      className="form__registro-input"
+    />
+    {intentadoEnviar && errores.name && <span id="nameError" className="form__registro-mensajeError">Error en el nombre</span>}
+  </label>
+  <br />
 
-      <label>
-        Apellido:
-        <input
-          type="text"
-          id="surname"
-          name="surname"
-          value={usuario.surname}
-          onChange={handleChange}
-        />
-        {intentadoEnviar && errores.surname && <span id="surnameError" className="error">Error en el apellido</span>}
-      </label>
-      <br />
-      <label>
-        Email:
-        <input
-          type="email"
-          id="email"
-          name="email"
-          value={usuario.email}
-          onChange={handleChange}
-        />
-        {intentadoEnviar && errores.email && <span id="emailError" className="error">Error en el Email</span>}
-      </label>
-      <br />
-      <label>
-        Password:
-        <input
-          type="password"
-          id="password"
-          name="password"
-          value={usuario.password}
-          onChange={handleChange}
-        />
-        {intentadoEnviar && errores.password && <span id="passwordError" className="error">Error en el Password</span>}
-      </label>
-      <br />
-      <label>
-        Acepto términos y condiciones
-        <input
-          type="checkbox"
-          id="terminos"
-          name="terminos"
-          checked={usuario.terminos}
-          onChange={handleChange}
-        />
-        {intentadoEnviar && errores.terminos && <span id="terminosError" className="error">Debe aceptar los términos y condiciones</span>}
-      </label>
-      <br />
-      <button type="submit">Registrar</button>
-    </form>
+  <label className="form__registro-label">
+    Apellido:
+    <input
+      type="text"
+      id="surname"
+      name="surname"
+      value={usuario.surname}
+      onChange={handleChange}
+      className="form__registro-input"
+    />
+    {intentadoEnviar && errores.surname && <span id="surnameError" className="form__registro-mensajeError">Error en el apellido</span>}
+  </label>
+  <br />
+  
+  <label className="form__registro-label">
+    Email:
+    <input
+      type="email"
+      id="email"
+      name="email"
+      value={usuario.email}
+      onChange={handleChange}
+      className="form__registro-input"
+    />
+    {intentadoEnviar && errores.email && <span id="emailError" className="form__registro-mensajeError">Error en el Email</span>}
+  </label>
+  <br />
+
+  <label className="form__registro-label">
+    Password:
+    <input
+      type="password"
+      id="password"
+      name="password"
+      value={usuario.password}
+      onChange={handleChange}
+      className="form__registro-input"
+    />
+    {intentadoEnviar && errores.password && <span id="passwordError" className="form__registro-mensajeError">Error en el Password</span>}
+  </label>
+  <br />
+
+  <div className="form__registro-checkbox">
+    <input
+      type="checkbox"
+      id="terminos"
+      name="terminos"
+      checked={usuario.terminos}
+      onChange={handleChange}
+      className="form__registro-input" // O crea una clase específica para estilizar checkboxes si es necesario
+    />
+    <label htmlFor="terminos" className="form__registro-terminosLabel">
+      Acepto términos y condiciones
+    </label>
+  </div>
+  {intentadoEnviar && errores.terminos && <span id="terminosError" className="form__registro-mensajeError">Debe aceptar los términos y condiciones</span>}
+
+  <button type="submit" className="form__registro-boton">Registrar</button>
+</form>
+
   );
 }
 

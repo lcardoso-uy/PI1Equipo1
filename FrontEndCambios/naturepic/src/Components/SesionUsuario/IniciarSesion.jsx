@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { DataContext } from '../Context/DataContext';
 import { useNavigate } from 'react-router-dom';
+import './User.css';
 
 const IniciarSesion = () => {
   const navigate = useNavigate();
@@ -38,30 +39,32 @@ const IniciarSesion = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Email:
-        <input
-          type="email"
-          name="email"
-          value={credenciales.email}
-          onChange={handleChange}
-        />
-      </label>
-      <br />
-      <label>
-        Password:
-        <input
-          type="password"
-          name="password"
-          value={credenciales.password}
-          onChange={handleChange}
-        />
-      </label>
-      <br />
-      {error && <p className="error">{error}</p>}
-      <button type="submit">Iniciar Sesión</button>
-    </form>
+<form onSubmit={handleSubmit} className="form__login">
+  <div className="form__login-field">
+    <label htmlFor="email">Email:</label>
+    <input
+      id="email"
+      type="email"
+      name="email"
+      className="form__login-input"
+      value={credenciales.email}
+      onChange={handleChange}
+    />
+  </div>
+  <div className="form__login-field">
+    <label htmlFor="password">Password:</label>
+    <input
+      id="password"
+      type="password"
+      name="password"
+      className="form__login-input"
+      value={credenciales.password}
+      onChange={handleChange}
+    />
+  </div>
+  {error && <p className="form__login-mensajeError">{error}</p>}
+  <button type="submit" className="form__login-boton">Iniciar Sesión</button>
+</form>
   );
 }
 

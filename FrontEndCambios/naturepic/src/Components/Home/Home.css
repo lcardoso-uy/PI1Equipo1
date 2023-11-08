@@ -5,7 +5,7 @@
 .header-content {
   position: absolute;
   width: 100%;
-  top: 500px; /* Ajusta según necesites */
+  top: 500px;
   text-align: center;
   z-index: 20;
   padding: 20px 0;
@@ -67,7 +67,6 @@ h1 {
     top: 375px;
     font-family: Cabinet Grotesk;
     z-index: 50;
-    /* line-height: 62px; */
     color: #FFFFFF;
   }
 
@@ -90,7 +89,6 @@ h1 {
     justify-content: space-around;
     margin-top: 1400px;
     gap: 20px;
-    /* margin: 50px 0; */
     text-align: center;
   }
 
@@ -152,7 +150,30 @@ h1 {
   .product-item img {
     width: 450px;
     height: 382px;
+  } 
+
+  
+  /* Paginación de productos en el Home */
+
+  .pagination-controls{
+    position: relative;
+    text-align: center;
+    gap: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
   }
+
+  .pagination-controls button:hover {
+    background-color: #D3D04F;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .pagination-controls button {
+    background-color: #A3BD70;
+  }
+
 
   @media (max-width: 768px) {
     .product-item {

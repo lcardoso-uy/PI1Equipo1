@@ -1,6 +1,7 @@
 .footer {
   background-color: #A3B4E0;
   height: 100px;
+  width: 100;
 }
 
 .footer-content {
@@ -14,7 +15,7 @@
 .footer-block {
   display: flex;
   align-items: center;
-  flex-wrap: wrap; /* Permite que los elementos se ajusten en líneas separadas si no hay suficiente espacio */
+  flex-wrap: wrap;
 }
 
 
@@ -22,25 +23,25 @@
 /* Estilos para tablets */
 @media screen and (max-width: 768px) {
   .footer img {
-    height: 40px; /* Reducir el tamaño del logo */
+    height: 40px;
   }
 
   .footer span {
-    font-size: 0.9rem; /* Reducir el tamaño del texto */
+    font-size: 0.9rem;
   }
 }
 
 /* Estilos para móviles */
 @media screen and (max-width: 480px) {
   .footer img {
-    height: 30px; /* Reducir aún más el tamaño del logo */
+    height: 30px;
   }
 
   .footer span {
-    font-size: 0.8rem; /* Reducir aún más el tamaño del texto */
+    font-size: 0.8rem;
   }
 
   .footer-content {
-    padding: 0 10px; /* Reducir el espaciado interno */
+    padding: 0 10px;
   }
 }
