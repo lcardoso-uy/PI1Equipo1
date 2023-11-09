@@ -1,3 +1,4 @@
+// Detalle.jsx
 import React, { useContext, useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { DataContext } from '../Context/DataContext';
@@ -17,16 +18,14 @@ const Detalle = () => {
   if (!product) return <p>Cargando...</p>;
 
   return (
-  <div>
-    <br /><br />
-    <div className="detalle-container">
-      <h1>Detalle del Producto</h1>
-      <InfoProducto product={product} />
-      <Link to={`/galeria/${product.id}`}>
-      <button className="ver-mas">Ver más</button>
-      </Link>
-
-    </div>
+    <div>
+      <br /><br />
+      <div className="detalle-container">
+        <InfoProducto product={product} />
+        <Link to={`/galeria/${product.id}`}>
+          <button className="ver-mas">Ver más</button>
+        </Link>
+      </div>
     </div>
   );
 };

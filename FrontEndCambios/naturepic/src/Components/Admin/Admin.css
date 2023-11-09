@@ -152,6 +152,10 @@
     background-color: #218838;
   }
 
+  .error-message__AddProduct{
+      color: red;
+      margin-bottom: 10px;
+  }
 
   /* Mensaje de error - panel no responsivo */
 

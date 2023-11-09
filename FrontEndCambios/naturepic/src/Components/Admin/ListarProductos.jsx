@@ -9,18 +9,18 @@ function ListarProductos() {
   const [currentPage, setCurrentPage] = useState(1);
   const productsPerPage = 10;
   
-   // Ordenar productos por 'id' de menor a mayor
+
    const sortedProducts = [...products].sort((a, b) => a.id - b.id);
 
-  // Obtener los productos actuales
+
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
   const currentProducts = sortedProducts.slice(indexOfFirstProduct, indexOfLastProduct);
 
-  // Cambiar página
+
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-  // Números totales de páginas
+
   const pageNumbers = [];
   for (let i = 1; i <= Math.ceil(products.length / productsPerPage); i++) {
     pageNumbers.push(i);

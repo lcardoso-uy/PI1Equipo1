@@ -11,6 +11,9 @@ function Admin() {
           <ul>
             <li><Link to="agregar-producto">Agregar Producto</Link></li>
             <li><Link to="lista-de-productos">Lista de Productos</Link></li>
+            {/* <li><Link to="agregar-usuario">Agregar Usuario</Link></li>
+            <li><Link to="lista-de-usuarios">Lista de Usuarios</Link></li>
+            <li><Link to="cambiar-contrasena">Cambiar Contraseña</Link></li> */}
           </ul>
         </nav>
         <Outlet/>

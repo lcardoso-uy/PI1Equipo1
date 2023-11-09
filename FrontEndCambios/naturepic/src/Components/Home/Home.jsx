@@ -33,7 +33,7 @@ const Home = () => {
   return (
     <div className='home-container'>
       <h1>Explora la Naturaleza en Detalle</h1>
-      <div className="header-content">
+      <div className="home-content">
         <p>Descubre nuestro arsenal de equipos fotográficos para capturar la vida salvaje como nunca antes</p>
         <BarraDeBusqueda />
       </div>

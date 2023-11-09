@@ -1,15 +1,18 @@
+
 .detalle-container {
-    max-width: 1200px;
-    margin: 20px auto;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    background: #fff;
-  }
-  
-  .detalle-container h1 {
-    font-size: 2em;
-    margin-bottom: 20px;
-  }
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 20px;
+  padding-bottom: 60px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background: #fff;
+  position: relative;
+}
+
+.detalle-container h1 {
+  font-size: 2em;
+  margin-bottom: 20px;
+}
   
   .detalle-container button {
     margin-top: 20px;
@@ -24,7 +27,11 @@
     background-color: #1a2a53;
   }
   
-
+  .imagen-y-boton-container img{
+    width: 300px;
+    height: 255px;
+    object-fit: cover;
+  }
 
   .info-producto-container {
     margin-top: 20px;
@@ -44,13 +51,13 @@
     position: relative;
   }
   
-  /* .ver-mas {
+  .ver-mas {
     position: absolute;
-    bottom: 20px;
     right: 20px;
-  } */
+    bottom: 20px;
+  }
   
-  /* @media (max-width: 768px) {
+  @media (max-width: 768px) {
     .detalle-container {
       padding: 20px 10px;
     }
@@ -58,9 +65,9 @@
     .detalle-container h1 {
       font-size: 1.5em;
     }
-  } */
+  }
   
-  /* @media (max-width: 480px) {
+@media (max-width: 480px) {
     .detalle-container {
       padding: 20px 5px;
     }
@@ -74,7 +81,7 @@
       padding: 10px 0;
     }
   }
-  */
+ 
   
 
    @media (max-width: 768px) {
@@ -98,3 +105,79 @@
       padding: 10px 0;
     }
   } 
+
+
+
+
+
+
+
+
+
+  
+
+/* Estilo general para la galería */
+.galeria-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  margin-top: 145px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+
+/* Imagen Principal */
+.galeria-main {
+  flex: 0 0 60%;
+  max-width: 60%;
+}
+
+.galeria-main img {
+  width: 100%; 
+  height: auto;
+}
+
+/* Imágenes Secundarias */
+.galeria-secondary-container {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+
+.galeria-secondary {
+  flex: 1 0 calc(50% - 5px);
+  max-width: calc(50% - 5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.galeria-secondary img {
+  width: 100%;
+  height: auto;
+}
+
+/* Media query para tablets */
+@media (max-width: 768px) {
+  .galeria-main, .galeria-secondary-container {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  .galeria-secondary {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+}
+
+/* Media query para móviles */
+@media (max-width: 480px) {
+  .galeria-secondary {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}

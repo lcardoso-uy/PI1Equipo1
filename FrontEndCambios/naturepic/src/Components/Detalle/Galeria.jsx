@@ -15,13 +15,23 @@ const Galeria = () => {
     }
   }, [productId, products]);
 
+
+  if (images.length === 0) {
+    return <div>Cargando...</div>;
+  }
+
   return (
-    <div>
-      <h1>Galería de Imágenes</h1>
-      <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-        {images.map((image, index) => (
-          <div key={index} style={{ margin: '10px' }}>
-            <img src={image.image_url} alt={`Imagen ${index + 1}`} style={{ width: '100px', height: '100px' }} />
+    <div className="galeria-container">
+      {/* Contenedor de la imagen principal */}
+      <div className="galeria-main">
+        <img src={images[0]?.image_url} alt="Imagen principal" />
+      </div>
+
+      {/* Contenedor de las imágenes secundarias */}
+      <div className="galeria-secondary-container">
+        {images.slice(1).map((image, index) => (
+          <div className="galeria-secondary" key={index}>
+            <img src={image.image_url} alt={`Imagen secundaria ${index + 1}`} />
           </div>
         ))}
       </div>

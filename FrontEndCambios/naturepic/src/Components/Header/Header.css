@@ -4,7 +4,6 @@
     justify-content: center;
 }
 
-
 header {
     width: 100%;
     height: 80px;
@@ -33,14 +32,33 @@ header {
     cursor: pointer;
 }
 
-.crear-cuenta, .iniciar-sesion{
+
+.user-info {
+  display: flex;
+  align-items: center; /* Esto alineará verticalmente el avatar y el texto de bienvenida */
+}
+
+.avatar {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background-color: #fff;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.crear-cuenta, .iniciar-sesion, .cerrar-sesion{
   font-family: Satoshi;
   font-weight: 500;
   font-size: 20.25px;
     margin: 0 15px;
     background: none;
     border: none;
-    padding: 0;
+    /* padding: 0; */
     cursor: pointer;
 }
 

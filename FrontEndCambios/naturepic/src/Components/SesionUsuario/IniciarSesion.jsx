@@ -40,32 +40,39 @@ const IniciarSesion = () => {
 
   return (
 <form onSubmit={handleSubmit} className="form__login">
-  <div className="form__login-field">
-    <label htmlFor="email">Email:</label>
-    <input
-      id="email"
-      type="email"
-      name="email"
-      className="form__login-input"
-      value={credenciales.email}
-      onChange={handleChange}
-    />
-  </div>
-  <div className="form__login-field">
-    <label htmlFor="password">Password:</label>
-    <input
-      id="password"
-      type="password"
-      name="password"
-      className="form__login-input"
-      value={credenciales.password}
-      onChange={handleChange}
-    />
-  </div>
-  {error && <p className="form__login-mensajeError">{error}</p>}
-  <button type="submit" className="form__login-boton">Iniciar Sesión</button>
+  <fieldset className="form__login-fieldset">
+    <legend>Iniciar Sesion</legend>
+
+    <div className="form__login-field">
+      <label htmlFor="email">Email:</label>
+      <input
+        id="email"
+        type="email"
+        name="email"
+        className="form__login-input"
+        value={credenciales.email}
+        onChange={handleChange}
+      />
+    </div>
+
+    <div className="form__login-field">
+      <label htmlFor="password">Password:</label>
+      <input
+        id="password"
+        type="password"
+        name="password"
+        className="form__login-input"
+        value={credenciales.password}
+        onChange={handleChange}
+      />
+    </div>
+
+    {error && <p className="form__login-mensajeError">{error}</p>}
+    <button type="submit" className="form__login-boton">Iniciar Sesión</button>
+  </fieldset>
 </form>
-  );
+);
+
 }
 
 export default IniciarSesion;
