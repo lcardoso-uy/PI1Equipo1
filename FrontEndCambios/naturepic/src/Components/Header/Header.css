@@ -35,7 +35,7 @@ header {
 
 .user-info {
   display: flex;
-  align-items: center; /* Esto alineará verticalmente el avatar y el texto de bienvenida */
+  align-items: center;
 }
 
 .avatar {
@@ -58,7 +58,6 @@ header {
     margin: 0 15px;
     background: none;
     border: none;
-    /* padding: 0; */
     cursor: pointer;
 }
 

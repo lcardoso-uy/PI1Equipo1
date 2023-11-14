@@ -7,12 +7,10 @@ import { DataContext } from '../Context/DataContext';
 const Header = () => {
   const { usuario, cerrarSesion } = useContext(DataContext);
 
-  // Función para obtener las iniciales del nombre y apellido del usuario
   const getInitials = (name, surname) => {
     return `${name[0]}${surname[0]}`.toUpperCase();
   };
 
-  // Crear avatar con las iniciales
   const avatar = usuario ? getInitials(usuario.name, usuario.surname) : '';
 
   return (

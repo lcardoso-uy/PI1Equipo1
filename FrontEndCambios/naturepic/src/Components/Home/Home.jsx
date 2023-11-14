@@ -7,12 +7,12 @@ import imagenDestacada from "../../../public/Imagen Principal 1.png";
 const Home = () => {
   const { products, categorias } = useContext(DataContext);
   const [currentPage, setCurrentPage] = useState(1);
-  const productsPerPage = 10; // Cantidad de productos por página
+  const productsPerPage = 10;
 
-  // Función para calcular el número total de páginas
+
   const pageCount = Math.ceil(products.length / productsPerPage);
 
-  // Funciones para manejar la paginación
+
   const goToNextPage = () => {
     setCurrentPage((prev) => (prev < pageCount ? prev + 1 : prev));
   };
@@ -25,7 +25,7 @@ const Home = () => {
     setCurrentPage(1);
   };
 
-  // Calcular los productos a mostrar en la página actual
+
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
   const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
