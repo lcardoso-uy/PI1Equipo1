@@ -36,5 +36,18 @@ public class UserInfoService implements UserDetailsService {
         return "User Added Successfully";
     }
 
+    public boolean isAdmin(UserInfo user) {
+        return user.getRoles() != null && user.getRoles().contains("ROLE_ADMIN");
+    }
 
+    public UserInfo getUserByUsername(String username) {
+        Optional<UserInfo> userInfoOptional = repository.findByName(username);
+        if (userInfoOptional.isPresent()) {
+            return userInfoOptional.get();
+        } else {
+            // Manejar el caso en que el usuario no se encuentra
+            // Puedes lanzar una excepción personalizada o devolver null
+            throw new RuntimeException("User not found with username: " + username);
+        }
+    }
 }
