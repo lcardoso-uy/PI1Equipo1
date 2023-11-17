@@ -81,3 +81,5 @@
 [2023-11-0721:27:07] [ DEBUG] [ProductService:35] newProduct :: Inicio
 [2023-11-0721:27:07] [ DEBUG] [ProductService:36] product.Dto:null-producto 2-null
 [2023-11-0721:27:07] [ DEBUG] [ProductService:46] save product.Dto:null-producto 2-null
+[2023-11-1713:32:12] [ DEBUG] [ProductService:99] ProductService :: associateCategoryToProduct :: Inicio
+[2023-11-1713:32:12] [ DEBUG] [ProductService:100] productUd:2-- categoryId: 1

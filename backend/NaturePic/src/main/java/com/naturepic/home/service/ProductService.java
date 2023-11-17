@@ -8,7 +8,6 @@ import com.naturepic.home.model.repository.CategoryRepository;
 import com.naturepic.home.model.repository.ProductRepository;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -95,17 +94,14 @@ public class ProductService implements IProductService {
     }
 
     public void associateCategoryToProduct(Long productId, Long categoryId) {
+        logger.debug("ProductService :: associateCategoryToProduct :: Inicio");
+        logger.debug("productUd:" + productId + "-" + "- categoryId: " + categoryId);
+
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new IllegalArgumentException("Producto no encontrado con ID: " + productId));
-        SimpleJpaRepository categoryRepository;
-        categoryRepository = null;
-        Category category = null;
-        try {
-            category = (Category) categoryRepository.findById(categoryId)
-                    .orElseThrow(() -> new IllegalArgumentException("Categoría no encontrada con ID: " + categoryId));
-        } catch (Throwable e) {
-            throw new RuntimeException( e );
-        }
+
+        Category category = categoryRepository.findById(categoryId)
+                .orElseThrow(() -> new IllegalArgumentException("Categoría no encontrada con ID: " + categoryId));
 
         product.setCategory(category);
         productRepository.save(product);

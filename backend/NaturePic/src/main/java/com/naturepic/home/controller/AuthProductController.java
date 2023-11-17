@@ -69,7 +69,7 @@ public class AuthProductController {
         }
     }
 
-    @PostMapping("/admin/resource/{productId}/category/{categoryId}")
+    @PatchMapping("/admin/resource/{productId}/category/{categoryId}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<?> associateCategoryToProduct(@PathVariable Long productId, @PathVariable Long categoryId){
         try {
