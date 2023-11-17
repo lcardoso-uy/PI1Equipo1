@@ -88,5 +88,26 @@ public class UserControllerAuth {
         }
     }
 
+    @PatchMapping("/admin/assignAdmin/{username}")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    public ResponseEntity<?> assignAdminRole(@PathVariable String username) {
+        try {
+            String response = service.assignAdminRole(username);
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred: " + e.getMessage());
+        }
+    }
+
+    @PatchMapping("/admin/revokeAdmin/{username}")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    public ResponseEntity<?> revokeAdminRole(@PathVariable String username) {
+        try {
+            String response = service.revokeAdminRole(username);
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred: " + e.getMessage());
+        }
+    }
 
 }

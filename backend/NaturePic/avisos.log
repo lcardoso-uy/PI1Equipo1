@@ -83,3 +83,11 @@
 [2023-11-0721:27:07] [ DEBUG] [ProductService:46] save product.Dto:null-producto 2-null
 [2023-11-1713:32:12] [ DEBUG] [ProductService:99] ProductService :: associateCategoryToProduct :: Inicio
 [2023-11-1713:32:12] [ DEBUG] [ProductService:100] productUd:2-- categoryId: 1
+[2023-11-1713:48:28] [ DEBUG] [ProductService:97] ProductService :: associateCategoryToProduct :: Inicio
+[2023-11-1713:48:28] [ DEBUG] [ProductService:98] productUd:2-- categoryId: 1
+[2023-11-1713:49:36] [ DEBUG] [ProductService:97] ProductService :: associateCategoryToProduct :: Inicio
+[2023-11-1713:49:36] [ DEBUG] [ProductService:98] productUd:2-- categoryId: 1
+[2023-11-1713:50:15] [ DEBUG] [ProductService:97] ProductService :: associateCategoryToProduct :: Inicio
+[2023-11-1713:50:15] [ DEBUG] [ProductService:98] productUd:2-- categoryId: 2
+[2023-11-1713:50:24] [ DEBUG] [ProductService:97] ProductService :: associateCategoryToProduct :: Inicio
+[2023-11-1713:50:24] [ DEBUG] [ProductService:98] productUd:2-- categoryId: 1
