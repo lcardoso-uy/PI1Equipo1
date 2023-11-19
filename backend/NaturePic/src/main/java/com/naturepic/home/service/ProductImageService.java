@@ -31,7 +31,13 @@ public class ProductImageService implements IProductImageService{
     @Override
     public ProductImageDto findProductImageById(Long imageId) {
         Optional<ProductImage> productImage = productImageRepository.findById(imageId);
-        return productImage.map(img -> mapper.convertValue(img, ProductImageDto.class)).orElse(null);
+        return productImage.map(img -> {
+            ProductImageDto dto = mapper.convertValue(img, ProductImageDto.class);
+            if (img.getProduct() != null) {
+                dto.setProductId(img.getProduct().getId());
+            }
+            return dto;
+        }).orElse(null);
     }
 
     @Override

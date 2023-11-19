@@ -91,3 +91,22 @@
 [2023-11-1713:50:15] [ DEBUG] [ProductService:98] productUd:2-- categoryId: 2
 [2023-11-1713:50:24] [ DEBUG] [ProductService:97] ProductService :: associateCategoryToProduct :: Inicio
 [2023-11-1713:50:24] [ DEBUG] [ProductService:98] productUd:2-- categoryId: 1
+[2023-11-1720:51:46] [ DEBUG] [ProductController:33] new product.Dto:null-producto 1-https://img.freepik.com/fotos-premium/fotografo-fotografiando-camara_191163-765.jpg?w=1380
+[2023-11-1720:51:46] [ DEBUG] [ProductService:34] newProduct :: Inicio
+[2023-11-1720:51:46] [ DEBUG] [ProductService:35] product.Dto:null-producto 1-https://img.freepik.com/fotos-premium/fotografo-fotografiando-camara_191163-765.jpg?w=1380
+[2023-11-1720:51:46] [ DEBUG] [ProductService:45] save product.Dto:null-producto 1-https://img.freepik.com/fotos-premium/fotografo-fotografiando-camara_191163-765.jpg?w=1380
+[2023-11-1911:20:31] [ DEBUG] [ProductController:33] new product.Dto:null-producto 1-https://img.freepik.com/fotos-premium/fotografo-fotografiando-camara_191163-765.jpg?w=1380
+[2023-11-1911:20:31] [ DEBUG] [ProductService:34] newProduct :: Inicio
+[2023-11-1911:20:31] [ DEBUG] [ProductService:35] product.Dto:null-producto 1-https://img.freepik.com/fotos-premium/fotografo-fotografiando-camara_191163-765.jpg?w=1380
+[2023-11-1911:20:31] [ DEBUG] [ProductService:45] save product.Dto:null-producto 1-https://img.freepik.com/fotos-premium/fotografo-fotografiando-camara_191163-765.jpg?w=1380
+[2023-11-1911:21:14] [ DEBUG] [ProductController:33] new product.Dto:null-producto 1-https://img.freepik.com/fotos-premium/fotografo-fotografiando-camara_191163-765.jpg?w=1380
+[2023-11-1911:21:14] [ DEBUG] [ProductService:34] newProduct :: Inicio
+[2023-11-1911:21:14] [ DEBUG] [ProductService:35] product.Dto:null-producto 1-https://img.freepik.com/fotos-premium/fotografo-fotografiando-camara_191163-765.jpg?w=1380
+[2023-11-1911:21:14] [ DEBUG] [ProductService:45] save product.Dto:null-producto 1-https://img.freepik.com/fotos-premium/fotografo-fotografiando-camara_191163-765.jpg?w=1380
+[2023-11-1911:21:29] [ DEBUG] [ProductController:33] new product.Dto:null-producto 1-null
+[2023-11-1911:21:29] [ DEBUG] [ProductService:34] newProduct :: Inicio
+[2023-11-1911:21:29] [ DEBUG] [ProductService:35] product.Dto:null-producto 1-null
+[2023-11-1911:21:39] [ DEBUG] [ProductController:33] new product.Dto:null-producto 2-null
+[2023-11-1911:21:39] [ DEBUG] [ProductService:34] newProduct :: Inicio
+[2023-11-1911:21:39] [ DEBUG] [ProductService:35] product.Dto:null-producto 2-null
+[2023-11-1911:21:39] [ DEBUG] [ProductService:45] save product.Dto:null-producto 2-null
