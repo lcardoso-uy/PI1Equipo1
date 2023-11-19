@@ -7,11 +7,14 @@ import { DataContext } from '../Context/DataContext';
 const Header = () => {
   const { usuario, cerrarSesion } = useContext(DataContext);
 
-  const getInitials = (name, surname) => {
-    return `${name[0]}${surname[0]}`.toUpperCase();
-  };
+  const getInitials = (firstname, surname) => {
+    if (firstname && surname) {
+        return `${firstname[0]}${surname[0]}`.toUpperCase();
+    }
+    return '';
+};
 
-  const avatar = usuario ? getInitials(usuario.name, usuario.surname) : '';
+const avatar = usuario ? getInitials(usuario.firstname, usuario.surname) : '';
 
   return (
     <header>
@@ -26,7 +29,7 @@ const Header = () => {
           <>
             <div className="user-info">
               <div className="avatar">{avatar}</div>
-              <span>Bienvenido, {usuario.name}!</span>
+              <span>Bienvenida, {usuario.firstname}!</span>
             </div>
             <button className='cerrar-sesion' onClick={cerrarSesion}>Cerrar Sesión</button>
           </>

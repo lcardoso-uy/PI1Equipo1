@@ -2,7 +2,7 @@
 import React from 'react';
 import './Detalle.css';
 
-const InfoProducto = ({ product }) => {º
+const InfoProducto = ({ product }) => {
   // const descripcionHardcodeada = "Esta es una descripción genérica que aparecerá en todos los productos. Puede contener información sobre el producto, detalles de fabricación, instrucciones de uso, y otros datos relevantes para el usuario.";
 
   return (
