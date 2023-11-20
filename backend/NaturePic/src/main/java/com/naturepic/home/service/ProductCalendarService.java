@@ -1,5 +1,6 @@
 package com.naturepic.home.service;
 
+import com.naturepic.home.model.CategoryDto;
 import com.naturepic.home.model.ProductCalendarDto;
 import com.naturepic.home.model.ProductDto;
 import com.naturepic.home.model.entity.Product;
@@ -105,6 +106,7 @@ public class ProductCalendarService implements IProductCalendarService {
         return dto;
     }
 
+/*
     private ProductDto convertToProductDto(Product product) {
         // Convierte la entidad Product a ProductDto
         ProductDto dto = new ProductDto();
@@ -114,4 +116,25 @@ public class ProductCalendarService implements IProductCalendarService {
         dto.setImageUrl( product.getImageUrl() );
         return dto;
     }
+*/
+
+    private ProductDto convertToProductDto(Product product) {
+        ProductDto dto = new ProductDto();
+        dto.setId(product.getId());
+        dto.setName(product.getName());
+        dto.setDescription(product.getDescription());
+        dto.setStatus(product.getStatus());
+        dto.setImageUrl(product.getImageUrl());
+
+        // Convertir la categoría si no es nula
+        if (product.getCategory() != null) {
+            CategoryDto categoryDto = new CategoryDto();
+            categoryDto.setId(product.getCategory().getId());
+            categoryDto.setName(product.getCategory().getName());
+            dto.setCategory(categoryDto);
+        }
+        return dto;
+
+    }
+
 }
