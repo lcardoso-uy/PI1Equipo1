@@ -21,17 +21,17 @@ export const DataProvider = ({ children }) => {
       setUsuario(JSON.parse(usuarioGuardado));
     }
 
-    fetch("http://localhost:8080/products")
+    fetch("http://3.139.238.255:8080/products")
       .then(res => res.json())
       .then(data => setProducts(data))
       .catch(err => console.error("Failed to fetch products:", err));
 
-    fetch("http://localhost:8080/products/random")
+    fetch("http://3.139.238.255:8080/products/random")
       .then(res => res.json())
       .then(data => setRandomProducts(data))
       .catch(err => console.error("Failed to fetch random products:", err));
 
-    fetch("http://localhost:8080/categories/")
+    fetch("http://3.139.238.255:8080/categories/")
     .then(res => res.json())
     .then(data => setCategorias(data))
     .catch(err => console.error("Failed to fetch categories:", err));
