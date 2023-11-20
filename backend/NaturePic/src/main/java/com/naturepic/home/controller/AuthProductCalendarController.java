@@ -14,6 +14,7 @@ import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/product-calendar")
 public class AuthProductCalendarController {
