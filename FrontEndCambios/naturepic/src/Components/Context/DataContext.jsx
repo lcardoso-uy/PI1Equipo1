@@ -13,86 +13,140 @@ export const DataProvider = ({ children }) => {
         category: '',
     });
 
-    // Cargar productos al iniciar la aplicación
     useEffect(() => {
-        fetch("http://localhost:8080/products")
-            .then(res => res.json())
-            .then(data => setProducts(data))
-            .catch(err => console.error("Failed to fetch products:", err));
-
-        fetch("http://localhost:8080/categories")
-            .then(res => res.json())
-            .then(data => setCategorias(data))
-            .catch(err => console.error("Failed to fetch categories:", err));
-
-            const usuarioGuardado = localStorage.getItem('usuario');
-            if (usuarioGuardado) {
-                setUsuario(JSON.parse(usuarioGuardado));
-            }
+        cargarProductosYCategorias();
+        verificarTokenYObtenerUsuario();
     }, []);
 
-    // Función para iniciar sesión y establecer el estado del usuario
-    const iniciarSesion = (userData) => {
-        setUsuario(userData);
-        localStorage.setItem('usuario', JSON.stringify(userData));
+    const cargarProductosYCategorias = async () => {
+        // Carga de productos
+        try {
+            const response = await fetch("http://localhost:8080/products");
+            if (response.ok) {
+                const data = await response.json();
+                setProducts(data);
+            } else {
+                console.error("Error al cargar productos");
+            }
+        } catch (error) {
+            console.error("Error al cargar productos:", error);
+        }
+
+        // Carga de categorías
+        try {
+            const response = await fetch("http://localhost:8080/categories");
+            if (response.ok) {
+                const data = await response.json();
+                setCategorias(data);
+            } else {
+                console.error("Error al cargar categorías");
+            }
+        } catch (error) {
+            console.error("Error al cargar categorías:", error);
+        }
     };
 
-    // Función para cerrar sesión y limpiar el estado del usuario
+    const verificarTokenYObtenerUsuario = async () => {
+        const token = localStorage.getItem('authToken');
+        if (token) {
+            await obtenerInformacionUsuario(token);
+        }
+    };
+
+    const obtenerInformacionUsuario = async (token) => {
+        try {
+            const response = await fetch('http://localhost:8080/auth/getUserInfo', {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+
+            if (response.ok) {
+                const userData = await response.json();
+                setUsuario(userData);
+                console.log(userData)
+            } else {
+                console.error('Token no válido o error al obtener información del usuario');
+            }
+        } catch (error) {
+            console.error('Error al obtener información del usuario:', error);
+        }
+    };
+
+    const iniciarSesion = async (credenciales) => {
+        try {
+            const response = await fetch('http://localhost:8080/auth/generateToken', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(credenciales)
+            });
+
+            if (response.ok) {
+                const token = await response.text();
+                localStorage.setItem('authToken', token);
+                await obtenerInformacionUsuario(token);
+            } else {
+                throw new Error('Error durante el inicio de sesión');
+            }
+        } catch (error) {
+            console.error('Error durante el inicio de sesión:', error);
+        }
+    };
+
     const cerrarSesion = () => {
         setUsuario(null);
-        localStorage.removeItem('authToken'); // Asegúrate de que esta clave coincida con la que usaste para almacenar el token JWT.
+        localStorage.removeItem('authToken');
+        localStorage.removeItem('usuario');
     };
 
-    // Función para agregar un nuevo producto
-    const agregarProducto = async (producto) => {
+    const asignarAdmin = async (email) => {
         try {
-            const response = await fetch("http://localhost:8080/products", {
-                method: 'POST',
+            const response = await fetch(`http://localhost:8080/auth/admin/assignAdmin/${email}`, {
+                method: 'PATCH',
                 headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(producto)
             });
-            const nuevoProducto = await response.json();
-            setProducts(prevProducts => [...prevProducts, nuevoProducto]);
-            return nuevoProducto;
-        } catch (error) {
-            console.error("Error al agregar producto:", error);
-        }
-    };
-
-    // Función para actualizar el rol de un usuario
-    const actualizarRolUsuario = async (userId, newRole) => {
-        try {
-            const response = await fetch(`http://localhost:8080/users/${userId}/role`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ role: newRole })
-            });
-            if (!response.ok) {
-                throw new Error('Error al actualizar el rol del usuario');
+            if (response.ok) {
+                console.log('Rol de administrador asignado con éxito');
+            } else {
+                console.error('Error al asignar rol de administrador');
             }
-            return response.json();
         } catch (error) {
-            console.error("Error al actualizar el rol del usuario:", error);
+            console.error('Error al asignar rol de administrador:', error);
+        }
+    };
+    
+    const revocarAdmin = async (email) => {
+        try {
+            const response = await fetch(`http://localhost:8080/auth/admin/revokeAdmin/${email}`, {
+                method: 'PATCH',
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
+                    'Content-Type': 'application/json',
+                },
+            });
+            if (response.ok) {
+                console.log('Rol de administrador revocado con éxito');
+            } else {
+                console.error('Error al revocar rol de administrador');
+            }
+        } catch (error) {
+            console.error('Error al revocar rol de administrador:', error);
         }
     };
 
-    // Valor proporcionado al Provider
     const value = {
-        newProduct,
-        setNewProduct,
         products,
         setProducts,
-        agregarProducto,
         usuario,
         iniciarSesion,
         cerrarSesion,
         categorias,
         setCategorias,
-        actualizarRolUsuario,
+        newProduct,
+        setNewProduct,
+        asignarAdmin,
+        revocarAdmin,
     };
 
     return (
@@ -102,13 +156,4 @@ export const DataProvider = ({ children }) => {
     );
 };
 
-
-
-
-
-
-
-  // const cerrarSesion = () => {
-  //   setUsuario(null);
-  //   localStorage.removeItem('usuario');
-  // };
+export default DataProvider;

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Header.css';
 import logoNaturePic from "../../../public/NaturePic-Logo 1.png";
@@ -7,14 +7,19 @@ import { DataContext } from '../Context/DataContext';
 const Header = () => {
   const { usuario, cerrarSesion } = useContext(DataContext);
 
+  useEffect(() => {
+    // Esta función se ejecutará cada vez que el estado 'usuario' cambie.
+    console.log("Estado del usuario actualizado:", usuario);
+  }, [usuario]);
+
   const getInitials = (firstname, surname) => {
     if (firstname && surname) {
         return `${firstname[0]}${surname[0]}`.toUpperCase();
     }
     return '';
-};
+  };
 
-const avatar = usuario ? getInitials(usuario.firstname, usuario.surname) : '';
+  const avatar = usuario ? getInitials(usuario.firstname, usuario.surname) : '';
 
   return (
     <header>
@@ -24,14 +29,19 @@ const avatar = usuario ? getInitials(usuario.firstname, usuario.surname) : '';
           <p>NaturePic</p>
         </Link>
       </div>
-      <div className="Header-buttons">
+      <div className="header-buttons">
         {usuario ? (
           <>
             <div className="user-info">
               <div className="avatar">{avatar}</div>
-              <span>Bienvenida, {usuario.firstname}!</span>
+              <span>Bienvenido/a, {usuario.firstname}!</span>
             </div>
             <button className='cerrar-sesion' onClick={cerrarSesion}>Cerrar Sesión</button>
+            {usuario.roles == 'ROLE_ADMIN' && (
+              <Link to="/admin">
+                <button className='boton-admin-panel'>Panel de Administración</button>
+              </Link>
+            )}
           </>
         ) : (
           <>

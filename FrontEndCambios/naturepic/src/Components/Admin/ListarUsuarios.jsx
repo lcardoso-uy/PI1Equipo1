@@ -3,21 +3,41 @@ import { DataContext } from '../Context/DataContext';
 
 function ListarUsuarios() {
   const [usuarios, setUsuarios] = useState([]);
-  const { actualizarRolUsuario } = useContext(DataContext);
+  const { asignarAdmin, revocarAdmin } = useContext(DataContext);
 
   useEffect(() => {
-    fetch('http://localhost:8080/users')
-      .then(response => response.json())
-      .then(data => setUsuarios(data))
-      .catch(error => console.error('Error:', error));
-  }, []);
+    const fetchUsuarios = async () => {
+      try {
+        const response = await fetch('http://localhost:8080/users', {
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('authToken')}`
+          }
+        });
+        if (response.ok) {
+          const data = await response.json();
+          setUsuarios(data);
+          console.log("Usuarios cargados:", data); // Depuración
+        } else {
+          console.error('Error al cargar usuarios');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
 
-  const handleRoleChange = (userId, newRole) => {
-    actualizarRolUsuario(userId, newRole)
-      .then(() => {
-        setUsuarios(usuarios.map(user => user.id === userId ? { ...user, role: newRole } : user));
-      })
-      .catch(error => console.error('Error:', error));
+    fetchUsuarios();
+  }, []); // Dependencias vacías para cargar solo una vez
+
+  const handleAsignarAdmin = async (email) => {
+    await asignarAdmin(email);
+    // Actualizar estado para reflejar el cambio en la UI
+    setUsuarios(usuarios.map(user => user.email === email ? { ...user, roles: 'ROLE_ADMIN' } : user));
+  };
+
+  const handleRevocarAdmin = async (email) => {
+    await revocarAdmin(email);
+    // Actualizar estado para reflejar el cambio en la UI
+    setUsuarios(usuarios.map(user => user.email === email ? { ...user, roles: 'ROLE_USER' } : user));
   };
 
   return (
@@ -26,9 +46,15 @@ function ListarUsuarios() {
       <ul>
         {usuarios.map(user => (
           <li key={user.id}>
-            {user.name} - {user.role}
-            <button onClick={() => handleRoleChange(user.id, 'ROLE_ADMIN')}>Hacer Admin</button>
-            <button onClick={() => handleRoleChange(user.id, 'ROLE_USER')}>Quitar Admin</button>
+            <span>ID: {user.id}</span>
+            <span>Email: {user.email}</span>
+            <span>Rol: {user.roles}</span>
+            {user.roles !== 'ROLE_ADMIN' && (
+              <button onClick={() => handleAsignarAdmin(user.email)}>Asignar Admin</button>
+            )}
+            {user.roles === 'ROLE_ADMIN' && (
+              <button onClick={() => handleRevocarAdmin(user.email)}>Revocar Admin</button>
+            )}
           </li>
         ))}
       </ul>

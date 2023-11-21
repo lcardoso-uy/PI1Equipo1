@@ -5,20 +5,17 @@ import Header from './Components/Header/Header';
 import Home from './Components/Home/Home';
 import Detalle from './Components/Detalle/Detalle';
 import Footer from './Components/Footer/Footer';
-import Admin from './Components/Admin/Admin';
-import AgregarProducto from './Components/Admin/AgregarProducto';
-import ListarProductos from './Components/Admin/ListarProductos';
 import { DataProvider } from './Components/Context/DataContext';
 import Catalogo from './Components/Home/Catalogo';
 import Galeria from './Components/Detalle/Galeria';
 import RegistroUsuario from './Components/SesionUsuario/RegistroUsuario';
 import IniciarSesion from './Components/SesionUsuario/IniciarSesion';
-import ListarUsuarios from './Components/Admin/ListarUsuarios';
+import AdminRoutes from './Components/Admin/AdminRoutes';
+
 function App() {
   return (
     <>
 
-      <DataProvider>
         <Header />
         <div className='main-content'>
           <Routes>
@@ -29,16 +26,10 @@ function App() {
             <Route path='/detalle/:productId' element={<Detalle />} />
             <Route path='/galeria/:productId' element={<Galeria />} />
             <Route path='/catalogo' element={<Catalogo />} />
-
             {/* Admin routes */}
-            <Route path='/admin' element={<Admin />}>
-              <Route path='agregar-producto' element={<AgregarProducto />} />
-              <Route path='lista-de-productos' element={<ListarProductos />} />
-              <Route path='usuarios' element={<ListarUsuarios />} />
-            </Route>
+            <Route path="/admin/*" element={<AdminRoutes />} />
           </Routes>
         </div>
-      </DataProvider>
       <Footer />
     </>
   );
