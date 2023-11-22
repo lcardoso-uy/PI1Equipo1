@@ -80,12 +80,9 @@ header {
   @media (max-width: 480px) {
     header {
       flex-direction: column;
-      padding: 10px;
+      /* padding: 10px; */
     }
 
-    .logo-container {
-      margin-bottom: 10px;
-    }
 
     .Header-buttons {
       display: flex;

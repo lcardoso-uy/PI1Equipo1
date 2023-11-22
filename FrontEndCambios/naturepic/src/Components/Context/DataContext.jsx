@@ -18,6 +18,50 @@ export const DataProvider = ({ children }) => {
         verificarTokenYObtenerUsuario();
     }, []);
 
+
+    const buscarProductos = async (termino, fechaInicio, fechaFin) => {
+        try {
+            const url = `http://localhost:8080/product-calendar/available?text=${encodeURIComponent(termino)}&start=${fechaInicio}&end=${fechaFin}`;
+            const response = await fetch(url, {
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('authToken')}`
+                }
+            });
+            if (response.ok) {
+                const data = await response.json();
+                return data; // Retorna los productos encontrados
+            } else {
+                console.error('Error al buscar productos');
+                return []; // Retorna un array vacío si hay un error
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            return [];
+        }
+    };
+
+    const esProductoDisponible = async (productoId, fechaInicio, fechaFin) => {
+        try {
+            const url = `http://localhost:8080/product-calendar/calendar/${productoId}?start=${fechaInicio}&end=${fechaFin}`;
+            const response = await fetch(url, {
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('authToken')}`
+                }
+            });
+            if (response.ok) {
+                const disponibilidad = await response.json();
+                return disponibilidad.isAvailable; // Suponiendo que la respuesta tiene un campo 'isAvailable'
+            } else {
+                console.error('Error al verificar la disponibilidad del producto');
+                return false; // Supone que el producto no está disponible si hay un error
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            return false;
+        }
+    };
+    
+
     const cargarProductosYCategorias = async () => {
         // Carga de productos
         try {
@@ -147,6 +191,8 @@ export const DataProvider = ({ children }) => {
         setNewProduct,
         asignarAdmin,
         revocarAdmin,
+        buscarProductos,
+        esProductoDisponible,
     };
 
     return (

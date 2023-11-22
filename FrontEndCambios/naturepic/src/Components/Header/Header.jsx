@@ -31,7 +31,7 @@ const Header = () => {
       </div>
       <div className="header-buttons">
         {usuario ? (
-          <>
+          <div>
             <div className="user-info">
               <div className="avatar">{avatar}</div>
               <span>Bienvenido/a, {usuario.firstname}!</span>
@@ -42,16 +42,16 @@ const Header = () => {
                 <button className='boton-admin-panel'>Panel de Administración</button>
               </Link>
             )}
-          </>
+          </div>
         ) : (
-          <>
+          <div className='header-buttons__CrearCuentaIniciarSesion'>
             <Link to="/registro">
               <button className='crear-cuenta'>Crear cuenta</button>
             </Link>
             <Link to="/iniciar-sesion">
               <button className='iniciar-sesion'>Iniciar sesión</button>
             </Link>
-          </>
+          </div>
         )}
       </div>
     </header>

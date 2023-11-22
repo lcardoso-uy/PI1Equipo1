@@ -3,6 +3,8 @@ import { DataContext } from '../Context/DataContext';
 import BarraDeBusqueda from './BarraDeBusqueda';
 import './Home.css';
 import imagenDestacada from "../../../public/Imagen Principal 1.png";
+import BarraDeBusquedaAvanzada from './BarraDeBusquedaAvanzada';
+import BarraDeBusquedaUnificada from './BarraDeBusquedaUnificada';
 
 const Home = () => {
   const { products, categorias } = useContext(DataContext);
@@ -35,7 +37,11 @@ const Home = () => {
       <h1>Explora la Naturaleza en Detalle</h1>
       <div className="home-content">
         <p>Descubre nuestro arsenal de equipos fotográficos para capturar la vida salvaje como nunca antes</p>
-        <BarraDeBusqueda />
+        <div className='contenedor__BarrasDeBusqueda__Home'>
+        {/* <BarraDeBusqueda />
+        <BarraDeBusquedaAvanzada/> */}
+        <BarraDeBusquedaUnificada/>
+        </div>
       </div>
       <img className='imagen-destacada' src={imagenDestacada} alt="imagen destacada" />
       <br />

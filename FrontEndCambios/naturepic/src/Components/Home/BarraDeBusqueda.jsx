@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DataContext } from '../Context/DataContext';
 import lupa from "../../../public/Vector.png"
+
 const BarraDeBusqueda = () => {
   const [terminoBusqueda, setTerminoBusqueda] = useState('');
   const navigate = useNavigate();

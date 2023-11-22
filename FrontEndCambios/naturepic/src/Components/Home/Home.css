@@ -14,7 +14,6 @@
 .serch__form {
   display: flex;
   justify-content: center;
-  margin-bottom: 30px;
 }
 
 .serchInput__form[type="text"] {
@@ -32,6 +31,10 @@
   border-color: #007bff;
 }
 
+.serchInput__form[type="date"] {
+  margin-left: 80px;
+}
+
 .form__button {
   width: 80px;
   padding: 10px 10px;
@@ -43,6 +46,7 @@
   cursor: pointer;
   transition: background-color 0.3s ease-in-out;
 }
+
 
 .form__button:hover {
   background-color: #D3D04F;
@@ -186,7 +190,10 @@ h1 {
       top: 180px;
     }
       
-
+    .imagen-destacada{
+      width: 100%;
+      margin-top: 23px;
+    }
     .home-content {
       top: 300px;
       padding: 10px 0;
@@ -226,7 +233,12 @@ h1 {
   @media (max-width: 480px) {
     /* Estilos para móviles */
     .home-container {
-      padding: 0 15px;
+      /* padding: 0 15px; */
+    }
+    
+    .imagen-destacada{
+      width: 100%;
+      top: 56.4px;
     }
   
     .home-content {
