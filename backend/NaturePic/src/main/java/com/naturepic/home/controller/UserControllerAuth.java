@@ -1,5 +1,6 @@
 package com.naturepic.home.controller;
 
+import com.naturepic.home.model.UserInfoDto;
 import com.naturepic.home.model.entity.AuthRequest;
 import com.naturepic.home.model.entity.UserInfo;
 import com.naturepic.home.service.JwtService;
@@ -15,6 +16,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @CrossOrigin(origins = "*")
@@ -108,6 +110,13 @@ public class UserControllerAuth {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred: " + e.getMessage());
         }
+    }
+
+
+    @GetMapping("/Users")
+    public ResponseEntity<List<UserInfoDto>> getAllUsers() {
+        List<UserInfoDto> users = service.getAllUsers();
+        return ResponseEntity.ok(users);
     }
 
 }
