@@ -12,9 +12,12 @@
 }
 
 .serch__form {
+  position: relative;
   display: flex;
   justify-content: center;
+  /* Resto de estilos */
 }
+
 
 .serchInput__form[type="text"] {
   padding: 10px;
@@ -52,6 +55,45 @@
   background-color: #D3D04F;
 }
 
+.serchInput__form[type="date"] {
+  max-width: 150px; /* Establece un ancho máximo */
+  width: 100%; /* Asegura que se adapten al contenedor hasta el máximo establecido */
+}
+
+/* Estilo para el desplegable de productos recomendados */
+.resultados-busqueda {
+  position: absolute;
+  top: 100%; /* Posicionado justo debajo del formulario de búsqueda */
+  left: 0;
+  right: 0;
+  width: 100%; /* O podrías usar un ancho fijo o máximo si es necesario */
+  max-height: 300px;
+  overflow-y: auto;
+  z-index: 10; /* Asegúrate de que este valor sea adecuado */
+  /* Resto de estilos */
+  z-index: 10;
+  list-style: none;
+  padding: 0;
+  margin: 10px 0;
+  background-color: rgba(255, 255, 255, 0.9);
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos adicionales para mejorar la visualización */
+
+
+.resultados-busqueda li {
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.resultados-busqueda li:hover {
+  background-color: #eaeaea;
+}
+
 .home-content p{
   font-family: Satoshi;
   font-size: 25px;
@@ -62,7 +104,7 @@
 
 .imagen-destacada {
   position: absolute;
-  z-index: 1;
+  z-index: 15;
 }
 
 h1 {

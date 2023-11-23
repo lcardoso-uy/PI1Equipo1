@@ -31,10 +31,14 @@ function ListarProductos() {
       <ul>
         {currentProducts.map((product) => (
           <li key={product.id}>
-            <span className='id__admin-panel'>{product.id}</span>
-            <span className="product-name">{product.name}</span>
-            <span className="category">{product.category ? product.category.name : 'Sin categoría'}</span>
-            <span><Acciones/></span>
+            <div className="product-info">
+              <span className='id__admin-panel'>{product.id}</span>
+              <span className="product-name">{product.name}</span>
+              <span className="category">{product.category ? product.category.name : 'Sin categoría'}</span>
+            </div>
+            <div className="acciones">
+              <Acciones />
+            </div>
           </li>
         ))}
       </ul>

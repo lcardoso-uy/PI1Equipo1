@@ -10,7 +10,7 @@ import ListarUsuarios from './ListarUsuarios';
 function AdminRoutes() {
   const navigate = useNavigate();
   const { usuario } = useContext(DataContext);
-  const isAdmin = usuario && usuario.roles === 'ROLE_ADMIN';
+  const isAdmin = usuario && usuario.roles.includes("ROLE_ADMIN");
 
   useEffect(() => {
     // Si el usuario no es administrador, redirige a la página principal

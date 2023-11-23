@@ -37,7 +37,7 @@ const Header = () => {
               <span>Bienvenido/a, {usuario.firstname}!</span>
             </div>
             <button className='cerrar-sesion' onClick={cerrarSesion}>Cerrar Sesión</button>
-            {usuario.roles == 'ROLE_ADMIN' && (
+            {usuario && usuario.roles.includes('ROLE_ADMIN') && (
               <Link to="/admin">
                 <button className='boton-admin-panel'>Panel de Administración</button>
               </Link>

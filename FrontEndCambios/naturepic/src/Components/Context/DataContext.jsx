@@ -29,10 +29,11 @@ export const DataProvider = ({ children }) => {
             });
             if (response.ok) {
                 const data = await response.json();
-                return data; // Retorna los productos encontrados
+                console.log("Data de buscarProductos:", data);
+                return data;
             } else {
-                console.error('Error al buscar productos');
-                return []; // Retorna un array vacío si hay un error
+                console.error('Error al buscar productos');D
+                return [];
             }
         } catch (error) {
             console.error('Error:', error);
@@ -50,13 +51,15 @@ export const DataProvider = ({ children }) => {
             });
             if (response.ok) {
                 const disponibilidad = await response.json();
-                return disponibilidad.isAvailable; // Suponiendo que la respuesta tiene un campo 'isAvailable'
+                console.log(`Disponibilidad del producto ${productoId}:`, disponibilidad);
+                return disponibilidad.isAvailable;
             } else {
-                console.error('Error al verificar la disponibilidad del producto');
-                return false; // Supone que el producto no está disponible si hay un error
+                const errorResponse = await response.json(); // Agregar esta línea
+                console.error('Error al verificar la disponibilidad del producto:', errorResponse); // Modificar esta línea
+                return false;
             }
         } catch (error) {
-            console.error('Error:', error);
+            console.error('Error en esProductoDisponible:', error);
             return false;
         }
     };
@@ -141,6 +144,14 @@ export const DataProvider = ({ children }) => {
         localStorage.removeItem('usuario');
     };
 
+
+    const actualizarInformacionUsuario = async () => {
+        // Suponiendo que tienes una función para obtener la información del usuario
+        const userData = await obtenerInformacionUsuario(localStorage.getItem('authToken'));
+        setUsuario(userData);
+      };
+
+
     const asignarAdmin = async (email) => {
         try {
             const response = await fetch(`http://localhost:8080/auth/admin/assignAdmin/${email}`, {
@@ -152,6 +163,7 @@ export const DataProvider = ({ children }) => {
             });
             if (response.ok) {
                 console.log('Rol de administrador asignado con éxito');
+                await actualizarInformacionUsuario();
             } else {
                 console.error('Error al asignar rol de administrador');
             }
@@ -171,6 +183,7 @@ export const DataProvider = ({ children }) => {
             });
             if (response.ok) {
                 console.log('Rol de administrador revocado con éxito');
+                await actualizarInformacionUsuario();
             } else {
                 console.error('Error al revocar rol de administrador');
             }

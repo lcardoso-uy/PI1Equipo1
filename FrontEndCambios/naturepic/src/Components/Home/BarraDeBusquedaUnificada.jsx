@@ -1,32 +1,76 @@
-import lupa from "../../../public/Vector.png";
-import './Home.css';
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DataContext } from '../Context/DataContext';
+import lupa from "../../../public/Vector.png";
 
 const BarraDeBusquedaUnificada = () => {
     const [terminoBusqueda, setTerminoBusqueda] = useState('');
     const [fechaInicio, setFechaInicio] = useState('');
     const [fechaFin, setFechaFin] = useState('');
+    const [resultadosBusqueda, setResultadosBusqueda] = useState([]);
     const navigate = useNavigate();
     const { buscarProductos, products } = useContext(DataContext);
+    const { esProductoDisponible } = useContext(DataContext);
+    const debounce = (func, delay) => {
+        let inDebounce;
+        return function() {
+            const context = this;
+            const args = arguments;
+            clearTimeout(inDebounce);
+            inDebounce = setTimeout(() => func.apply(context, args), delay);
+        };
+    };
+
+    const fetchSearchResults = async (query) => {
+        const productosEncontrados = fechaInicio && fechaFin 
+            ? await buscarProductos(query, fechaInicio, fechaFin) 
+            : products.filter(product => product.name.toLowerCase().includes(query.toLowerCase()));
+    
+        console.log("Productos encontrados:", productosEncontrados);
+        setResultadosBusqueda(productosEncontrados);
+    };
+
+    const delayedQuery = useCallback(debounce((query) => fetchSearchResults(query), 500), []);
+
+    const handleSearchChange = (e) => {
+        setTerminoBusqueda(e.target.value);
+        if (e.target.value.length > 2) {
+            delayedQuery(e.target.value);
+        } else {
+            setResultadosBusqueda([]);
+        }
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        // Búsqueda simple o avanzada dependiendo de si se han proporcionado fechas
-        const productosEncontrados = fechaInicio && fechaFin 
-            ? await buscarProductos(terminoBusqueda, fechaInicio, fechaFin) 
-            : products.filter(product => product.name.toLowerCase().includes(terminoBusqueda.toLowerCase()));
-
-        if (productosEncontrados && productosEncontrados.length > 0) {
-            // Redirigir al detalle del primer producto encontrado
-            navigate(`/detalle/${productosEncontrados[0].id}`);
+    
+        console.log("Resultados de búsqueda:", resultadosBusqueda);
+    
+        if (resultadosBusqueda && resultadosBusqueda.length > 0) {
+            const productoId = resultadosBusqueda[0].id;
+    
+            console.log("ID del producto seleccionado:", productoId);
+    
+            if (fechaInicio && fechaFin) {
+                console.log("Verificando disponibilidad para las fechas:", { fechaInicio, fechaFin });
+                const disponible = await esProductoDisponible(productoId, fechaInicio, fechaFin);
+    
+                console.log("Producto disponible:", disponible);
+    
+                if (disponible) {
+                    navigate(`/detalle/${productoId}`);
+                } else {
+                    alert('El producto seleccionado no está disponible en el rango de fechas proporcionado.');
+                }
+            } else {
+                navigate(`/detalle/${productoId}`);
+            }
         } else {
-            // Mostrar mensaje si no se encuentra ningún producto
             alert('No se encontraron productos con los criterios de búsqueda proporcionados.');
         }
     };
+    
+    
 
     return (
         <form className='serch__form' onSubmit={handleSubmit}>
@@ -34,7 +78,7 @@ const BarraDeBusquedaUnificada = () => {
                 className='serchInput__form'
                 type="text"
                 value={terminoBusqueda}
-                onChange={(e) => setTerminoBusqueda(e.target.value)}
+                onChange={handleSearchChange}
                 placeholder="Buscar producto..."
             />
             <input
@@ -50,73 +94,17 @@ const BarraDeBusquedaUnificada = () => {
                 placeholder="Fecha fin"
             />
             <button className='form__button' type="submit"><img src={lupa} alt="Buscar" /></button>
+            {resultadosBusqueda.length > 0 && (
+                <ul className='resultados-busqueda'>
+                    {resultadosBusqueda.map(producto => (
+                        <li key={producto.id} onClick={() => navigate(`/detalle/${producto.id}`)}>
+                            {producto.name}
+                        </li>
+                    ))}
+                </ul>
+            )}
         </form>
     );
 };
 
 export default BarraDeBusquedaUnificada;
-
-// const BarraDeBusquedaUnificada = () => {
-//     const [terminoBusqueda, setTerminoBusqueda] = useState('');
-//     const [fechaInicio, setFechaInicio] = useState('');
-//     const [fechaFin, setFechaFin] = useState('');
-//     const navigate = useNavigate();
-//     const { buscarProductos, products, esProductoDisponible } = useContext(DataContext);
-
-//     const handleSubmit = async (e) => {
-//         e.preventDefault();
-
-//         if (!fechaInicio && !fechaFin) {
-//             // Búsqueda simple sin rango de fechas
-//             const productoEncontrado = products.find(product => product.name.toLowerCase().includes(terminoBusqueda.toLowerCase()));
-//             if (productoEncontrado) {
-//                 navigate(`/detalle/${productoEncontrado.id}`); // Redirigir al detalle del producto
-//             } else {
-//                 console.log('Producto no encontrado');
-//                 // Manejar el caso de no encontrar el producto
-//             }
-//         } else {
-//             // Búsqueda avanzada con rango de fechas
-//             const productoEncontrado = products.find(product => product.name.toLowerCase().includes(terminoBusqueda.toLowerCase()));
-//             if (productoEncontrado && await esProductoDisponible(productoEncontrado.id, fechaInicio, fechaFin)) {
-//                 navigate(`/detalle/${productoEncontrado.id}`); // Redirigir al detalle del producto si está disponible
-//             } else {
-//                 alert(`El producto ${productoEncontrado?.name || ''} no está disponible en el rango de fechas seleccionado.`);
-//                 // Manejar el caso de no disponibilidad del producto
-//             }
-//         }
-//     };
-
-//     return (
-//         <form className='serch__form' onSubmit={handleSubmit}>
-//             <input className='serchInput__form'
-//                 type="text"
-//                 value={terminoBusqueda}
-//                 onChange={(e) => setTerminoBusqueda(e.target.value)}
-//                 placeholder="Buscar producto..."
-//             />
-//             <input
-//                 type="date"
-//                 value={fechaInicio}
-//                 onChange={(e) => setFechaInicio(e.target.value)}
-//                 placeholder="Fecha inicio"
-//             />
-//             <input
-//                 type="date"
-//                 value={fechaFin}
-//                 onChange={(e) => setFechaFin(e.target.value)}
-//                 placeholder="Fecha fin"
-//             />
-//             <button className='form__button' type="submit">Buscar</button>
-//         </form>
-//     );
-// };
-
-// export default BarraDeBusquedaUnificada;
-
-
-
-
-
-
-

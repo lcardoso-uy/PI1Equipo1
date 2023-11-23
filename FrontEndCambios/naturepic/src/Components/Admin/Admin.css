@@ -46,7 +46,24 @@
   text-decoration: underline;
 }
 
+/* Lista de usuarios*/
+.lista__usaurios {
+  margin-top: 20px;
+}
 
+.lista__usaurios ul {
+  padding: 0;
+  list-style: none;
+}
+
+
+.lista__usaurios li {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  align-items: center;
+  gap: 50px;
+}
 
 
 /* Lista de productos */
@@ -67,6 +84,38 @@
   display: flex;
   align-items: center;
   gap: 50px;
+}
+
+.lista-productos li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.lista-productos li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.product-info {
+  flex-grow: 1;
+}
+
+.id__admin-panel, .product-name, .category {
+  /* margin-right: 20px;  */
+}
+
+.acciones {
+  flex-shrink: 0; 
+}
+
+.id__admin-panel, .product-name, .category {
+  margin-right: 50px;
+}
+
+.acciones {
+  flex-shrink: 0;
 }
 
 .id__admin-panel {

@@ -5,7 +5,6 @@ import Header from './Components/Header/Header';
 import Home from './Components/Home/Home';
 import Detalle from './Components/Detalle/Detalle';
 import Footer from './Components/Footer/Footer';
-import { DataProvider } from './Components/Context/DataContext';
 import Catalogo from './Components/Home/Catalogo';
 import Galeria from './Components/Detalle/Galeria';
 import RegistroUsuario from './Components/SesionUsuario/RegistroUsuario';
