@@ -17,6 +17,8 @@ public class ProductDto {
 
     private Long id;
     private String name;
+
+    @Column(length = 1500)
     private String description;
     private Boolean status;
     private CategoryDto category;
