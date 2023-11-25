@@ -13,13 +13,13 @@ function AdminRoutes() {
   const isAdmin = usuario && usuario.roles.includes("ROLE_ADMIN");
 
   useEffect(() => {
-    // Si el usuario no es administrador, redirige a la página principal
+
     if (!isAdmin) {
       navigate('/');
     }
   }, [isAdmin, navigate]);
 
-  // Renderiza las rutas solo si el usuario es administrador
+
   return isAdmin ? (
     <Routes>
       <Route path="/" element={<Admin />}>

@@ -102,9 +102,6 @@
   flex-grow: 1;
 }
 
-.id__admin-panel, .product-name, .category {
-  /* margin-right: 20px;  */
-}
 
 .acciones {
   flex-shrink: 0; 

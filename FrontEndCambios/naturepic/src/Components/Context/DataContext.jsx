@@ -142,14 +142,11 @@ export const DataProvider = ({ children }) => {
         setUsuario(null);
         localStorage.removeItem('authToken');
         localStorage.removeItem('usuario');
+        /*localStorage.removeItem('usuario');*/
     };
 
 
-    const actualizarInformacionUsuario = async () => {
-        // Suponiendo que tienes una función para obtener la información del usuario
-        const userData = await obtenerInformacionUsuario(localStorage.getItem('authToken'));
-        setUsuario(userData);
-      };
+
 
 
     const asignarAdmin = async (email) => {

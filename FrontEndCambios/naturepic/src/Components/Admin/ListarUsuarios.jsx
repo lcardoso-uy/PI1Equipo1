@@ -48,7 +48,7 @@ function ListarUsuarios() {
     <div className="lista__usaurios">
       <ul>
         {usuarios.map(user => (
-          <li key={user.email}> {/* Usa el email como key, asumiendo que es único */}
+          <li key={user.email}> 
             <span>Email: {user.email}</span>
             <span>{user.admin ? 'ROLE_ADMIN' : 'ROLE_USER'}</span>
             {user.admin ? (

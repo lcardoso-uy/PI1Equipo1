@@ -8,7 +8,6 @@ const Header = () => {
   const { usuario, cerrarSesion } = useContext(DataContext);
 
   useEffect(() => {
-    // Esta función se ejecutará cada vez que el estado 'usuario' cambie.
     console.log("Estado del usuario actualizado:", usuario);
   }, [usuario]);
 
