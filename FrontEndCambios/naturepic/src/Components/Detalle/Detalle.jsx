@@ -21,7 +21,7 @@ const Detalle = () => {
         // Ajusta las fechas según sea necesario
         const fechaInicio = "2023-11-15";
         const fechaFin = "2023-11-30";
-        const response = await fetch(`{{env}}/product-calendar/calendar/${productId}?start=${fechaInicio}&end=${fechaFin}`);
+        const response = await fetch(`http://localhost:8080/product-calendar/calendar/${productId}?start=${fechaInicio}&end=${fechaFin}`);
         if (response.ok) {
           const data = await response.json();
           setDisponibilidad(data);

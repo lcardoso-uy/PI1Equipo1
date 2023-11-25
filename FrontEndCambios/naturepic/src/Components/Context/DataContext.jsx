@@ -22,17 +22,17 @@ export const DataProvider = ({ children }) => {
     const buscarProductos = async (termino, fechaInicio, fechaFin) => {
         try {
             const url = `http://localhost:8080/product-calendar/available?text=${encodeURIComponent(termino)}&start=${fechaInicio}&end=${fechaFin}`;
-            const response = await fetch(url, {
-                headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('authToken')}`
-                }
-            });
+            
+            const token = localStorage.getItem('authToken');
+            const headers = token ? { 'Authorization': `Bearer ${token}` } : {};
+    
+            const response = await fetch(url, { headers });
             if (response.ok) {
                 const data = await response.json();
                 console.log("Data de buscarProductos:", data);
                 return data;
             } else {
-                console.error('Error al buscar productos');D
+                console.error('Error al buscar productos');
                 return [];
             }
         } catch (error) {
@@ -40,6 +40,7 @@ export const DataProvider = ({ children }) => {
             return [];
         }
     };
+    
 
     const esProductoDisponible = async (productoId, fechaInicio, fechaFin) => {
         try {

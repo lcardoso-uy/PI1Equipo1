@@ -11,6 +11,7 @@ const BarraDeBusquedaUnificada = () => {
     const navigate = useNavigate();
     const { buscarProductos, products } = useContext(DataContext);
     const { esProductoDisponible } = useContext(DataContext);
+    
     const debounce = (func, delay) => {
         let inDebounce;
         return function() {
