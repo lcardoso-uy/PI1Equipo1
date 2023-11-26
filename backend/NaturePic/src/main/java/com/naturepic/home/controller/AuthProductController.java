@@ -92,6 +92,16 @@ public class AuthProductController {
         }
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<List<ProductDto>> searchProductsByNameWithText(@RequestParam String name) {
+        List<ProductDto> products = productService.searchProductsByNameWithText(name);
+        if (products.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        } else {
+            return ResponseEntity.ok(products);
+        }
+    }
+
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<String> handleIllegalArgumentException(IllegalArgumentException e) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());

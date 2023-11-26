@@ -15,5 +15,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> findRandomProducts();
 
     List<Product> findAllById(Iterable<Long> ids);
+
+    List<Product> findByNameContaining(String name);
 }
 

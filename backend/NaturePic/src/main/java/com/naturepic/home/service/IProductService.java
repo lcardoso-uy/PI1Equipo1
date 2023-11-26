@@ -22,4 +22,6 @@ public interface IProductService {
 
     void associateCategoryToProduct(Long productId, Long categoryId);
     void updateProduct(Long productId, ProductDto productDto);
+
+    List<ProductDto> searchProductsByNameWithText(String name);
 }

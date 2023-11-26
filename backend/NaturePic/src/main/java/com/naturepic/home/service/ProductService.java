@@ -1,9 +1,12 @@
 package com.naturepic.home.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.naturepic.home.model.CategoryDto;
 import com.naturepic.home.model.ProductDto;
+import com.naturepic.home.model.ProductImageDto;
 import com.naturepic.home.model.entity.Category;
 import com.naturepic.home.model.entity.Product;
+import com.naturepic.home.model.entity.ProductImage;
 import com.naturepic.home.model.repository.CategoryRepository;
 import com.naturepic.home.model.repository.ProductRepository;
 import org.apache.log4j.Logger;
@@ -88,7 +91,6 @@ public class ProductService implements IProductService {
 
     private void saveProduct(ProductDto productDto) {
 
-
         Product newProduct = mapper.convertValue(productDto, Product.class);
         productRepository.save(newProduct);
     }
@@ -129,4 +131,74 @@ public class ProductService implements IProductService {
         productRepository.save(existingProduct);
     }
 
+/*    @Autowired
+    public ProductServiceImpl(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }*/
+@Override
+public List<ProductDto> searchProductsByNameWithText(String name) {
+    List<Product> products = productRepository.findByNameContaining(name);
+    return products.stream()
+            .map(this::convertToDto)
+            .collect(Collectors.toList());
+}
+
+ /*   private ProductDto convertToDto(Product product) {
+        ProductDto dto = new ProductDto();
+        dto.setId(product.getId());
+        dto.setName(product.getName());
+        dto.setDescription(product.getDescription());
+        dto.setStatus(product.getStatus());
+        dto.setImageUrl(product.getImageUrl());
+
+        // Convertir la categoría
+        if (product.getCategory() != null) {
+            dto.setCategory(convertCategoryToDto(product.getCategory()));
+        }
+
+        // Convertir las imágenes (si es necesario)
+
+        return dto;
+    }*/
+
+    private ProductDto convertToDto(Product product) {
+        ProductDto dto = new ProductDto();
+        dto.setId(product.getId());
+        dto.setName(product.getName());
+        dto.setDescription(product.getDescription());
+        dto.setStatus(product.getStatus());
+        dto.setImageUrl(product.getImageUrl());
+
+        // Convertir la categoría
+        if (product.getCategory() != null) {
+            dto.setCategory(convertCategoryToDto(product.getCategory()));
+        }
+
+        // Convertir las imágenes del producto
+        if (product.getImages() != null && !product.getImages().isEmpty()) {
+            List<ProductImageDto> imageDtos = product.getImages().stream()
+                    .map(this::convertImageToDto)
+                    .collect(Collectors.toList());
+            dto.setImages(imageDtos);
+        }
+
+        return dto;
+    }
+    private CategoryDto convertCategoryToDto(Category category) {
+        CategoryDto categoryDto = new CategoryDto();
+        categoryDto.setId(category.getId());
+        categoryDto.setName(category.getName());
+        categoryDto.setStatus(category.getStatus());
+        categoryDto.setImageUrl(category.getImageUrl());
+        return categoryDto;
+    }
+
+    private ProductImageDto convertImageToDto(ProductImage image) {
+        ProductImageDto imageDto = new ProductImageDto();
+        imageDto.setImageId(image.getImageId());
+        imageDto.setImageUrl(image.getImageUrl());
+        // Si necesitas referenciar el ID del producto
+        imageDto.setProductId(image.getProduct().getId());
+        return imageDto;
+    }
 }
