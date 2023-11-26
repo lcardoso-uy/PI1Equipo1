@@ -71,17 +71,22 @@ public class UserInfoService implements IUserInfoService {
     }
 
     public String revokeAdminRole(String username) {
-        UserInfo user = repository.findByName( username )
-                .orElseThrow( () -> new RuntimeException( "User not found with username: " + username ) );
+        UserInfo user = repository.findByName(username)
+                .orElseThrow(() -> new RuntimeException("User not found with username: " + username));
 
-        if (user.getRoles().contains( "ROLE_ADMIN" )) {
-            // Aquí asumo que los roles están separados por comas.
-            // Ajusta esta lógica según cómo estés almacenando los roles.
-            String updatedRoles = Arrays.stream( user.getRoles().split( "," ) )
-                    .filter( role -> !role.equals( "ROLE_ADMIN" ) )
-                    .collect( Collectors.joining( "," ) );
-            user.setRoles( updatedRoles );
-            repository.save( user );
+        if (user.getRoles().contains("ROLE_ADMIN")) {
+            // Comprobar si ROLE_ADMIN es el único rol
+            if (user.getRoles().equals("ROLE_ADMIN")) {
+                // Asignar ROLE_USER si ROLE_ADMIN es el único rol
+                user.setRoles("ROLE_USER");
+            } else {
+                // Remover ROLE_ADMIN y mantener otros roles
+                String updatedRoles = Arrays.stream(user.getRoles().split(","))
+                        .filter(role -> !role.equals("ROLE_ADMIN"))
+                        .collect(Collectors.joining(","));
+                user.setRoles(updatedRoles);
+            }
+            repository.save(user);
             return "Admin role revoked from user: " + username;
         } else {
             return "User does not have admin role";
