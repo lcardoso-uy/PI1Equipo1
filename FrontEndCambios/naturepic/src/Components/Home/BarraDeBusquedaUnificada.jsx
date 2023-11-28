@@ -9,18 +9,7 @@ const BarraDeBusquedaUnificada = () => {
     const [fechaFin, setFechaFin] = useState('');
     const [resultadosBusqueda, setResultadosBusqueda] = useState([]);
     const navigate = useNavigate();
-    const { buscarProductos, products } = useContext(DataContext);
-    const { esProductoDisponible } = useContext(DataContext);
-    
-    const debounce = (func, delay) => {
-        let inDebounce;
-        return function() {
-            const context = this;
-            const args = arguments;
-            clearTimeout(inDebounce);
-            inDebounce = setTimeout(() => func.apply(context, args), delay);
-        };
-    };
+    const { buscarProductos, esProductoDisponible, products } = useContext(DataContext);
 
     const fetchSearchResults = async (query) => {
         const productosEncontrados = fechaInicio && fechaFin 
@@ -30,13 +19,10 @@ const BarraDeBusquedaUnificada = () => {
         console.log("Productos encontrados:", productosEncontrados);
         setResultadosBusqueda(productosEncontrados);
     };
-
-    const delayedQuery = useCallback(debounce((query) => fetchSearchResults(query), 500), []);
-
     const handleSearchChange = (e) => {
         setTerminoBusqueda(e.target.value);
         if (e.target.value.length > 2) {
-            delayedQuery(e.target.value);
+            fetchSearchResults(e.target.value);
         } else {
             setResultadosBusqueda([]);
         }

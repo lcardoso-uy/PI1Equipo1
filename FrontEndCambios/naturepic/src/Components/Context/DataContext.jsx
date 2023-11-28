@@ -161,7 +161,7 @@ export const DataProvider = ({ children }) => {
             });
             if (response.ok) {
                 console.log('Rol de administrador asignado con éxito');
-                await actualizarInformacionUsuario();
+                // await actualizarInformacionUsuario();
             } else {
                 console.error('Error al asignar rol de administrador');
             }
@@ -181,7 +181,7 @@ export const DataProvider = ({ children }) => {
             });
             if (response.ok) {
                 console.log('Rol de administrador revocado con éxito');
-                await actualizarInformacionUsuario();
+                // await actualizarInformacionUsuario();
             } else {
                 console.error('Error al revocar rol de administrador');
             }

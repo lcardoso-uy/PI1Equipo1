@@ -6,7 +6,6 @@ function Admin() {
   return (
     <div>
       <div className="admin-panel">
-        <h1>Panel de Administración</h1>
         <nav>
           <ul>
             <li><Link to="agregar-producto">Agregar Producto</Link></li>

@@ -72,39 +72,3 @@ const IniciarSesion = () => {
 };
 
 export default IniciarSesion;
-
-
-    // const handleLogin = async () => {
-    //     try {
-    //         const response = await fetch('http://localhost:8080/auth/generateToken', {
-    //             method: 'POST',
-    //             headers: {
-    //                 'Content-Type': 'application/json',
-    //             },
-    //             body: JSON.stringify(credenciales)
-    //         });
-
-    //         if (response.ok) {
-    //             const token = await response.text();
-    //             localStorage.setItem('authToken', token);
-    //             const userInfoResponse = await fetch('http://localhost:8080/auth/getUserInfo', {
-    //                 headers: {
-    //                     'Authorization': `Bearer ${token}`
-    //                 }
-    //             });
- 
-    //             if (userInfoResponse.ok) {
-    //                 const usuarioData = await userInfoResponse.json();
-    //                 iniciarSesion(usuarioData);
-    //                 navigate('/');
-    //             } else {
-    //                 throw new Error("No se pudo obtener la información del usuario");
-    //             }
-    //         } else {
-    //             setError("Correo electrónico o contraseña incorrectos");
-    //         }
-    //     } catch (err) {
-    //         console.error('Error during login:', err);
-    //         setError("Error en el servidor");
-    //     }
-    // };
