@@ -11,26 +11,22 @@ const BarraDeBusquedaUnificada = () => {
     const [fechaFin, setFechaFin] = useState("");
     const [resultadosBusqueda, setResultadosBusqueda] = useState([]);
     const navigate = useNavigate();
-    const { buscarProductos, esProductoDisponible, products, buscarProductosPorNombre } = useContext(DataContext);
+    const {buscarProductos} = useContext(DataContext);
 
 
     const fetchSearchResults = async (query) => {
-        const formatFecha = fecha => fecha ? fecha.toISOString().split('T')[0] : ''; // Formatea la fecha al formato YYYY-MM-DD
+        const formatFecha = fecha => fecha ? fecha.toISOString().split('T')[0] : '';
         const fechaInicioFormatted = formatFecha(fechaInicio);
         const fechaFinFormatted = formatFecha(fechaFin);
-    
+
         const productosEncontrados = await buscarProductos(query, fechaInicioFormatted, fechaFinFormatted);
-    
+
         if (fechaInicioFormatted && fechaFinFormatted && productosEncontrados.length === 0) {
-            // Caso donde se proporcionaron fechas pero no se encontraron productos disponibles
             alert("No hay productos disponibles en el rango de fechas seleccionado.");
         } else {
-            // Caso donde se encontraron productos (con o sin fechas)
             setResultadosBusqueda(productosEncontrados);
         }
     };
-    
-    
 
     const handleSearchChange = (e) => {
         setTerminoBusqueda(e.target.value);
@@ -43,33 +39,17 @@ const BarraDeBusquedaUnificada = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-    
-        console.log("Resultados de búsqueda:", resultadosBusqueda);
-    
+
         if (resultadosBusqueda && resultadosBusqueda.length > 0) {
             const productoId = resultadosBusqueda[0].id;
-    
-            console.log("ID del producto seleccionado:", productoId);
-    
-            if (fechaInicio && fechaFin) {
-                console.log("Verificando disponibilidad para las fechas:", { fechaInicio, fechaFin });
-                const disponible = await esProductoDisponible(productoId, fechaInicio, fechaFin);
-    
-                console.log("Producto disponible:", disponible);
-    
-                if (disponible) {
-                    navigate(`/detalle/${productoId}`);
-                } else {
-                    alert('El producto seleccionado no está disponible en el rango de fechas proporcionado.');
-                }
-            } else {
-                navigate(`/detalle/${productoId}`);
-            }
+            navigate(`/detalle/${productoId}`);
         } else {
             alert('No se encontraron productos con los criterios de búsqueda proporcionados.');
         }
     };
     
+
+    /*REVISAR SUBMIT*/
     
 
     return (

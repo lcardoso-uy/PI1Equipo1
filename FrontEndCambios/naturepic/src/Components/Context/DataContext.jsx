@@ -19,11 +19,6 @@ export const DataProvider = ({ children }) => {
     }, []);
 
 
-
-
-
-
-
 const buscarProductos = async (termino, fechaInicio, fechaFin) => {
     let url;
     if (fechaInicio && fechaFin) {
@@ -47,28 +42,7 @@ const buscarProductos = async (termino, fechaInicio, fechaFin) => {
 
     
 
-    const esProductoDisponible = async (productoId, fechaInicio, fechaFin) => {
-        try {
-            const url = `http://localhost:8080/product-calendar/calendar/${productoId}?start=${fechaInicio}&end=${fechaFin}`;
-            const response = await fetch(url, {
-                headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('authToken')}`
-                }
-            });
-            if (response.ok) {
-                const disponibilidad = await response.json();
-                console.log(`Disponibilidad del producto ${productoId}:`, disponibilidad);
-                return disponibilidad.isAvailable;
-            } else {
-                const errorResponse = await response.json(); // Agregar esta línea
-                console.error('Error al verificar la disponibilidad del producto:', errorResponse); // Modificar esta línea
-                return false;
-            }
-        } catch (error) {
-            console.error('Error en esProductoDisponible:', error);
-            return false;
-        }
-    };
+
     
 
     const cargarProductosYCategorias = async () => {
@@ -148,11 +122,7 @@ const buscarProductos = async (termino, fechaInicio, fechaFin) => {
         setUsuario(null);
         localStorage.removeItem('authToken');
         localStorage.removeItem('usuario');
-        /*localStorage.removeItem('usuario');*/
     };
-
-
-
 
 
     const asignarAdmin = async (email) => {
@@ -208,8 +178,6 @@ const buscarProductos = async (termino, fechaInicio, fechaFin) => {
         asignarAdmin,
         revocarAdmin,
         buscarProductos,
-        esProductoDisponible,
-        // buscarProductosPorNombre,
     };
 
     return (
