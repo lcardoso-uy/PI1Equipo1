@@ -7,20 +7,31 @@ import "react-datepicker/dist/react-datepicker.css";
 
 const BarraDeBusquedaUnificada = () => {
     const [terminoBusqueda, setTerminoBusqueda] = useState('');
-    const [fechaInicio, setFechaInicio] = useState(null);
-    const [fechaFin, setFechaFin] = useState(null);
+    const [fechaInicio, setFechaInicio] = useState("");
+    const [fechaFin, setFechaFin] = useState("");
     const [resultadosBusqueda, setResultadosBusqueda] = useState([]);
     const navigate = useNavigate();
-    const { buscarProductos, esProductoDisponible, products } = useContext(DataContext);
+    const { buscarProductos, esProductoDisponible, products, buscarProductosPorNombre } = useContext(DataContext);
+
 
     const fetchSearchResults = async (query) => {
-        const productosEncontrados = fechaInicio && fechaFin 
-            ? await buscarProductos(query, fechaInicio, fechaFin) 
-            : products.filter(product => product.name.toLowerCase().includes(query.toLowerCase()));
+        const formatFecha = fecha => fecha ? fecha.toISOString().split('T')[0] : ''; // Formatea la fecha al formato YYYY-MM-DD
+        const fechaInicioFormatted = formatFecha(fechaInicio);
+        const fechaFinFormatted = formatFecha(fechaFin);
     
-        console.log("Productos encontrados:", productosEncontrados);
-        setResultadosBusqueda(productosEncontrados);
+        const productosEncontrados = await buscarProductos(query, fechaInicioFormatted, fechaFinFormatted);
+    
+        if (fechaInicioFormatted && fechaFinFormatted && productosEncontrados.length === 0) {
+            // Caso donde se proporcionaron fechas pero no se encontraron productos disponibles
+            alert("No hay productos disponibles en el rango de fechas seleccionado.");
+        } else {
+            // Caso donde se encontraron productos (con o sin fechas)
+            setResultadosBusqueda(productosEncontrados);
+        }
     };
+    
+    
+
     const handleSearchChange = (e) => {
         setTerminoBusqueda(e.target.value);
         if (e.target.value.length > 2) {
