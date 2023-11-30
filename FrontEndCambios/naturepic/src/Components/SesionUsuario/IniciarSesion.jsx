@@ -1,11 +1,11 @@
 import React, { useState, useContext } from 'react';
-import { DataContext } from '../Context/DataContext';
 import { useNavigate } from 'react-router-dom';
 import './User.css';
+import { AuthContext } from '../Context/AuthContext';
 
 const IniciarSesion = () => {
     const navigate = useNavigate();
-    const { iniciarSesion } = useContext(DataContext);
+    const { iniciarSesion } = useContext(AuthContext);
     const [credenciales, setCredenciales] = useState({
         username: "",
         password: ""
@@ -22,8 +22,8 @@ const IniciarSesion = () => {
 
     const handleLogin = async () => {
         try {
-            await iniciarSesion(credenciales); // Llama a iniciarSesion con credenciales
-            navigate('/'); // Redirige a la página principal
+            await iniciarSesion(credenciales); 
+            navigate('/'); 
         } catch (error) {
             setError(error.message || "Error durante el inicio de sesión");
         }

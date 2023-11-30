@@ -1,15 +1,15 @@
 import React, { useContext, useEffect } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
-import { DataContext } from '../Context/DataContext';
 import Admin from './Admin';
 import AgregarProducto from './AgregarProducto';
 import ListarProductos from './ListarProductos';
 import ListarUsuarios from './ListarUsuarios';
+import { AuthContext } from '../Context/AuthContext';
 
 
 function AdminRoutes() {
   const navigate = useNavigate();
-  const { usuario } = useContext(DataContext);
+  const { usuario } = useContext(AuthContext);
   const isAdmin = usuario && usuario.roles.includes("ROLE_ADMIN");
 
   useEffect(() => {

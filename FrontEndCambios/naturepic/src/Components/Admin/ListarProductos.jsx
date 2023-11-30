@@ -3,9 +3,10 @@ import { DataContext } from '../Context/DataContext';
 import { Link } from 'react-router-dom';
 import './Admin.css';
 import Acciones from './Acciones';
+import { AuthContext } from '../Context/AuthContext';
 
 function ListarProductos() {
-  const { products } = useContext(DataContext);
+  const { products } = useContext(AuthContext);
   const [currentPage, setCurrentPage] = useState(1);
   const productsPerPage = 10;
   

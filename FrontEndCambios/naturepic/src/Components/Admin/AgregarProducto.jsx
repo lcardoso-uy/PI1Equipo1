@@ -1,9 +1,10 @@
 import React, { useContext, useState } from 'react';
 import { DataContext } from '../Context/DataContext';
 import './Admin.css';
+import { AuthContext } from '../Context/AuthContext';
 
 function AgregarProducto() {
-  const { agregarProducto, setNewProduct, newProduct, products, setProducts, categorias } = useContext(DataContext);
+  const { agregarProducto, setNewProduct, newProduct, products, setProducts, categorias } = useContext(AuthContext);
   const [selectedCategoryId, setSelectedCategoryId] = useState('');
   const [errorMessage, setErrorMessage] = useState('');  // Estado para manejar el mensaje de error
 

@@ -2,10 +2,10 @@ import React, { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Header.css';
 import logoNaturePic from "../../../public/NaturePic-Logo 1.png";
-import { DataContext } from '../Context/DataContext';
+import { AuthContext } from '../Context/AuthContext';
 
 const Header = () => {
-  const { usuario, cerrarSesion } = useContext(DataContext);
+  const { usuario, cerrarSesion } = useContext(AuthContext);
 
   useEffect(() => {
     console.log("Estado del usuario actualizado:", usuario);

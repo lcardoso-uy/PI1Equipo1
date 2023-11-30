@@ -1,9 +1,10 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { DataContext } from '../Context/DataContext';
+import { AuthContext } from '../Context/AuthContext';
 
 function ListarUsuarios() {
   const [usuarios, setUsuarios] = useState([]);
-  const { asignarAdmin, revocarAdmin } = useContext(DataContext);
+  const { asignarAdmin, revocarAdmin } = useContext(AuthContext);
 
   useEffect(() => {
     const fetchUsuarios = async () => {
