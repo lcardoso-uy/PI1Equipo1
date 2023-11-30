@@ -1,4 +1,4 @@
-import React, { useState, useContext, useCallback } from 'react';
+import React, { useState, useContext, useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DataContext } from '../Context/DataContext';
 import lupa from "../../../public/Vector.png";
@@ -11,45 +11,39 @@ const BarraDeBusquedaUnificada = () => {
     const [fechaFin, setFechaFin] = useState("");
     const [resultadosBusqueda, setResultadosBusqueda] = useState([]);
     const navigate = useNavigate();
-    const {buscarProductos} = useContext(DataContext);
+    const { buscarProductos } = useContext(DataContext);
 
+    useEffect(() => {
+        if (terminoBusqueda.length >= 3) {
+            fetchSearchResults();
+        }
+    }, [terminoBusqueda, fechaInicio, fechaFin]);
 
-    const fetchSearchResults = async (query) => {
+    const fetchSearchResults = async () => {
         const formatFecha = fecha => fecha ? fecha.toISOString().split('T')[0] : '';
         const fechaInicioFormatted = formatFecha(fechaInicio);
         const fechaFinFormatted = formatFecha(fechaFin);
 
-        const productosEncontrados = await buscarProductos(query, fechaInicioFormatted, fechaFinFormatted);
-
-        if (fechaInicioFormatted && fechaFinFormatted && productosEncontrados.length === 0) {
-            alert("No hay productos disponibles en el rango de fechas seleccionado.");
-        } else {
-            setResultadosBusqueda(productosEncontrados);
-        }
+        const productosEncontrados = await buscarProductos(terminoBusqueda, fechaInicioFormatted, fechaFinFormatted);
+        setResultadosBusqueda(productosEncontrados);
     };
 
     const handleSearchChange = (e) => {
         setTerminoBusqueda(e.target.value);
-        if (e.target.value.length > 2) {
-            fetchSearchResults(e.target.value);
-        } else {
-            setResultadosBusqueda([]);
-        }
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        if (resultadosBusqueda && resultadosBusqueda.length > 0) {
-            const productoId = resultadosBusqueda[0].id;
-            navigate(`/detalle/${productoId}`);
-        } else {
-            alert('No se encontraron productos con los criterios de búsqueda proporcionados.');
+        if (terminoBusqueda.length >= 3 || (fechaInicio && fechaFin)) {
+            await fetchSearchResults();
+            if (resultadosBusqueda.length === 0) {
+                alert('No se encontraron productos con los criterios de búsqueda proporcionados.');
+            } else {
+                // Navegar al primer producto encontrado si se desea
+                navigate(`/detalle/${resultadosBusqueda[0].id}`);
+            }
         }
     };
-    
-
-    /*REVISAR SUBMIT*/
     
 
     return (

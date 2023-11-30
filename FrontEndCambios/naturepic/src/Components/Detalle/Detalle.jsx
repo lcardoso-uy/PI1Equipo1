@@ -1,98 +1,70 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { DataContext } from '../Context/DataContext';
 import InfoProducto from './InfoProducto';
+import DatePicker from 'react-datepicker';
+import "react-datepicker/dist/react-datepicker.css";
 import './Detalle.css';
 
 const Detalle = () => {
-  const { productId } = useParams();
-  const { products } = useContext(DataContext);
-  const [product, setProduct] = useState(null);
-  const [disponibilidad, setDisponibilidad] = useState([]);
+    const { productId } = useParams();
+    const { products } = useContext(DataContext);
+    const [product, setProduct] = useState(null);
+    const [disponibilidad, setDisponibilidad] = useState([]);
+    const [fechasDisponibles, setFechasDisponibles] = useState([]);
 
-  useEffect(() => {
-    const selectedProduct = products.find(p => p.id === parseInt(productId));
-    setProduct(selectedProduct || null);
+    useEffect(() => {
+        const selectedProduct = products.find(p => p.id === parseInt(productId));
+        setProduct(selectedProduct || null);
+        cargarDisponibilidad();
+    }, [productId, products]);
 
-    // Cargar disponibilidad
     const cargarDisponibilidad = async () => {
-      try {
-        // Ajusta las fechas según sea necesario
-        const fechaInicio = "2023-11-15";
-        const fechaFin = "2023-11-30";
-        const response = await fetch(`http://localhost:8080/product-calendar/calendar/${productId}?start=${fechaInicio}&end=${fechaFin}`);
-        if (response.ok) {
-          const data = await response.json();
-          setDisponibilidad(data);
+        try {
+            const response = await fetch(`http://localhost:8080/product-calendar/calendar/${productId}?start=2023-01-01&end=2023-12-31`);
+            if (response.ok) {
+                const data = await response.json();
+                setDisponibilidad(data);
+                const fechas = data.map(item => new Date(item.date));
+                setFechasDisponibles(fechas);
+            }
+        } catch (error) {
+            console.error('Error al cargar la disponibilidad:', error);
         }
-      } catch (error) {
-        console.error('Error al cargar la disponibilidad:', error);
-      }
     };
 
-    cargarDisponibilidad();
-  }, [productId, products]);
+    const isDateAvailable = date => {
+        return fechasDisponibles.some(fechaDisponible => 
+            fechaDisponible.getDate() === date.getDate() && 
+            fechaDisponible.getMonth() === date.getMonth() && 
+            fechaDisponible.getFullYear() === date.getFullYear());
+    };
 
-  const mostrarDisponibilidad = () => {
-    return disponibilidad.map((item, index) => (
-      <div key={index}>
-        <span>{item.date}: </span>
-        <span>{item.status}</span>
-      </div>
-    ));
-  };
+    const highlightWithGreen = date => {
+        return isDateAvailable(date) ? 'available-date' : undefined;
+    };
 
-  if (!product) return <p>Cargando...</p>;
+    if (!product) return <p>Cargando...</p>;
 
-  return (
-    <div>
-      <br /><br />
-      <div className="detalle-container">
-        <InfoProducto product={product} />
-        <div className="disponibilidad-container">
-          <h3>Disponibilidad:</h3>
-          {mostrarDisponibilidad()}
+    return (
+        <div>
+            <br /><br />
+            <div className="detalle-container">
+                <InfoProducto product={product} />
+                <div className="disponibilidad-container">
+                    <h3>Disponibilidad:</h3>
+                    <DatePicker
+                        inline
+                        highlightDates={[{
+                            "available-date": fechasDisponibles
+                        }]}
+                        dayClassName={highlightWithGreen}
+                    />
+                </div>
+                {/* Agregar enlaces o botones según sea necesario */}
+            </div>
         </div>
-        <Link to={`/galeria/${product.id}`}>
-          <button className="ver-mas">Ver más</button>
-        </Link>
-      </div>
-    </div>
-  );
+    );
 };
 
 export default Detalle;
-
-
-// import React, { useContext, useEffect, useState } from 'react';
-// import { useParams, Link } from 'react-router-dom';
-// import { DataContext } from '../Context/DataContext';
-// import InfoProducto from './InfoProducto';
-// import './Detalle.css';
-
-// const Detalle = () => {
-//   const { productId } = useParams();
-//   const { products } = useContext(DataContext);
-//   const [product, setProduct] = useState(null);
-
-//   useEffect(() => {
-//     const selectedProduct = products.find(p => p.id === parseInt(productId));
-//     setProduct(selectedProduct || null);
-//   }, [productId, products]);
-
-//   if (!product) return <p>Cargando...</p>;
-
-//   return (
-//     <div>
-//       <br /><br />
-//       <div className="detalle-container">
-//         <InfoProducto product={product} />
-//         <Link to={`/galeria/${product.id}`}>
-//           <button className="ver-mas">Ver más</button>
-//         </Link>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Detalle;
