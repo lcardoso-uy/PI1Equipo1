@@ -52,14 +52,19 @@
   }
   
   .available-date {
-    background-color: green;
+    background-color: #28a745;
     color: white;
 }
 
 .unavailable-date {
-    background-color: red;
+    background-color: #dc3545;
     color: white;
 }
+
+.selected-date {
+  border: 2px solid blue;
+}
+
 
   .ver-mas {
     position: absolute;
