@@ -51,6 +51,16 @@
     position: relative;
   }
   
+  .available-date {
+    background-color: green;
+    color: white;
+}
+
+.unavailable-date {
+    background-color: red;
+    color: white;
+}
+
   .ver-mas {
     position: absolute;
     right: 20px;
