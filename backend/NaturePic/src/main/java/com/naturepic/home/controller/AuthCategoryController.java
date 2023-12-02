@@ -1,6 +1,7 @@
 package com.naturepic.home.controller;
 
 import com.naturepic.home.model.CategoryDto;
+import com.naturepic.home.model.ProductProjection;
 import com.naturepic.home.service.ICategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -8,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Set;
 
 @CrossOrigin(origins = "*")
@@ -54,5 +56,16 @@ public class AuthCategoryController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Categoría no encontrada");
         }
     }
+
+    @GetMapping("/{id}/products")
+    public ResponseEntity<List<ProductProjection>> getProductsByCategory(@PathVariable Long id) {
+        List<ProductProjection> products = categoryService.getProductsByCategory(id);
+        if (products != null) {
+            return ResponseEntity.ok(products);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+    }
+
 
 }

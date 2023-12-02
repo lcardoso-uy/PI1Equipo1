@@ -1,5 +1,7 @@
 package com.naturepic.home.model.repository;
 
+import com.naturepic.home.model.ProductProjection;
+import com.naturepic.home.model.entity.Category;
 import com.naturepic.home.model.entity.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -17,5 +19,8 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> findAllById(Iterable<Long> ids);
 
     List<Product> findByNameContaining(String name);
+
+    List<ProductProjection> findByCategory(Category category);
+
 }
 

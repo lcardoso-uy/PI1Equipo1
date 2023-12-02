@@ -2,8 +2,10 @@ package com.naturepic.home.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.naturepic.home.model.CategoryDto;
+import com.naturepic.home.model.ProductProjection;
 import com.naturepic.home.model.entity.Category;
 import com.naturepic.home.model.repository.CategoryRepository;
+import com.naturepic.home.model.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +21,9 @@ public class CategoryService implements ICategoryService{
 
     @Autowired
     ObjectMapper mapper;
+
+    @Autowired
+    private ProductRepository productRepository;
 
     @Override
     public void newCategory(CategoryDto categoryDto) {
@@ -54,4 +59,21 @@ public class CategoryService implements ICategoryService{
         return categories.stream().map(category -> mapper.convertValue(category, CategoryDto.class))
                 .collect(Collectors.toSet());
     }
+
+    @Override
+    public List<ProductProjection> getProductsByCategory(Long categoryId) {
+        Category category = categoryRepository.findById(categoryId).orElse(null);
+        if (category != null) {
+            List<ProductProjection> products = productRepository.findByCategory(category);
+            return products;
+/*
+                    products.stream().map(product -> mapper.convertValue(product, ProductDto.class))
+                    .collect(Collectors.toSet());
+*/
+        }
+        return null;
+    }
+
+
+
 }
