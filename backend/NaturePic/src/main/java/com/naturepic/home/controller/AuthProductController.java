@@ -26,6 +26,11 @@ public class AuthProductController {
         this.productService = productService;
     }
 
+    @Autowired
+    public AuthProductController(IProductService productService) {
+        this.productService = productService;
+    }
+
     @PostMapping("/admin/resource")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<?> newProduct(@RequestBody ProductDto productDto){

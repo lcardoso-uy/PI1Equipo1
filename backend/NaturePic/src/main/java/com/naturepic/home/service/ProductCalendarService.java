@@ -106,18 +106,6 @@ public class ProductCalendarService implements IProductCalendarService {
         return dto;
     }
 
-/*
-    private ProductDto convertToProductDto(Product product) {
-        // Convierte la entidad Product a ProductDto
-        ProductDto dto = new ProductDto();
-        dto.setId(product.getId());
-        dto.setName(product.getName());
-        dto.setDescription( product.getDescription() );
-        dto.setImageUrl( product.getImageUrl() );
-        return dto;
-    }
-*/
-
     private ProductDto convertToProductDto(Product product) {
         ProductDto dto = new ProductDto();
         dto.setId(product.getId());
@@ -134,6 +122,14 @@ public class ProductCalendarService implements IProductCalendarService {
             dto.setCategory(categoryDto);
         }
         return dto;
+
+    }
+
+    @Override
+    public void validateDateRange(LocalDate startDate, LocalDate endDate) throws Exception {
+        if (startDate.isAfter(endDate)) {
+            throw new Exception("La fecha de inicio debe ser menor o igual a la fecha de fin");
+        }
 
     }
 

@@ -5,6 +5,7 @@ import com.naturepic.home.model.entity.AuthRequest;
 import com.naturepic.home.model.entity.UserInfo;
 import com.naturepic.home.service.JwtService;
 import com.naturepic.home.service.UserInfoService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,7 +40,7 @@ public class UserControllerAuth {
     }
 
     @PostMapping("/addNewUser")
-    public String addNewUser(@RequestBody UserInfo userInfo) {
+    public String addNewUser(@Valid @RequestBody UserInfo userInfo) {
         return service.addUser(userInfo);
     }
 
@@ -56,7 +57,7 @@ public class UserControllerAuth {
     }
 
     @PostMapping("/generateToken")
-    public String authenticateAndGetToken(@RequestBody AuthRequest authRequest) {
+    public String authenticateAndGetToken(@Valid @RequestBody AuthRequest authRequest) {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
         if (authentication.isAuthenticated()) {
             return jwtService.generateToken(authRequest.getUsername());

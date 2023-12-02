@@ -11,4 +11,7 @@ public interface IProductCalendarService {
     List<ProductCalendarDto> getProductCalendar(Long productId, LocalDate start, LocalDate end);
 
     List<ProductCalendarDto> createProductCalendar(Long productId, LocalDate startDate, LocalDate endDate) throws Exception;
+
+    void validateDateRange(LocalDate startDate, LocalDate endDate) throws Exception;
+
 }

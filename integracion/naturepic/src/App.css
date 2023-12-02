@@ -40,3 +40,29 @@
 .read-the-docs {
   color: #888;
 }
+
+.date-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.date-wrapper label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  color: #aaa;
+  transition: all 0.3s;
+}
+
+input[type="date"]:not(:placeholder-shown),
+input[type="date"]:focus {
+  padding-left: 120px;
+}
+
+input[type="date"]:not(:placeholder-shown) + label,
+input[type="date"]:focus + label {
+  font-size: 12px;
+  top: -20px;
+  color: #000;
+}

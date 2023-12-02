@@ -1,9 +1,12 @@
 package com.naturepic.home.model.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.Collection;
 
 @Entity
 @Data
@@ -16,6 +19,7 @@ public class UserInfo {
     private int id;
 
     @Column(unique = true)
+    @NotBlank(message = "El nombre de usuario no puede estar vacío")
     private String name;
 
     private String firstname;
@@ -24,11 +28,20 @@ public class UserInfo {
     private String password;
     private String roles;
 
+    @OneToMany(mappedBy = "userInfo")
+    private Collection<Booking> bookings;
+
+
     public boolean isAdmin() {
         return this.roles != null && this.roles.contains("ROLE_ADMIN");
     }
 
-    public Object getUsername() {
+    public String getUsername() {
         return this.name;
     }
+
+    public Collection<Booking> getBookings() {
+        return bookings;
+    }
+
 }

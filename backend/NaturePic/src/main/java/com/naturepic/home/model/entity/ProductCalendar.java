@@ -11,6 +11,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @JsonIdentityInfo(
         generator = ObjectIdGenerators.PropertyGenerator.class,
@@ -38,4 +40,19 @@ public class ProductCalendar {
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
     private ProductStatus status; // Usando el enumerado
+
+    @ManyToMany(mappedBy = "productCalendars")
+    private List<Booking> bookings; // Nueva relación agregada
+
+    public void addBooking(Booking booking) {
+        if (bookings == null) {
+            bookings = new ArrayList<>();
+        }
+        bookings.add(booking);
+        booking.getProductCalendars().add(this);
+
+        // Actualizar el estado a NO_DISPONIBLE
+        this.setStatus(ProductStatus.NO_DISPONIBLE);
+    }
+
 }

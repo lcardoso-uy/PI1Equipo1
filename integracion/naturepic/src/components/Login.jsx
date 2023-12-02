@@ -6,10 +6,12 @@ class Login extends React.Component {
         this.state = {
             username: '',
             password: '',
+            birthDate: '', // Añadir este nuevo campo
             userInfo: null,
             loginError: null,
             userInfoError: null
         };
+    
     }
 
     handleInputChange = (event) => {
@@ -57,7 +59,8 @@ class Login extends React.Component {
     }
 
     render() {
-        const { username, password, userInfo, loginError, userInfoError } = this.state;
+        const { username, password, birthDate, userInfo, loginError, userInfoError } = this.state;
+
 
         if (userInfo) {
             return (
@@ -75,16 +78,27 @@ class Login extends React.Component {
 
         return (
             <form onSubmit={this.handleSubmit}>
-                <label>
-                    Username:
-                    <input name="username" type="email" value={username} onChange={this.handleInputChange} />
-                </label>
+                {/* ... otros campos del formulario ... */}
+
+                <div className="date-input-container">
+                    <input
+                        id="birthDate"
+                        name="birthDate"
+                        type="date"
+                        value={birthDate}
+                        onChange={this.handleInputChange}
+                        style={{ display: birthDate ? 'block' : 'none' }}
+                    />
+                    <label
+                        htmlFor="birthDate"
+                        style={{ display: birthDate ? 'none' : 'block' }}
+                        onClick={() => this.setState({ birthDate: new Date().toISOString().split('T')[0] })}
+                    >
+                        Fecha de Nacimiento
+                    </label>
+                </div>
                 <br />
-                <label>
-                    Password:
-                    <input name="password" type="password" value={password} onChange={this.handleInputChange} />
-                </label>
-                <br />
+
                 <button type="submit">Login</button>
                 {loginError && <p>{loginError}</p>}
                 {userInfoError && <p>{userInfoError}</p>}

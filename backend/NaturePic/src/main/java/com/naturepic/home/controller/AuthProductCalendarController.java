@@ -32,12 +32,14 @@ public class AuthProductCalendarController {
                                                    @RequestParam LocalDate startDate,
                                                    @RequestParam LocalDate endDate) {
         try {
+            productCalendarService.validateDateRange(startDate, endDate);
             List<ProductCalendarDto> createdCalendars = productCalendarService.createProductCalendar(productId, startDate, endDate);
             return ResponseEntity.ok(createdCalendars);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
 
     // Método para obtener productos disponibles
     @GetMapping("/available")
