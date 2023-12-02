@@ -5,10 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -19,8 +16,7 @@ import java.util.List;
         property = "id"
 )
 @Entity
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductCalendar {
@@ -53,6 +49,15 @@ public class ProductCalendar {
 
         // Actualizar el estado a NO_DISPONIBLE
         this.setStatus(ProductStatus.NO_DISPONIBLE);
+    }
+
+    @Override
+    public String toString() {
+        return "ProductCalendar{" +
+                "id=" + id +
+                "date=" + date +
+                "status=" + status +
+                '}';
     }
 
 }

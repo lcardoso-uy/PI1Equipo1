@@ -38,4 +38,17 @@ public class BookingDto {
 
     public void setUserId(Integer integer) {
     }
+
+    @Override
+    public String toString() {
+        return "BookingDto{" +
+                "id=" + id +
+                ", productId=" + productId +
+                ", productCalendarIds=" + productCalendarIds +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                ", comment='" + comment + '\'' +
+                '}';
+    }
+
 }

@@ -44,4 +44,12 @@ public class UserInfo {
         return bookings;
     }
 
+    @Override
+    public String toString() {
+        return "UserInfo{" +
+                "name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                '}';
+    }
+
 }

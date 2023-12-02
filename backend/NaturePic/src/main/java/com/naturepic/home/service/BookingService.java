@@ -17,6 +17,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.ArrayList;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 
@@ -40,10 +41,10 @@ public class BookingService implements IBookingService {
     @Override
     public String createBooking(BookingDto bookingDto, String username) {
         UserInfo user = userInfoRepository.findByName(username)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
 
         Product product = productRepository.findById(bookingDto.getProductId())
-                .orElseThrow(() -> new RuntimeException("Product not found"));
+                .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
 
         if (!product.getStatus() || bookingDto.getStartDate().isAfter(bookingDto.getEndDate())) {
             return "Error: Producto no disponible o rango de fechas inválido";
@@ -56,22 +57,32 @@ public class BookingService implements IBookingService {
             return "Error: No todos los días en el rango están disponibles";
         }
 
+        logger.debug("BookingDto :: " + bookingDto.toString());
+        logger.debug("Available Calendars :: " +  availableCalendars.toString());
+
         Booking booking = new Booking();
         booking.setUserInfo(user);
         booking.setProduct(product);
         booking.setStartDate(bookingDto.getStartDate());
         booking.setEndDate(bookingDto.getEndDate());
         booking.setComment(bookingDto.getComment());
-        booking.setProductCalendars(availableCalendars);
         booking.setBookingDate(LocalDate.now());
         booking.setBookingTime(LocalTime.now());
 
-        if (bookingDto.getProductCalendarIds() != null && !bookingDto.getProductCalendarIds().isEmpty()) {
-            List<ProductCalendar> productCalendars = productCalendarRepository.findAllById(bookingDto.getProductCalendarIds());
+        logger.debug("newBooking :: booking:" + booking.toString());
+
+        if (!availableCalendars.isEmpty()) {
+            List<ProductCalendar> productCalendars = new ArrayList<>(availableCalendars);
             booking.setProductCalendars(productCalendars);
 
             for (ProductCalendar productCalendar : productCalendars) {
-                productCalendar.addBooking(booking);
+                List<Booking> bookings = productCalendar.getBookings();
+                if (bookings == null) {
+                    bookings = new ArrayList<>();
+                    productCalendar.setBookings(bookings);
+                }
+
+                bookings.add(booking);
                 productCalendarRepository.save(productCalendar);
 
                 logger.debug("newBooking :: Estado de ProductCalendar después de la reserva:" + productCalendar.getStatus());
@@ -82,6 +93,7 @@ public class BookingService implements IBookingService {
 
         return "Booking created successfully with ID: " + booking.getId();
     }
+
 
     @Override
     public List<BookingDto> getBookingsForUser(String username) {

@@ -3,7 +3,9 @@ package com.naturepic.home.controller;
 import com.naturepic.home.model.BookingDto;
 import com.naturepic.home.service.BookingService;
 import com.naturepic.home.service.JwtService;
+import com.naturepic.home.service.ProductService;
 import jakarta.validation.Valid;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -21,6 +23,8 @@ public class AuthBookingController {
 
     @Autowired
     private JwtService jwtService;
+
+    private Logger logger = Logger.getLogger( ProductService.class);
 
     @PostMapping("/create")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
