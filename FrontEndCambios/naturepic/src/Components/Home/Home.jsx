@@ -52,6 +52,16 @@ const Home = () => {
         ))}
       </div>
       <br />
+      {/* Listado de productos */}
+      <div className="Productos-random-contenedor">
+        {currentProducts.map(product => (
+          <div key={product.id} className="product-item">
+            <p>{product.name}</p>
+            <img src={product.image_url} alt={product.name} />
+          </div>
+        ))}
+      </div>
+      <br />
       {/* Controles de Paginación */}
       <div className="pagination-controls">
         {/*<button onClick={goToFirstPage} disabled={currentPage === 1}>
@@ -67,16 +77,6 @@ const Home = () => {
         <button onClick={goToNextPage} disabled={currentPage === pageCount}>
           Siguiente
         </button>
-      </div>
-      <br />
-      {/* Listado de productos */}
-      <div className="Productos-random-contenedor">
-        {currentProducts.map(product => (
-          <div key={product.id} className="product-item">
-            <p>{product.name}</p>
-            <img src={product.image_url} alt={product.name} />
-          </div>
-        ))}
       </div>
     </div>
     

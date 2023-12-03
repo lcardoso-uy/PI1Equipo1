@@ -9,6 +9,8 @@ import Galeria from './Components/Detalle/Galeria';
 import RegistroUsuario from './Components/SesionUsuario/RegistroUsuario';
 import IniciarSesion from './Components/SesionUsuario/IniciarSesion';
 import AdminRoutes from './Components/Admin/AdminRoutes';
+import ListaProductos from './Components/Detalle/ListaProductos';
+import FormularioReserva from './Components/Detalle/FormularioReserva';
 
 function App() {
   return (
@@ -22,8 +24,12 @@ function App() {
             <Route path='/' element={<Home />} />
             <Route path='/detalle/:productId' element={<Detalle />} />
             <Route path='/galeria/:productId' element={<Galeria />} />
+            {/* Resultados de búsqueda */}
+          <Route path='/resultados' element={<ListaProductos />} />
             {/* Admin routes */}
             <Route path="/admin/*" element={<AdminRoutes />} />
+
+            <Route path='/reserva' element={<FormularioReserva />} />
           </Routes>
         </div>
       <Footer />

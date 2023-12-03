@@ -12,13 +12,17 @@ export const DataProvider = ({ children }) => {
     }, []);
 
 
-const buscarProductos = async (termino, fechaInicio, fechaFin) => {
-    let url;
-    if (fechaInicio && fechaFin) {
-        url = `http://localhost:8080/product-calendar/available?text=${encodeURIComponent(termino)}&start=${fechaInicio}&end=${fechaFin}`;
-    } else {
-        url = `http://localhost:8080/authproducts/search?name=${encodeURIComponent(termino)}`;
-    }
+    const buscarProductos = async (termino, fechaInicio, fechaFin) => {
+        let url = 'http://localhost:8080/';
+        if (fechaInicio && fechaFin) {
+            url += 'product-calendar/available?';
+            if (termino) {
+                url += `text=${encodeURIComponent(termino)}&`;
+            }
+            url += `start=${fechaInicio}&end=${fechaFin}`;
+        } else if (termino) {
+            url += `authproducts/search?name=${encodeURIComponent(termino)}`;
+        }
     try {
         const response = await fetch(url);
         if (response.ok) {
