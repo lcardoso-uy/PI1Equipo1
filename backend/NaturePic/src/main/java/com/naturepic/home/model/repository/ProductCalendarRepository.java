@@ -19,4 +19,6 @@ public interface ProductCalendarRepository extends JpaRepository<ProductCalendar
 
     @Query("SELECT pc FROM ProductCalendar pc WHERE pc.product.id IN :productIds AND pc.date BETWEEN :startDate AND :endDate")
     List<ProductCalendar> findByProductIdsAndDateBetween(@Param("productIds") List<Long> productIds, @Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
+
+    List<ProductCalendar> findByProductIdAndDate(Long productId, LocalDate currentDate);
 }

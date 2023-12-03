@@ -5,10 +5,11 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 @JsonIdentityInfo(
@@ -40,6 +41,12 @@ public class ProductCalendar {
     @ManyToMany(mappedBy = "productCalendars")
     private List<Booking> bookings; // Nueva relación agregada
 
+    public void addBooking(ProductCalendar productCalendar) {
+        // Actualizar el estado a NO_DISPONIBLE
+        this.setStatus(ProductStatus.NO_DISPONIBLE);
+    }
+
+/*
     public void addBooking(Booking booking) {
         if (bookings == null) {
             bookings = new ArrayList<>();
@@ -50,6 +57,8 @@ public class ProductCalendar {
         // Actualizar el estado a NO_DISPONIBLE
         this.setStatus(ProductStatus.NO_DISPONIBLE);
     }
+*/
+
 
     @Override
     public String toString() {

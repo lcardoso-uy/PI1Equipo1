@@ -1,10 +1,7 @@
 package com.naturepic.home.service;
 
 import com.naturepic.home.model.BookingDto;
-import com.naturepic.home.model.entity.Booking;
-import com.naturepic.home.model.entity.Product;
-import com.naturepic.home.model.entity.ProductCalendar;
-import com.naturepic.home.model.entity.UserInfo;
+import com.naturepic.home.model.entity.*;
 import com.naturepic.home.model.repository.BookingRepository;
 import com.naturepic.home.model.repository.ProductCalendarRepository;
 import com.naturepic.home.model.repository.ProductRepository;
@@ -15,11 +12,9 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.ArrayList;
-
-import static java.time.temporal.ChronoUnit.DAYS;
 
 @Service
 public class BookingService implements IBookingService {
@@ -46,6 +41,7 @@ public class BookingService implements IBookingService {
         Product product = productRepository.findById(bookingDto.getProductId())
                 .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
 
+/*
         if (!product.getStatus() || bookingDto.getStartDate().isAfter(bookingDto.getEndDate())) {
             return "Error: Producto no disponible o rango de fechas inválido";
         }
@@ -56,6 +52,33 @@ public class BookingService implements IBookingService {
         if (availableCalendars.size() < DAYS.between(bookingDto.getStartDate(), bookingDto.getEndDate()) + 1) {
             return "Error: No todos los días en el rango están disponibles";
         }
+*/
+// Verificación del estado del producto y rango de fechas
+        if (!product.getStatus() || bookingDto.getStartDate().isAfter(bookingDto.getEndDate())) {
+            return "Error: Producto no disponible o rango de fechas inválido";
+        }
+
+// Verificación de la disponibilidad para cada día en el rango
+        LocalDate currentDate = bookingDto.getStartDate();
+        while (!currentDate.isAfter(bookingDto.getEndDate())) {
+            List<ProductCalendar> calendarsForCurrentDate = productCalendarRepository
+                    .findByProductIdAndDate(bookingDto.getProductId(), currentDate);
+
+            if (calendarsForCurrentDate.isEmpty()) {
+                return "Error: El día " + currentDate + " no está disponible";
+            }
+
+            ProductCalendar calendar = calendarsForCurrentDate.get(0);
+            if (calendar.getStatus() != ProductStatus.DISPONIBLE) {
+                return "Error: El día " + currentDate + " no está disponible";
+            }
+
+            currentDate = currentDate.plusDays(1);
+        }
+
+        List<ProductCalendar> availableCalendars = productCalendarRepository
+                .findByProductIdAndDateBetween(bookingDto.getProductId(), bookingDto.getStartDate(), bookingDto.getEndDate());
+
 
         logger.debug("BookingDto :: " + bookingDto.toString());
         logger.debug("Available Calendars :: " +  availableCalendars.toString());
@@ -79,16 +102,16 @@ public class BookingService implements IBookingService {
                 List<Booking> bookings = productCalendar.getBookings();
                 if (bookings == null) {
                     bookings = new ArrayList<>();
-                    productCalendar.setBookings(bookings);
+                    productCalendar.setBookings(bookings);  // Asegurarse de que la lista esté inicializada
                 }
 
                 bookings.add(booking);
+                productCalendar.setStatus( ProductStatus.NO_DISPONIBLE);
                 productCalendarRepository.save(productCalendar);
 
                 logger.debug("newBooking :: Estado de ProductCalendar después de la reserva:" + productCalendar.getStatus());
             }
         }
-
         bookingRepository.save(booking);
 
         return "Booking created successfully with ID: " + booking.getId();
