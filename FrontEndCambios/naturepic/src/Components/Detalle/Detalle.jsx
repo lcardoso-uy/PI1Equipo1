@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { DataContext } from '../Context/DataContext';
 import InfoProducto from './InfoProducto';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import './Detalle.css';
+import { AuthContext } from '../Context/AuthContext';
 
 const Detalle = () => {
     const { productId } = useParams();
@@ -15,6 +16,9 @@ const Detalle = () => {
     const [error, setError] = useState('');
     const [fechaInicioReserva, setFechaInicioReserva] = useState(null);
     const [fechaFinReserva, setFechaFinReserva] = useState(null);
+    const { usuario } = useContext(AuthContext)
+    const [mostrarModal, setMostrarModal] = useState(false); 
+    const navigate = useNavigate(); 
 
     useEffect(() => {
         const selectedProduct = products.find(p => p.id === parseInt(productId));
@@ -42,30 +46,51 @@ const Detalle = () => {
         }
     };
 
-    const verificarDisponibilidad = () => {
+    const verificarDisponibilidadYRedirigir = () => {
         if (!fechaInicioReserva || !fechaFinReserva) {
             alert('Por favor, selecciona ambas fechas.');
             return;
         }
-
+    
         const inicio = new Date(fechaInicioReserva);
         const fin = new Date(fechaFinReserva);
         let fechaActual = new Date(inicio);
-
+    
         while (fechaActual <= fin) {
             const fechaStr = fechaActual.toISOString().split('T')[0];
             const disponible = disponibilidad.some(item => item.date === fechaStr && item.status === 'DISPONIBLE');
-
+    
             if (!disponible) {
                 alert('Algunas de las fechas seleccionadas no están disponibles para reserva.');
                 return;
             }
-
+    
             fechaActual.setDate(fechaActual.getDate() + 1);
         }
-
-        alert('Las fechas seleccionadas están disponibles para reserva.');
+    
+        if (usuario) {
+            // Mostrar el modal si el usuario está logueado
+            setMostrarModal(true);
+        } else {
+            // Si el usuario no está logueado, redirige a iniciar sesión
+            navigate('/iniciar-sesion');
+        }
     };
+    
+
+    const ModalConfirmacion = ({ onClose, onConfirm }) => {
+        return (
+            <div className="modal">
+                <div className="modal-content">
+                    <h2>Confirmar Reserva</h2>
+                    <p>¿Estás seguro de que quieres hacer esta reserva?</p>
+                    <button onClick={onConfirm}>Confirmar</button>
+                    <button onClick={onClose}>Cancelar</button>
+                </div>
+            </div>
+        );
+    };
+
 
     if (cargando) return <p>Cargando disponibilidad...</p>;
     if (error) return <p>Error: {error}</p>;
@@ -91,9 +116,15 @@ const Detalle = () => {
         <div>
             <br /><br />
             <div className="detalle-container">
+                <div className='Info-producto'>
                 {product && <InfoProducto product={product} />}
+                </div>
+                <div className="detalle-producto">
+                <h3>Disponibilidad:</h3>
+                <p>{product.description}</p>
+                </div>
                 <div className="disponibilidad-container">
-                    <h3>Disponibilidad:</h3>
+                
                     <DatePicker
                         inline
                         selected={fechaInicioReserva}
@@ -101,6 +132,7 @@ const Detalle = () => {
                         dateFormat="yyyy-MM-dd"
                         placeholderText="Fecha inicio"
                         dayClassName={dayClassName}
+                        className='detail__calendar'
                     />
                     <DatePicker
                         inline
@@ -109,10 +141,27 @@ const Detalle = () => {
                         dateFormat="yyyy-MM-dd"
                         placeholderText="Fecha fin"
                         dayClassName={dayClassName}
+                        className='detail__calendar'
                     />
-                    <button onClick={verificarDisponibilidad}>Verificar Disponibilidad</button>
                 </div>
+                <button onClick={verificarDisponibilidadYRedirigir}
+                    className='boton__disponibilidad__detalle'>Reservar</button>
             </div>
+            {mostrarModal && (
+            <ModalConfirmacion
+                onConfirm={() => {
+                    setMostrarModal(false);
+                    navigate('/reserva', {
+                        state: {
+                            startDate: fechaInicioReserva.toISOString().split('T')[0],
+                            endDate: fechaFinReserva.toISOString().split('T')[0],
+                            productId: product.id // Asegúrate de tener el ID del producto aquí
+                        }
+                    });
+                }}
+                onClose={() => setMostrarModal(false)}
+            />
+        )}
         </div>
     );
 };

@@ -34,3 +34,17 @@
 [2023-11-0919:20:43] [ DEBUG] [ProductService:35] newProduct :: Inicio
 [2023-11-0919:20:43] [ DEBUG] [ProductService:36] product.Dto:null-Producto 3-Producto 3
 [2023-11-0919:20:43] [ DEBUG] [ProductService:46] save product.Dto:null-Producto 3-Producto 3
+[2023-12-0312:09:28] [ DEBUG] [ProductService:83] BookingDto :: BookingDto{id=null, productId=2, productCalendarIds=null, startDate=2024-01-12, endDate=2024-01-15, comment='Reserva del administrador 12 al 15'}
+[2023-12-0312:09:28] [ DEBUG] [ProductService:84] Available Calendars :: [ProductCalendar{id=483date=2024-01-12status=DISPONIBLE}, ProductCalendar{id=484date=2024-01-13status=DISPONIBLE}, ProductCalendar{id=485date=2024-01-14status=DISPONIBLE}, ProductCalendar{id=486date=2024-01-15status=DISPONIBLE}]
+[2023-12-0312:09:28] [ DEBUG] [ProductService:95] newBooking :: booking:Booking(id=null, userInfo=UserInfo{name='lcc@gmail.com', email='lcc@gmail.com'}, product=com.naturepic.home.model.entity.Product@3c2aa786, productCalendars=null, bookingDate=2023-12-03, bookingTime=12:09:28.300289, startDate=2024-01-12, endDate=2024-01-15, comment=Reserva del administrador 12 al 15)
+[2023-12-0312:09:28] [ DEBUG] [ProductService:112] newBooking :: Estado de ProductCalendar después de la reserva:NO_DISPONIBLE
+[2023-12-0312:09:28] [ DEBUG] [ProductService:112] newBooking :: Estado de ProductCalendar después de la reserva:NO_DISPONIBLE
+[2023-12-0312:09:28] [ DEBUG] [ProductService:112] newBooking :: Estado de ProductCalendar después de la reserva:NO_DISPONIBLE
+[2023-12-0312:09:28] [ DEBUG] [ProductService:112] newBooking :: Estado de ProductCalendar después de la reserva:NO_DISPONIBLE
+[2023-12-0312:50:52] [ DEBUG] [ProductService:83] BookingDto :: BookingDto{id=null, productId=2, productCalendarIds=null, startDate=2024-01-12, endDate=2024-01-15, comment='Reserva del administrador 12 al 15'}
+[2023-12-0312:50:52] [ DEBUG] [ProductService:84] Available Calendars :: [ProductCalendar{id=483date=2024-01-12status=DISPONIBLE}, ProductCalendar{id=484date=2024-01-13status=DISPONIBLE}, ProductCalendar{id=485date=2024-01-14status=DISPONIBLE}, ProductCalendar{id=486date=2024-01-15status=DISPONIBLE}]
+[2023-12-0312:50:52] [ DEBUG] [ProductService:95] newBooking :: booking:Booking(id=null, userInfo=UserInfo{name='lcc@gmail.com', email='lcc@gmail.com'}, product=com.naturepic.home.model.entity.Product@30ea513d, productCalendars=null, bookingDate=2023-12-03, bookingTime=12:50:52.937881300, startDate=2024-01-12, endDate=2024-01-15, comment=Reserva del administrador 12 al 15)
+[2023-12-0312:50:53] [ DEBUG] [ProductService:112] newBooking :: Estado de ProductCalendar después de la reserva:NO_DISPONIBLE
+[2023-12-0312:50:53] [ DEBUG] [ProductService:112] newBooking :: Estado de ProductCalendar después de la reserva:NO_DISPONIBLE
+[2023-12-0312:50:53] [ DEBUG] [ProductService:112] newBooking :: Estado de ProductCalendar después de la reserva:NO_DISPONIBLE
+[2023-12-0312:50:53] [ DEBUG] [ProductService:112] newBooking :: Estado de ProductCalendar después de la reserva:NO_DISPONIBLE

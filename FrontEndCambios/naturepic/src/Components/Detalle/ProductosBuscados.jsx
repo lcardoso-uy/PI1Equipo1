@@ -1,12 +1,10 @@
-import React from 'react';
-import './Detalle.css';
+import React from 'react'
 
-const InfoProducto = ({ product }) => {
-
+const ProductosBuscados = ({product}) => {
   return (
+
     <div className="info-producto-container">
       <h2>{product.name}</h2>
-      
       <div className="imagen-y-boton-container">
         {product.image_url && (
           <img
@@ -17,7 +15,8 @@ const InfoProducto = ({ product }) => {
         )}
       </div>
     </div>
-  );
-};
 
-export default InfoProducto;
+  )
+}
+
+export default ProductosBuscados

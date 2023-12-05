@@ -7,44 +7,47 @@ import "react-datepicker/dist/react-datepicker.css";
 
 const BarraDeBusquedaUnificada = () => {
     const [terminoBusqueda, setTerminoBusqueda] = useState('');
-    const [fechaInicio, setFechaInicio] = useState("");
-    const [fechaFin, setFechaFin] = useState("");
+    const [fechaInicio, setFechaInicio] = useState(null);
+    const [fechaFin, setFechaFin] = useState(null);
     const [resultadosBusqueda, setResultadosBusqueda] = useState([]);
     const navigate = useNavigate();
     const { buscarProductos } = useContext(DataContext);
 
+    const formatFecha = fecha => fecha ? fecha.toISOString().split('T')[0] : '';
+
+    const realizarBusqueda = async () => {
+        const fechaInicioFormatted = formatFecha(fechaInicio);
+        const fechaFinFormatted = formatFecha(fechaFin);
+        const productos = await buscarProductos(terminoBusqueda, fechaInicioFormatted, fechaFinFormatted);
+        setResultadosBusqueda(productos);
+    };
+
     useEffect(() => {
-        if (terminoBusqueda.length >= 3) {
-            fetchSearchResults();
+        if (terminoBusqueda.length >= 3 || fechaInicio || fechaFin) {
+            realizarBusqueda();
         }
     }, [terminoBusqueda, fechaInicio, fechaFin]);
 
-    const fetchSearchResults = async () => {
-        const formatFecha = fecha => fecha ? fecha.toISOString().split('T')[0] : '';
-        const fechaInicioFormatted = formatFecha(fechaInicio);
-        const fechaFinFormatted = formatFecha(fechaFin);
-
-        const productosEncontrados = await buscarProductos(terminoBusqueda, fechaInicioFormatted, fechaFinFormatted);
-        setResultadosBusqueda(productosEncontrados);
-    };
-
-    const handleSearchChange = (e) => {
-        setTerminoBusqueda(e.target.value);
-    };
-
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (terminoBusqueda.length >= 3 || (fechaInicio && fechaFin)) {
-            await fetchSearchResults();
-            if (resultadosBusqueda.length === 0) {
-                alert('No se encontraron productos con los criterios de búsqueda proporcionados.');
-            } else {
-                // Navegar al primer producto encontrado si se desea
-                navigate(`/detalle/${resultadosBusqueda[0].id}`);
+        await realizarBusqueda();
+
+        if (resultadosBusqueda.length > 1) {
+            let queryParam = '';
+            if (terminoBusqueda) {
+                queryParam += `nombre=${encodeURIComponent(terminoBusqueda)}`;
             }
+            if (fechaInicio && fechaFin) {
+                queryParam += queryParam ? '&' : '';
+                queryParam += `inicio=${formatFecha(fechaInicio)}&fin=${formatFecha(fechaFin)}`;
+            }
+            navigate(`/resultados?${queryParam}`);
+        } else if (resultadosBusqueda.length === 1) {
+            navigate(`/detalle/${resultadosBusqueda[0].id}`);
+        } else {
+            alert('No se encontraron productos con los criterios de búsqueda proporcionados.');
         }
     };
-    
 
     return (
         <form className='serch__form' onSubmit={handleSubmit}>
@@ -52,20 +55,20 @@ const BarraDeBusquedaUnificada = () => {
                 className='serchInput__form'
                 type="text"
                 value={terminoBusqueda}
-                onChange={handleSearchChange}
+                onChange={(e) => setTerminoBusqueda(e.target.value)}
                 placeholder="Buscar producto..."
             />
-            <DatePicker className='serchInput__form__Callendar'
+            <DatePicker className='serchInput__form__Calendar'
                 selected={fechaInicio}
                 onChange={date => setFechaInicio(date)}
                 dateFormat="dd/MM/yyyy"
-                placeholderText="Fecha inicio"
+                placeholderText="Fecha de inicio"
             />
-            <DatePicker className='serchInput__form__Callendar'
+            <DatePicker className='serchInput__form__Calendar'
                 selected={fechaFin}
                 onChange={date => setFechaFin(date)}
                 dateFormat="dd/MM/yyyy"
-                placeholderText="Fecha fin"
+                placeholderText="Fecha final"
             />
             <button className='form__button' type="submit"><img src={lupa} alt="Buscar" /></button>
             {resultadosBusqueda.length > 0 && (
