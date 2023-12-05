@@ -5,11 +5,42 @@
 .home-content {
   position: absolute;
   width: 100%;
-  top: 500px;
+  top: 10%;
   text-align: center;
   z-index: 20;
-  padding: 20px 0;
 }
+
+.imagen-destacada {
+  width: 100%;
+  top: 0;
+  z-index: 15;
+  min-height: 100vh;
+}
+
+h1 {
+  position: absolute;
+    top: 7%; 
+    width: 100%;
+    text-align: center;
+    font-family: Cabinet Grotesk;
+    z-index: 50;
+    color: #FFFFFF;
+  }
+
+
+  .home-content p{
+    font-family: Satoshi;
+    font-size: 25px;
+    line-height: 33.75px;
+    color: #FFFFFF;
+    padding-bottom: 150px;
+  }
+
+  .logo-container p{
+    font-family: Cabinet Grotesk;
+    color: black;
+    font-weight: bold;
+  }
 
 .serch__form {
   position: relative;
@@ -43,7 +74,6 @@
   border: 2px solid #ddd;
   border-radius: 20px 0 0 20px;
   outline: none;
-  /* width: 625px; */
   height: 80px;
   transition: all 0.3s ease-in-out;
 }
@@ -100,46 +130,12 @@
   background-color: #eaeaea;
 }
 
-.home-content p{
-  font-family: Satoshi;
-  font-size: 25px;
-  line-height: 33.75px;
-  color: #FFFFFF;
-  padding-bottom: 150px;
-}
-
-.imagen-destacada {
-  position: absolute;
-  z-index: 15;
-}
-
-h1 {
-  position: relative;
-    text-align: center;
-    top: 375px;
-    font-family: Cabinet Grotesk;
-    z-index: 50;
-    color: #FFFFFF;
-  }
-
-  .logo-container p{
-    font-family: Cabinet Grotesk;
-    color: black;
-    font-weight: bold;
-  }
-  
-  .imagen-destacada{
-    width: 100%;
-    margin-top: 23px;
-  }
-
   /* Categorias del Home */
 
   .categories-container{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    margin-top: 1400px;
     gap: 20px;
     text-align: center;
   }
@@ -255,14 +251,6 @@ h1 {
       width: 100%;
       margin-top: 0;
     }
-
-    .form__button, .serchInput__form{
-      margin-top: 50px;
-    }
-
-    .categories-container {
-      margin-top: 650px;
-    }
   
     .categorie-item img {
       width: 100px;
@@ -280,9 +268,6 @@ h1 {
   
   @media (max-width: 480px) {
     /* Estilos para móviles */
-    .home-contenedorPrincipal {
-      /* padding: 0 15px; */
-    }
     
     .imagen-destacada{
       width: 100%;
@@ -293,8 +278,6 @@ h1 {
       top: 150px;
       font-size: 14px;
     }
-  
-
   
     .categories-container {
       margin-top: 400px;

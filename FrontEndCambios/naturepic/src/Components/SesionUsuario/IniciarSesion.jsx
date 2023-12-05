@@ -1,7 +1,9 @@
 import React, { useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+
 import './User.css';
 import { AuthContext } from '../Context/AuthContext';
+
 
 const IniciarSesion = () => {
     const navigate = useNavigate();
@@ -36,6 +38,7 @@ const IniciarSesion = () => {
     };
 
     return (
+        <div className='inicio-sesion__contenedor'>
         <form onSubmit={handleSubmit} className="form__login">
             <fieldset className="form__login-fieldset">
                 <legend>Iniciar Sesión</legend>
@@ -68,6 +71,7 @@ const IniciarSesion = () => {
                 <button type="submit" className="form__login-boton">Iniciar Sesión</button>
             </fieldset>
         </form>
+        </div>
     );
 };
 

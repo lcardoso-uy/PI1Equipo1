@@ -1,5 +1,6 @@
 
 .detalle-container {
+  height: 100vh;
   max-width: 1200px;
   margin: 20px auto;
   padding: 20px;
@@ -9,9 +10,6 @@
   position: relative;
 }
 
-.formularioReserva{
-  margin-top: 72.19px;
-}
 
 .detalle-container h1 {
   font-size: 2em;
@@ -62,9 +60,8 @@
 
   }
 
-  .contenedor-reserva-exitosa{
-    
-  }
+
+
 
   .boton__disponibilidad__detalle{
     position: absolute;
@@ -164,17 +161,9 @@
   } 
 
 
-
-
-
-
-
-
-
-  
-
 /* Estilo general para la galería */
 .galeria-container {
+  height: 100vh;
   max-width: 1200px;
   margin: 0 auto;
   margin-top: 145px;
@@ -208,7 +197,6 @@
 .galeria-secondary {
   flex: 1 0 calc(50% - 5px);
   max-width: calc(50% - 5px);
-  display: flex;
   justify-content: center;
   align-items: center;
 }

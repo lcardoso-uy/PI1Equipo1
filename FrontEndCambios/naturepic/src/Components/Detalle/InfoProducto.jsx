@@ -1,7 +1,7 @@
 import React from 'react';
 import './Detalle.css';
 
-const InfoProducto = ({ product }) => {
+const InfoProducto = ({ product, onVerMasClicked }) => {
 
   return (
     <div className="info-producto-container">
@@ -16,6 +16,7 @@ const InfoProducto = ({ product }) => {
           />
         )}
       </div>
+      <button className='ver-mas' onClick={onVerMasClicked}>Ver Más</button>
     </div>
   );
 };

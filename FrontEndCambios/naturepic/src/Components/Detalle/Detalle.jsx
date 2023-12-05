@@ -69,10 +69,8 @@ const Detalle = () => {
         }
     
         if (usuario) {
-            // Mostrar el modal si el usuario está logueado
             setMostrarModal(true);
         } else {
-            // Si el usuario no está logueado, redirige a iniciar sesión
             navigate('/iniciar-sesion');
         }
     };
@@ -80,16 +78,26 @@ const Detalle = () => {
 
     const ModalConfirmacion = ({ onClose, onConfirm }) => {
         return (
-            <div className="modal">
-                <div className="modal-content">
-                    <h2>Confirmar Reserva</h2>
-                    <p>¿Estás seguro de que quieres hacer esta reserva?</p>
-                    <button onClick={onConfirm}>Confirmar</button>
-                    <button onClick={onClose}>Cancelar</button>
+        <div className="modal">
+                    <div className="modal-content">
+                        <h2>Confirmar Reserva</h2>
+                        <p>¿Estás seguro de que quieres hacer esta reserva?</p>
+                        <button onClick={() => {
+                            onClose();
+                            navigate('/reserva', {
+                                state: {
+                                    startDate: fechaInicioReserva.toISOString().split('T')[0],
+                                    endDate: fechaFinReserva.toISOString().split('T')[0],
+                                    productId: product.id,
+                                    productName: product.name // Añadir el nombre del producto aquí
+                                }
+                            });
+                        }}>Confirmar</button>
+                        <button onClick={onClose}>Cancelar</button>
+                    </div>
                 </div>
-            </div>
-        );
-    };
+            );
+        };
 
 
     if (cargando) return <p>Cargando disponibilidad...</p>;
@@ -112,12 +120,17 @@ const Detalle = () => {
         return className;
     };
 
+    const irAGaleria = () => {
+        navigate(`/galeria/${productId}`);
+      };
+
+
     return (
-        <div>
-            <br /><br />
+        <>
             <div className="detalle-container">
                 <div className='Info-producto'>
-                {product && <InfoProducto product={product} />}
+                {product && <InfoProducto product={product} onVerMasClicked={irAGaleria} />
+}
                 </div>
                 <div className="detalle-producto">
                 <h3>Disponibilidad:</h3>
@@ -154,14 +167,14 @@ const Detalle = () => {
                         state: {
                             startDate: fechaInicioReserva.toISOString().split('T')[0],
                             endDate: fechaFinReserva.toISOString().split('T')[0],
-                            productId: product.id // Asegúrate de tener el ID del producto aquí
+                            productId: product.id
                         }
                     });
                 }}
                 onClose={() => setMostrarModal(false)}
             />
         )}
-        </div>
+        </>
     );
 };
 

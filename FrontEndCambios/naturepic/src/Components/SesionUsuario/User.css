@@ -1,10 +1,21 @@
+.inicio-sesion__contenedor{
+  height: 100vh;
+}
+
+.mensaje-error__iniciarSesion {
+  color: red;
+  margin-bottom: 15px;
+  text-align: center;
+  font-weight: bold;
+}
+
 .form__login {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 80px;
-  padding-top: 100px;
+  top: 15%;
 }
 
 .form__login-fieldset {
@@ -74,13 +85,18 @@
 }
 
 /* Estilos para RegistroUsuario */
+
+.registro__contenedor{
+  height: 100vh;
+}
+
 .form__registro {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 80px;
-  padding-top: 50px;
+  top: 10%;
 }
 
 .form__registro-fieldset {
@@ -170,124 +186,3 @@
   border: 0;
   outline: none;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* :root {
-    --primary:rgb(0, 173, 87);
-    --secondary: rgb(0, 114, 221);
-    --danger: red;
-}
-
-* {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    border-radius: 0.3rem;
-}
-
-body {
-    font-family: "Roboto mono", monospace, sans-serif;
-    background-color: rgb(226, 226, 226);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-
-form {
-    background-color: white;
-    width: 23rem;
-    padding: 2rem 3rem;
-    display: flex;
-    flex-direction: column;
-}
-
-h2 {
-    text-align: center;
-}
-
-.fila {
-    display: flex;
-    flex-direction: column;
-}
-
-input:focus-visible
-select:focus-visible {
-    outline: 1px solid black;
-}
-
-input,
-select {
-    outline: none;
-    border: 1px solid gray;
-    margin-top: 3px;
-    padding: 5px;
-    font-family: "Roboto mono", monospace, sans-serif;
-}
-
-.condiciones {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.condiciones label {
-    font-size: 0.8rem;
-}
-
-form button {
-    font-family: "Roboto mono", monospace, sans-serif;
-    padding: 10px;
-    font-size: 1.2rem;
-    border: none;
-    background-color: var(--primary);
-    color: white;
-    cursor: pointer;
-    margin-top: 20px;
-}
-
-form button:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-}
-
-.error {
-    color: var(--danger);
-    font-size: 0.7rem;
-    visibility: hidden;
-}
-
-.visible {
-    visibility: visible;
-}
-*/
-/* ----------------------------------- page user -----------------------------------*/
-/* .user {
-    background-color: #ddd;
-    padding: 20px;
-    border: 1px solid rgb(181, 181, 181);
-    text-align: center;
-} */

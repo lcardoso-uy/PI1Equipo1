@@ -4,7 +4,6 @@ const BloquePoliticas = () => {
   const [politicas, setPoliticas] = useState([]);
 
   useEffect(() => {
-    // Aquí podrías cargar las políticas desde una API o definirlas directamente
     setPoliticas([
       { titulo: "Política 1", descripcion: "Descripción de la política 1..." },
       { titulo: "Política 2", descripcion: "Descripción de la política 2..." },

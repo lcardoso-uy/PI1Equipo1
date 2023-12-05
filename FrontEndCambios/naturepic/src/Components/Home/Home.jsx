@@ -40,7 +40,7 @@ const Home = () => {
         </div>
       </div>
       <img className='imagen-destacada' src={imagenDestacada} alt="imagen destacada" />
-      <br />
+      
       <div className="categories-container">
         {categorias.map(categoria => (
           <div key={categoria.id} className="categorie-item">
@@ -51,7 +51,7 @@ const Home = () => {
           </div>
         ))}
       </div>
-      <br />
+      
       {/* Listado de productos */}
       <div className="Productos-random-contenedor">
         {currentProducts.map(product => (
@@ -61,18 +61,13 @@ const Home = () => {
           </div>
         ))}
       </div>
-      <br />
+
       {/* Controles de Paginación */}
+
       <div className="pagination-controls">
-        {/*<button onClick={goToFirstPage} disabled={currentPage === 1}>
-          Inicio
-        </button> */}
         <button onClick={goToFirstPage}>
           Inicio
         </button>
-        {/* <button onClick={goToPreviousPage} disabled={currentPage === 1}>
-          Anterior
-        </button> */}
         <span>Página {currentPage} de {pageCount}</span>
         <button onClick={goToNextPage} disabled={currentPage === pageCount}>
           Siguiente

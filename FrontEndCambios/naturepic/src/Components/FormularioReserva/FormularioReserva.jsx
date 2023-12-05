@@ -1,38 +1,57 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { AuthContext } from '../Context/AuthContext';
-import './Detalle.css';
+import './Reserva.css';
+import { validarFechas, validarDetallesUsuario, validarComentario } from './ValidacionesReserva';
 
 const FormularioReserva = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const { usuario } = useContext(AuthContext);
 
-    // Extrae las fechas y el ID del producto del estado pasado
-    const { startDate: fechaInicioProp, endDate: fechaFinProp, productId } = location.state || {};
+    const { startDate: fechaInicioProp, endDate: fechaFinProp, productId, productName } = location.state || {};
 
-    // Estados para las fechas y el comentario
     const [startDate, setStartDate] = useState(fechaInicioProp || '');
     const [endDate, setEndDate] = useState(fechaFinProp || '');
     const [comment, setComment] = useState('');
 
-    // Verificar si el usuario está logueado
+    const [nombreUsuario, setNombreUsuario] = useState(usuario?.firstname || '');
+    const [apellido, setApellido] = useState(usuario?.surname || '');
+    const [correoElectronico, setCorreoElectronico] = useState(usuario?.email || '');
+
+
     useEffect(() => {
         if (!usuario) {
             navigate('/iniciar-sesion', { state: { message: 'Debes iniciar sesión para hacer una reserva.' } });
         }
     }, [usuario, navigate]);
 
+    const validarDatos = () => {
+        const errorFechas = validarFechas(startDate, endDate, fechaInicioProp, fechaFinProp);
+        const errorUsuario = validarDetallesUsuario(nombreUsuario, apellido, correoElectronico, usuario);
+        const errorComentario = validarComentario(comment);
+
+        if (errorFechas || errorUsuario || errorComentario) {
+            alert(errorFechas || errorUsuario || errorComentario);
+            return false;
+        }
+        return true;
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         
         const token = localStorage.getItem('authToken');
         const reserva = {
-            productId: productId,  // Asegúrate de que esta clave coincida con lo que espera tu API
+            productId: productId,
             startDate: startDate,
             endDate: endDate,
             comment: comment
         };
+
+        if (!validarDatos()) {
+            return;
+        }
     
         try {
             const response = await fetch('http://localhost:8080/authbookings/create', {
@@ -57,10 +76,44 @@ const FormularioReserva = () => {
     
 
     return (
-        <form onSubmit={handleSubmit} className="form__login"> {/* O usa 'form__registro' si prefieres ese estilo */}
+        <div className='formularioReserva'>
+        <form onSubmit={handleSubmit} className="form__login">
         <fieldset className="form__login-fieldset">
-            <legend>Reservar Producto</legend>
+            <legend>Reservar: {productName}</legend>
 
+            <div className="form__login-field">
+                    <label htmlFor="nombreUsuario">Nombre de Usuario:</label>
+                    <input
+                        id="nombreUsuario"
+                        type="text"
+                        name="nombreUsuario"
+                        className="form__login-input"
+                        value={nombreUsuario}
+                        onChange={(e) => setNombreUsuario(e.target.value)}
+                    />
+                </div>
+                <div className="form__login-field">
+                    <label htmlFor="apellido">Apellido:</label>
+                    <input
+                        id="apellido"
+                        type="text"
+                        name="apellido"
+                        className="form__login-input"
+                        value={apellido}
+                        onChange={(e) => setApellido(e.target.value)}
+                    />
+                </div>
+                <div className="form__login-field">
+                    <label htmlFor="correoElectronico">Correo Electrónico:</label>
+                    <input
+                        id="correoElectronico"
+                        type="email"
+                        name="correoElectronico"
+                        className="form__login-input"
+                        value={correoElectronico}
+                        onChange={(e) => setCorreoElectronico(e.target.value)}
+                    />
+                </div>
             <div className="form__login-field">
                 <label htmlFor="startDate">Fecha de Inicio:</label>
                 <input
@@ -99,6 +152,7 @@ const FormularioReserva = () => {
             <button type="submit" className="form__login-boton">Confirmar Reserva</button>
         </fieldset>
     </form>
+    </div>
     );
 };
 

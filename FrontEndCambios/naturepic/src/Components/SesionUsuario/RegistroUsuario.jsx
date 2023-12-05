@@ -103,6 +103,7 @@ const RegistroUsuario = () => {
         }
     }
     return (
+        <div className='registro__contenedor'>
       <form onSubmit={handleSubmit} noValidate className="form__registro">
           <fieldset className="form__registro-fieldset">
               <legend className="form__registro-legend">Registro de Usuario</legend>
@@ -174,6 +175,7 @@ const RegistroUsuario = () => {
               <button type="submit" className="form__registro-boton">Registrar</button>
           </fieldset>
       </form>
+      </div>
   );
   
 }

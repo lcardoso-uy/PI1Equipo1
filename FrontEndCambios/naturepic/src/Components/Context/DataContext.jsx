@@ -11,14 +11,15 @@ export const DataProvider = ({ children }) => {
         cargarProductosYCategorias();
     }, []);
 
-
     const buscarProductos = async (termino, fechaInicio, fechaFin) => {
         let url = 'http://localhost:8080/';
+    
         if (fechaInicio && fechaFin) {
             url += `product-calendar/available?text=${encodeURIComponent(termino || '')}&start=${fechaInicio}&end=${fechaFin}`;
-        } else if (termino) {
+        } else {
             url += `authproducts/search?name=${encodeURIComponent(termino)}`;
         }
+    
     
     try {
         const response = await fetch(url);

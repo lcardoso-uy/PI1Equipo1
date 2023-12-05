@@ -80,7 +80,6 @@ header {
   @media (max-width: 480px) {
     header {
       flex-direction: column;
-      /* padding: 10px; */
     }
 
 

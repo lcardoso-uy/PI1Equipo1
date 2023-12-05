@@ -139,7 +139,7 @@
 /* Media queries para ajustes responsivos */
 @media (max-width: 768px) {
     .admin-panel {
-        margin-top: 80px; /* Ajustar el margen superior en pantallas más pequeñas */
+        margin-top: 80px;
     }
 }
 

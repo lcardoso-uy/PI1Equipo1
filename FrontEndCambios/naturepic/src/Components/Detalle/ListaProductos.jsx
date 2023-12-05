@@ -10,18 +10,17 @@ const ListaProductos = () => {
         const fetchProductos = async () => {
             setCargando(true);
             let url = 'http://localhost:8080/';
-
+    
             const termino = searchParams.get('nombre');
-            const fechaInicio = searchParams.get('inicio');
-            const fechaFin = searchParams.get('fin');
-
+            const fechaInicio = searchParams.get('start');
+            const fechaFin = searchParams.get('end');
+    
             if (fechaInicio && fechaFin) {
-                    url += `product-calendar/available?text=${encodeURIComponent(termino || '')}&start=${fechaInicio}&end=${fechaFin}`;
-                
-            } else if (termino) {
+                url += `product-calendar/available?text=${encodeURIComponent(termino || '')}&start=${fechaInicio}&end=${fechaFin}`;
+            } else {
                 url += `authproducts/search?name=${encodeURIComponent(termino)}`;
             }
-
+    
             try {
                 const response = await fetch(url);
                 if (response.ok) {
@@ -36,29 +35,26 @@ const ListaProductos = () => {
                 setCargando(false);
             }
         };
-
+    
         fetchProductos();
     }, [searchParams]);
+    
 
     if (cargando) {
         return <div>Cargando productos...</div>;
     }
 
     return (
-        <div>
-            <h2>Productos Encontrados</h2>
-            {productos.length > 0 ? (
-                <ul>
-                    {productos.map(producto => (
-                        <li key={producto.id}>
-                            <h3>{producto.name}</h3>
-                            <p>{producto.description}</p>
-                        </li>
-                    ))}
-                </ul>
-            ) : (
-                <p>No se encontraron productos.</p>
-            )}
+        <div className="Productos-random-contenedor">
+            {productos.length > 0 ? 
+                <>
+                {productos.map(producto => (
+                <div key={producto.id}     className="product-item">
+                <p>{producto.name}</p>   
+                <img src={producto.image_url} alt={producto.name} />
+                </div>
+                ))}                                         </> :
+                <p>No se encontraron productos.</p>}
         </div>
     );
 };

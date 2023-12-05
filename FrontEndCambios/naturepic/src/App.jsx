@@ -10,8 +10,8 @@ import RegistroUsuario from './Components/SesionUsuario/RegistroUsuario';
 import IniciarSesion from './Components/SesionUsuario/IniciarSesion';
 import AdminRoutes from './Components/Admin/AdminRoutes';
 import ListaProductos from './Components/Detalle/ListaProductos';
-import FormularioReserva from './Components/Detalle/FormularioReserva';
-import ReservaExitosa from './Components/Detalle/ReservaExitosa';
+import FormularioReserva from './Components/FormularioReserva/FormularioReserva';
+import ReservaExitosa from './Components/FormularioReserva/ReservaExitosa';
 
 function App() {
   return (
@@ -21,15 +21,14 @@ function App() {
           <Routes>
           <Route path="/registro" element={<RegistroUsuario />} />
         <Route path="/iniciar-sesion" element={<IniciarSesion />} />
-            {/* Home routes */}
+            {/* Rutas del Home */}
             <Route path='/' element={<Home />} />
             <Route path='/detalle/:productId' element={<Detalle />} />
             <Route path='/galeria/:productId' element={<Galeria />} />
-            {/* Resultados de búsqueda */}
+            {/* Resultados de búsqueda para varios productos */}
           <Route path='/resultados' element={<ListaProductos />} />
-            {/* Admin routes */}
+            {/* Rutas del Panel de Administración */}
             <Route path="/admin/*" element={<AdminRoutes />} />
-
             <Route path='/reserva' element={<FormularioReserva />} />
             <Route path='/reserva/exito' element={<ReservaExitosa />} />
           </Routes>

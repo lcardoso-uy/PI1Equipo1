@@ -31,13 +31,15 @@ const BarraDeBusquedaUnificada = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         await realizarBusqueda();
-
+    
+        let queryParam = '';
+        if (fechaInicio && fechaFin) {
+            queryParam = `nombre=${encodeURIComponent(terminoBusqueda || '')}&start=${formatFecha(fechaInicio)}&end=${formatFecha(fechaFin)}`;
+        } else {
+            queryParam = `nombre=${encodeURIComponent(terminoBusqueda)}`;
+        }
+    
         if (resultadosBusqueda.length > 1) {
-            let queryParam = `nombre=${encodeURIComponent(terminoBusqueda || '')}`;
-            if (fechaInicio && fechaFin) {
-                queryParam += `&start=${formatFecha(fechaInicio)}&end=${formatFecha(fechaFin)}`;
-            }
-
             navigate(`/resultados?${queryParam}`);
         } else if (resultadosBusqueda.length === 1) {
             navigate(`/detalle/${resultadosBusqueda[0].id}`);
@@ -45,6 +47,7 @@ const BarraDeBusquedaUnificada = () => {
             alert('No se encontraron productos con los criterios de búsqueda proporcionados.');
         }
     };
+    
 
     return (
         <form className='serch__form' onSubmit={handleSubmit}>
