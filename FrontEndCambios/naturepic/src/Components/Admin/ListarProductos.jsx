@@ -6,7 +6,7 @@ import Acciones from './Acciones';
 import { AuthContext } from '../Context/AuthContext';
 
 function ListarProductos() {
-  const { products } = useContext(AuthContext);
+  const { products } = useContext(DataContext);
   const [currentPage, setCurrentPage] = useState(1);
   const productsPerPage = 10;
   

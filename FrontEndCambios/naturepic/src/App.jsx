@@ -11,6 +11,7 @@ import IniciarSesion from './Components/SesionUsuario/IniciarSesion';
 import AdminRoutes from './Components/Admin/AdminRoutes';
 import ListaProductos from './Components/Detalle/ListaProductos';
 import FormularioReserva from './Components/Detalle/FormularioReserva';
+import ReservaExitosa from './Components/Detalle/ReservaExitosa';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
             <Route path="/admin/*" element={<AdminRoutes />} />
 
             <Route path='/reserva' element={<FormularioReserva />} />
+            <Route path='/reserva/exito' element={<ReservaExitosa />} />
           </Routes>
         </div>
       <Footer />

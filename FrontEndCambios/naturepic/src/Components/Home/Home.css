@@ -1,4 +1,4 @@
-.home-container {
+.home-contenedorPrincipal {
   position: relative;
 }
 
@@ -15,7 +15,6 @@
   position: relative;
   display: flex;
   justify-content: center;
-  /* Resto de estilos */
 }
 
 
@@ -67,21 +66,19 @@
 }
 
 .serchInput__form[type="date"] {
-  max-width: 150px; /* Establece un ancho máximo */
-  width: 100%; /* Asegura que se adapten al contenedor hasta el máximo establecido */
+  max-width: 150px;
+  width: 100%;
 }
 
-/* Estilo para el desplegable de productos recomendados */
 .resultados-busqueda {
   position: absolute;
-  top: 100%; /* Posicionado justo debajo del formulario de búsqueda */
+  top: 100%;
   left: 0;
   right: 0;
-  width: 100%; /* O podrías usar un ancho fijo o máximo si es necesario */
+  width: 100%;
   max-height: 300px;
   overflow-y: auto;
-  z-index: 10; /* Asegúrate de que este valor sea adecuado */
-  /* Resto de estilos */
+  z-index: 10;
   z-index: 10;
   list-style: none;
   padding: 0;
@@ -91,8 +88,6 @@
   border-radius: 4px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
-
-/* Estilos adicionales para mejorar la visualización */
 
 
 .resultados-busqueda li {
@@ -252,7 +247,7 @@ h1 {
       padding: 10px 0;
     }
 
-    .home-container {
+    .home-contenedorPrincipal {
       margin-top: 24px;
     }
 
@@ -285,7 +280,7 @@ h1 {
   
   @media (max-width: 480px) {
     /* Estilos para móviles */
-    .home-container {
+    .home-contenedorPrincipal {
       /* padding: 0 15px; */
     }
     

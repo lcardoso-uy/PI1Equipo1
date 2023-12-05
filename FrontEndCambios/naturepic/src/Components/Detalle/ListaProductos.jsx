@@ -16,11 +16,8 @@ const ListaProductos = () => {
             const fechaFin = searchParams.get('fin');
 
             if (fechaInicio && fechaFin) {
-                url += `product-calendar/available?`;
-                if (termino) {
-                    url += `text=${encodeURIComponent(termino)}&`;
-                }
-                url += `start=${fechaInicio}&end=${fechaFin}`;
+                    url += `product-calendar/available?text=${encodeURIComponent(termino || '')}&start=${fechaInicio}&end=${fechaFin}`;
+                
             } else if (termino) {
                 url += `authproducts/search?name=${encodeURIComponent(termino)}`;
             }

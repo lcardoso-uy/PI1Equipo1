@@ -15,14 +15,11 @@ export const DataProvider = ({ children }) => {
     const buscarProductos = async (termino, fechaInicio, fechaFin) => {
         let url = 'http://localhost:8080/';
         if (fechaInicio && fechaFin) {
-            url += 'product-calendar/available?';
-            if (termino) {
-                url += `text=${encodeURIComponent(termino)}&`;
-            }
-            url += `start=${fechaInicio}&end=${fechaFin}`;
+            url += `product-calendar/available?text=${encodeURIComponent(termino || '')}&start=${fechaInicio}&end=${fechaFin}`;
         } else if (termino) {
             url += `authproducts/search?name=${encodeURIComponent(termino)}`;
         }
+    
     try {
         const response = await fetch(url);
         if (response.ok) {
@@ -42,10 +39,14 @@ export const DataProvider = ({ children }) => {
         
         // Carga de productos
         try {
+            console.log("Cargando productos");
             const response = await fetch("http://localhost:8080/products");
+            console.log(response);
             if (response.ok) {
+
                 const data = await response.json();
                 setProducts(data);
+            
             } else {
                 console.error("Error al cargar productos");
             }

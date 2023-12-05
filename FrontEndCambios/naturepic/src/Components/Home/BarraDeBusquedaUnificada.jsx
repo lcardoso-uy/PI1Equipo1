@@ -33,14 +33,11 @@ const BarraDeBusquedaUnificada = () => {
         await realizarBusqueda();
 
         if (resultadosBusqueda.length > 1) {
-            let queryParam = '';
-            if (terminoBusqueda) {
-                queryParam += `nombre=${encodeURIComponent(terminoBusqueda)}`;
-            }
+            let queryParam = `nombre=${encodeURIComponent(terminoBusqueda || '')}`;
             if (fechaInicio && fechaFin) {
-                queryParam += queryParam ? '&' : '';
-                queryParam += `inicio=${formatFecha(fechaInicio)}&fin=${formatFecha(fechaFin)}`;
+                queryParam += `&start=${formatFecha(fechaInicio)}&end=${formatFecha(fechaFin)}`;
             }
+
             navigate(`/resultados?${queryParam}`);
         } else if (resultadosBusqueda.length === 1) {
             navigate(`/detalle/${resultadosBusqueda[0].id}`);

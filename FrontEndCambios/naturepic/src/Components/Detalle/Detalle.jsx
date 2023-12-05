@@ -121,7 +121,6 @@ const Detalle = () => {
                 </div>
                 <div className="detalle-producto">
                 <h3>Disponibilidad:</h3>
-                <p>{product.description}</p>
                 </div>
                 <div className="disponibilidad-container">
                 

@@ -1,16 +1,22 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { AuthContext } from '../Context/AuthContext';
 import './Detalle.css';
 
-const FormularioReserva = ({ productId, startDate: fechaInicioProp, endDate: fechaFinProp }) => {
+const FormularioReserva = () => {
+    const location = useLocation();
+    const navigate = useNavigate();
+    const { usuario } = useContext(AuthContext);
+
+    // Extrae las fechas y el ID del producto del estado pasado
+    const { startDate: fechaInicioProp, endDate: fechaFinProp, productId } = location.state || {};
+
+    // Estados para las fechas y el comentario
     const [startDate, setStartDate] = useState(fechaInicioProp || '');
     const [endDate, setEndDate] = useState(fechaFinProp || '');
     const [comment, setComment] = useState('');
-    const [isAvailable, setIsAvailable] = useState(true);
-    const { usuario } = useContext(AuthContext);
-    const navigate = useNavigate();
 
+    // Verificar si el usuario está logueado
     useEffect(() => {
         if (!usuario) {
             navigate('/iniciar-sesion', { state: { message: 'Debes iniciar sesión para hacer una reserva.' } });
@@ -22,15 +28,14 @@ const FormularioReserva = ({ productId, startDate: fechaInicioProp, endDate: fec
         
         const token = localStorage.getItem('authToken');
         const reserva = {
-            start_date: startDate,
-            end_date: endDate,
-            comment: comment,
-            user_info_id: usuario.id,
-            producto_id: productId,
+            productId: productId,  // Asegúrate de que esta clave coincida con lo que espera tu API
+            startDate: startDate,
+            endDate: endDate,
+            comment: comment
         };
-
+    
         try {
-            const response = await fetch('http://localhost:8080/authbookings/mybookings', {
+            const response = await fetch('http://localhost:8080/authbookings/create', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -38,37 +43,62 @@ const FormularioReserva = ({ productId, startDate: fechaInicioProp, endDate: fec
                 },
                 body: JSON.stringify(reserva)
             });
-
+    
             if (response.ok) {
-                alert('Reserva realizada con éxito');
-                // Puedes redirigir al usuario a otra página o actualizar el estado de la aplicación aquí
+                navigate('/reserva/exito');
             } else {
-                alert('Error al realizar la reserva');
-                // Puedes manejar errores de la API aquí
+                const errorData = await response.json();
+                alert(`Error al realizar la reserva: ${errorData.message}`);
             }
         } catch (error) {
             console.error('Error al enviar la reserva:', error);
-            // Manejar errores de conexión aquí
         }
     };
+    
 
     return (
-        <form className='formularioReserva' onSubmit={handleSubmit}>
-            <label>Fecha de Inicio</label>
-            <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
+        <form onSubmit={handleSubmit} className="form__login"> {/* O usa 'form__registro' si prefieres ese estilo */}
+        <fieldset className="form__login-fieldset">
+            <legend>Reservar Producto</legend>
 
-            <label>Fecha de Fin</label>
-            <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
+            <div className="form__login-field">
+                <label htmlFor="startDate">Fecha de Inicio:</label>
+                <input
+                    id="startDate"
+                    type="date"
+                    name="startDate"
+                    className="form__login-input"
+                    value={startDate}
+                    onChange={(e) => setStartDate(e.target.value)}
+                />
+            </div>
 
-            <label>Comentario</label>
-            <input type="text" value={comment} onChange={(e) => setComment(e.target.value)} />
+            <div className="form__login-field">
+                <label htmlFor="endDate">Fecha de Fin:</label>
+                <input
+                    id="endDate"
+                    type="date"
+                    name="endDate"
+                    className="form__login-input"
+                    value={endDate}
+                    onChange={(e) => setEndDate(e.target.value)}
+                />
+            </div>
 
-            {isAvailable ? (
-                <button type="submit">Reservar</button>
-            ) : (
-                <p>El producto no está disponible en las fechas seleccionadas.</p>
-            )}
-        </form>
+            <div className="form__login-field">
+                <label htmlFor="comment">Comentario:</label>
+                <textarea
+                    id="comment"
+                    name="comment"
+                    className="form__login-input"
+                    value={comment}
+                    onChange={(e) => setComment(e.target.value)}
+                ></textarea>
+            </div>
+
+            <button type="submit" className="form__login-boton">Confirmar Reserva</button>
+        </fieldset>
+    </form>
     );
 };
 
