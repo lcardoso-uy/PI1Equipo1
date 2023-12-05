@@ -1,5 +1,6 @@
 package com.naturepic.home.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -28,6 +29,7 @@ public class UserInfo {
     private String password;
     private String roles;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "userInfo")
     private Collection<Booking> bookings;
 
