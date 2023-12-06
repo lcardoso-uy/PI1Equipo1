@@ -1,11 +1,14 @@
 .inicio-sesion__contenedor{
   height: 100vh;
+  position: relative;
 }
 
-.mensaje-error__iniciarSesion {
+.mensaje-login-obligatorio {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
   color: red;
-  margin-bottom: 15px;
-  text-align: center;
   font-weight: bold;
 }
 
@@ -180,9 +183,24 @@
 
 /* Estilo para el checkbox */
 .form__registro-checkbox input {
-  width: initial;
   margin-right: 10px;
   padding: 0;
   border: 0;
   outline: none;
+}
+
+
+.contenedor-reserva-exitosa {
+  border-radius: 8px;
+}
+
+
+.contenedor-reserva-exitosa p {
+  color: #212529;
+  line-height: 2.6;
+}
+
+/* Un poco de espacio adicional entre párrafos para mejor legibilidad */
+.contenedor-reserva-exitosa p + p {
+  margin-top: 15px;
 }

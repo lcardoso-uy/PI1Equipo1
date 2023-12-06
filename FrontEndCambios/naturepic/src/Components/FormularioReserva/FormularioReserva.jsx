@@ -19,6 +19,7 @@ const FormularioReserva = () => {
     const [apellido, setApellido] = useState(usuario?.surname || '');
     const [correoElectronico, setCorreoElectronico] = useState(usuario?.email || '');
 
+    const [mostrarModal, setMostrarModal] = useState(false);
 
     useEffect(() => {
         if (!usuario) {
@@ -38,9 +39,16 @@ const FormularioReserva = () => {
         return true;
     };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        
+    const confirmarReserva = () => {
+        if (validarDatos()) {
+            setMostrarModal(true);
+        }
+    };
+
+
+
+    const realizarReserva = async () => {
+        setMostrarModal(false);
         const token = localStorage.getItem('authToken');
         const reserva = {
             productId: productId,
@@ -49,9 +57,6 @@ const FormularioReserva = () => {
             comment: comment
         };
 
-        if (!validarDatos()) {
-            return;
-        }
     
         try {
             const response = await fetch('http://localhost:8080/authbookings/create', {
@@ -64,7 +69,16 @@ const FormularioReserva = () => {
             });
     
             if (response.ok) {
-                navigate('/reserva/exito');
+                navigate('/reserva/exito', {
+                    state: {
+                        nombreUsuario: usuario?.firstname,
+                        apellidoUsuario: usuario?.surname,
+                        nombreProducto: productName,
+                        fechaInicio: startDate,
+                        fechaFin: endDate
+                    }
+                });
+                
             } else {
                 const errorData = await response.json();
                 alert(`Error al realizar la reserva: ${errorData.message}`);
@@ -75,6 +89,11 @@ const FormularioReserva = () => {
     };
     
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        confirmarReserva();
+    };
+
     return (
         <div className='formularioReserva'>
         <form onSubmit={handleSubmit} className="form__login">
@@ -82,7 +101,7 @@ const FormularioReserva = () => {
             <legend>Reservar: {productName}</legend>
 
             <div className="form__login-field">
-                    <label htmlFor="nombreUsuario">Nombre de Usuario:</label>
+                    <label htmlFor="nombreUsuario">Nombre de Usuario: *</label>
                     <input
                         id="nombreUsuario"
                         type="text"
@@ -93,7 +112,7 @@ const FormularioReserva = () => {
                     />
                 </div>
                 <div className="form__login-field">
-                    <label htmlFor="apellido">Apellido:</label>
+                    <label htmlFor="apellido">Apellido: *</label>
                     <input
                         id="apellido"
                         type="text"
@@ -104,7 +123,7 @@ const FormularioReserva = () => {
                     />
                 </div>
                 <div className="form__login-field">
-                    <label htmlFor="correoElectronico">Correo Electrónico:</label>
+                    <label htmlFor="correoElectronico">Correo Electrónico: *</label>
                     <input
                         id="correoElectronico"
                         type="email"
@@ -115,7 +134,7 @@ const FormularioReserva = () => {
                     />
                 </div>
             <div className="form__login-field">
-                <label htmlFor="startDate">Fecha de Inicio:</label>
+                <label htmlFor="startDate">Fecha de Inicio: *</label>
                 <input
                     id="startDate"
                     type="date"
@@ -127,7 +146,7 @@ const FormularioReserva = () => {
             </div>
 
             <div className="form__login-field">
-                <label htmlFor="endDate">Fecha de Fin:</label>
+                <label htmlFor="endDate">Fecha de Fin: *</label>
                 <input
                     id="endDate"
                     type="date"
@@ -149,9 +168,20 @@ const FormularioReserva = () => {
                 ></textarea>
             </div>
 
-            <button type="submit" className="form__login-boton">Confirmar Reserva</button>
+            <button type="button" onClick={confirmarReserva} className="form__login-boton">Confirmar Reserva</button>
         </fieldset>
     </form>
+            {/* Modal de Confirmación */}
+            {mostrarModal && (
+                <div className="modal">
+                    <div className="modal-content">
+                        <h2>Confirmar Reserva</h2>
+                        <p>¿Estás seguro de que quieres hacer esta reserva?</p>
+                        <button onClick={realizarReserva}>Confirmar</button>
+                        <button onClick={() => setMostrarModal(false)}>Cancelar</button>
+                    </div>
+                </div>
+            )}
     </div>
     );
 };

@@ -68,10 +68,11 @@ const Detalle = () => {
             fechaActual.setDate(fechaActual.getDate() + 1);
         }
     
-        if (usuario) {
-            setMostrarModal(true);
-        } else {
+        if (!usuario) {
+            localStorage.setItem('fromProductDetail', 'true');
             navigate('/iniciar-sesion');
+        } else {
+            setMostrarModal(true);
         }
     };
     
@@ -89,7 +90,7 @@ const Detalle = () => {
                                     startDate: fechaInicioReserva.toISOString().split('T')[0],
                                     endDate: fechaFinReserva.toISOString().split('T')[0],
                                     productId: product.id,
-                                    productName: product.name // Añadir el nombre del producto aquí
+                                    productName: product.name
                                 }
                             });
                         }}>Confirmar</button>

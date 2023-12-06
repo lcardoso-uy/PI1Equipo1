@@ -1,6 +1,5 @@
-import React, { useState, useContext } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
-
+import React, { useState, useContext, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './User.css';
 import { AuthContext } from '../Context/AuthContext';
 
@@ -13,6 +12,22 @@ const IniciarSesion = () => {
         password: ""
     });
     const [error, setError] = useState("");
+
+
+    const [mostrarMensaje, setMostrarMensaje] = useState(false);
+
+
+    useEffect(() => {
+        const fromProductDetail = localStorage.getItem('fromProductDetail');
+        if (fromProductDetail) {
+            setMostrarMensaje(true);
+            localStorage.removeItem('fromProductDetail');
+        }
+    }, []);
+    
+    
+    
+
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -37,8 +52,15 @@ const IniciarSesion = () => {
         handleLogin();
     };
 
+
+
     return (
         <div className='inicio-sesion__contenedor'>
+                {mostrarMensaje && (
+                    <div className="mensaje-login-obligatorio">
+                        <p>Para reservar necesitamos validar tus datos. Por favor, inicia sesión o <a href="/registro">crea</a> tu cuenta si aún no lo has hecho.</p>
+                    </div>
+                )}
         <form onSubmit={handleSubmit} className="form__login">
             <fieldset className="form__login-fieldset">
                 <legend>Iniciar Sesión</legend>
