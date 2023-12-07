@@ -4,9 +4,10 @@ import './Admin.css';
 import { AuthContext } from '../Context/AuthContext';
 
 function AgregarProducto() {
-  const { agregarProducto, setNewProduct, newProduct, products, setProducts, categorias } = useContext(AuthContext);
+  const { categorias } = useContext(DataContext)
+  const { agregarProducto, setNewProduct, newProduct, products, setProducts } = useContext(AuthContext);
   const [selectedCategoryId, setSelectedCategoryId] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');  // Estado para manejar el mensaje de error
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleProductChange = (e) => {
     setNewProduct({ ...newProduct, [e.target.name]: e.target.value });

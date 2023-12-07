@@ -103,20 +103,24 @@ h1 {
 .resultados-busqueda {
   position: absolute;
   top: 100%;
-  left: 0;
+  left: 20%;
   right: 0;
   width: 100%;
   max-height: 300px;
+  height: auto;
   overflow-y: auto;
   z-index: 10;
   z-index: 10;
   list-style: none;
-  padding: 0;
-  margin: 10px 0;
+  padding: 1%;
+  margin: 5px 0;
   background-color: rgba(255, 255, 255, 0.9);
   border: 1px solid #ddd;
   border-radius: 4px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 20px 20px 20px 20px;
+  width: 525px;
+  text-align: left;
 }
 
 

@@ -130,11 +130,9 @@ const Detalle = () => {
         <>
             <div className="detalle-container">
                 <div className='Info-producto'>
-                {product && <InfoProducto product={product} onVerMasClicked={irAGaleria} />
-}
+                {product && <InfoProducto product={product} onVerMasClicked={irAGaleria} />}
                 </div>
                 <div className="detalle-producto">
-                <h3>Disponibilidad:</h3>
                 </div>
                 <div className="disponibilidad-container">
                 
