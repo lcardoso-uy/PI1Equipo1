@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './User.css';
 import { AuthContext } from '../Context/AuthContext';
-
+import { Link } from 'react-router-dom';
 
 const IniciarSesion = () => {
     const navigate = useNavigate();
@@ -58,7 +58,7 @@ const IniciarSesion = () => {
         <div className='inicio-sesion__contenedor'>
                 {mostrarMensaje && (
                     <div className="mensaje-login-obligatorio">
-                        <p>Para reservar necesitamos validar tus datos. Por favor, inicia sesión o <a href="/registro">crea</a> tu cuenta si aún no lo has hecho.</p>
+                        <p>Para reservar necesitamos validar tus datos. Por favor, inicia sesión o <Link to="/registro">crea</Link> tu cuenta si aún no lo has hecho.</p>
                     </div>
                 )}
         <form onSubmit={handleSubmit} className="form__login">
