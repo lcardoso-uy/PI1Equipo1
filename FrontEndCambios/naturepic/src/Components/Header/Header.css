@@ -99,3 +99,53 @@ header {
       flex-direction: column;
     }
   }
+
+  @media (max-width: 768px) {
+    .logo-container img {
+      height: 30px;
+    }
+  
+    .Header-buttons {
+      font-size: 14px;
+    }
+  
+    .Header-buttons button {
+      padding: 5px 10px;
+    }
+  
+    header {
+      height: 60px; /* Reducir la altura del encabezado para dispositivos más pequeños */
+    }
+  
+    .user-info {
+      display: none; /* Ocultar información del usuario en pantallas pequeñas */
+    }
+  
+    .avatar {
+      width: 25px;
+      height: 25px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    header {
+      flex-direction: column;
+      height: auto; /* Altura automática para adaptarse al contenido */
+    }
+  
+    .Header-buttons {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .Header-buttons button {
+      margin-bottom: 5px;
+    }
+  }
+  
+  @media (max-width: 768px) and (min-width: 551px) {
+    header {
+      flex-direction: column;
+    }
+  }

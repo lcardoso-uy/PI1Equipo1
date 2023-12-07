@@ -45,3 +45,34 @@
     padding: 0 10px;
   }
 }
+
+
+/* Estilos para tablets */
+@media screen and (max-width: 768px) {
+  .footer img {
+    height: 40px;
+  }
+
+  .footer span {
+    font-size: 0.9rem;
+  }
+
+  .footer-content {
+    padding: 0 10px;
+  }
+}
+
+/* Estilos para móviles */
+@media screen and (max-width: 480px) {
+  .footer img {
+    height: 30px;
+  }
+
+  .footer span {
+    font-size: 0.8rem;
+  }
+
+  .footer-content {
+    padding: 0 10px;
+  }
+}
